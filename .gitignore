@@ -1,0 +1,54 @@
+# Operating systems and editors
+.DS_Store
+Icon?
+._*
+.idea/
+.vscode/
+
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+secrets/
+*.pem
+*.key
+*webhook*
+
+# Dependencies and generated runtime data
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+node_modules/
+upstream-checkout/
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+
+# Private editorial records and review exports (store outside this repository)
+manifest.json
+source-manifest.json
+review-delivery.json
+review-note.txt
+feishu-review.md
+original-review-package.zip
+editorial-plan.md
+column-branding.md
+
+# Machine-specific diagram QA and repeated test captures
+*.deliver.json
+*.validate.json
+*.visual-check.json
+**/diagrams/handoff.json
+**/diagrams/manual-browser-evidence.json
+**/diagrams/manual/
+**/code/evidence/replay-*/
+
+# Local validation output and diagram browser captures
+validation.txt
+validation.json
+snapshot-validation.json
+test-run.txt
+*.visual-check-*.png
+*.visual-check.html

@@ -1,0 +1,107 @@
+{
+  "experiment": "deterministic harness contract tests; no live model",
+  "contract": {
+    "version": "review-contract-v1",
+    "sections": [
+      "结论",
+      "证据",
+      "局限"
+    ],
+    "min_sources": 2,
+    "max_turns": 8,
+    "max_tool_calls": 5
+  },
+  "rows": [
+    {
+      "case": "直接声称完成",
+      "without_gate": "REVIEW_READY",
+      "without_gate_turns": 1,
+      "without_gate_tools": 0,
+      "with_gate": "EXHAUSTED",
+      "with_gate_turns": 8,
+      "with_gate_tools": 0
+    },
+    {
+      "case": "写出空报告",
+      "without_gate": "REVIEW_READY",
+      "without_gate_turns": 2,
+      "without_gate_tools": 1,
+      "with_gate": "EXHAUSTED",
+      "with_gate_turns": 8,
+      "with_gate_tools": 1
+    },
+    {
+      "case": "引用未读取资料",
+      "without_gate": "REVIEW_READY",
+      "without_gate_turns": 2,
+      "without_gate_tools": 1,
+      "with_gate": "EXHAUSTED",
+      "with_gate_turns": 8,
+      "with_gate_tools": 1
+    },
+    {
+      "case": "引用不存在编号",
+      "without_gate": "REVIEW_READY",
+      "without_gate_turns": 4,
+      "without_gate_tools": 3,
+      "with_gate": "EXHAUSTED",
+      "with_gate_turns": 8,
+      "with_gate_tools": 3
+    },
+    {
+      "case": "报告缺少局限",
+      "without_gate": "REVIEW_READY",
+      "without_gate_turns": 4,
+      "without_gate_tools": 3,
+      "with_gate": "EXHAUSTED",
+      "with_gate_turns": 8,
+      "with_gate_tools": 3
+    },
+    {
+      "case": "被拒绝后补齐",
+      "without_gate": "REVIEW_READY",
+      "without_gate_turns": 4,
+      "without_gate_tools": 3,
+      "with_gate": "REVIEW_READY",
+      "with_gate_turns": 6,
+      "with_gate_tools": 4
+    },
+    {
+      "case": "合格的正例",
+      "without_gate": "REVIEW_READY",
+      "without_gate_turns": 4,
+      "without_gate_tools": 3,
+      "with_gate": "REVIEW_READY",
+      "with_gate_turns": 4,
+      "with_gate_tools": 3
+    },
+    {
+      "case": "格式合格但结论夸大",
+      "without_gate": "REVIEW_READY",
+      "without_gate_turns": 4,
+      "without_gate_tools": 3,
+      "with_gate": "REVIEW_READY",
+      "with_gate_turns": 4,
+      "with_gate_tools": 3
+    },
+    {
+      "case": "越权修改状态",
+      "without_gate": "BLOCKED",
+      "without_gate_turns": 1,
+      "without_gate_tools": 0,
+      "with_gate": "BLOCKED",
+      "with_gate_turns": 1,
+      "with_gate_tools": 0
+    },
+    {
+      "case": "不停调用工具",
+      "without_gate": "EXHAUSTED",
+      "without_gate_turns": 6,
+      "without_gate_tools": 5,
+      "with_gate": "EXHAUSTED",
+      "with_gate_turns": 6,
+      "with_gate_tools": 5
+    }
+  ],
+  "scope": "Structural acceptance and execution bounds only; semantic truth is not verified."
+}

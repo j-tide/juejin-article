@@ -1,0 +1,116 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "完成请求的验收流程",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "run",
+      "label": "完成请求"
+    },
+    {
+      "id": "reject",
+      "label": "未通过处理",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "proposal",
+    "snapshot",
+    "verify",
+    "ready"
+  ],
+  "nodes": [
+    {
+      "id": "proposal",
+      "lane": "run",
+      "col": 0,
+      "type": "cloud",
+      "label": "模型提出 finish",
+      "sublabel": "动作提案不修改状态",
+      "width": 190,
+      "yOffset": 0
+    },
+    {
+      "id": "snapshot",
+      "lane": "run",
+      "col": 1,
+      "type": "database",
+      "label": "读取报告快照",
+      "sublabel": "固定字节与内容哈希",
+      "width": 190,
+      "yOffset": 0
+    },
+    {
+      "id": "verify",
+      "lane": "run",
+      "col": 2,
+      "type": "security",
+      "label": "验证任务契约",
+      "sublabel": "章节、引用与来源登记",
+      "width": 190,
+      "yOffset": 0
+    },
+    {
+      "id": "ready",
+      "lane": "run",
+      "col": 3,
+      "type": "backend",
+      "label": "进入人工待审",
+      "sublabel": "REVIEW_READY",
+      "width": 190,
+      "yOffset": 0
+    },
+    {
+      "id": "feedback",
+      "lane": "reject",
+      "col": 2,
+      "type": "messagebus",
+      "label": "返回失败原因",
+      "sublabel": "预算内修正后重新验收",
+      "width": 190,
+      "yOffset": 12
+    }
+  ],
+  "edges": [
+    {
+      "from": "proposal",
+      "to": "snapshot",
+      "label": "请求验收",
+      "role": "main"
+    },
+    {
+      "from": "snapshot",
+      "to": "verify",
+      "label": "同一份字节",
+      "role": "main"
+    },
+    {
+      "from": "verify",
+      "to": "ready",
+      "label": "通过",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "from": "verify",
+      "to": "feedback",
+      "label": "未通过",
+      "role": "error",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "验证范围",
+      "items": [
+        "结构与来源登记通过，不等于结论正确。",
+        "此图对应本地确定性实验，没有调用在线模型。"
+      ]
+    }
+  ]
+}

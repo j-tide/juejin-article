@@ -1,0 +1,1428 @@
+{
+  "01-without_gate": [
+    {
+      "seq": 1,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 2,
+      "kind": "accepted",
+      "receipt": {
+        "artifact_sha256": null,
+        "contract_sha256": "da5a7cae11cb60a3660d2b84677ead9572958a235f4875031178cdcc9f315f8a",
+        "contract_version": "review-contract-v1",
+        "verification": "bypassed_for_experiment",
+        "evidence_sha256": {}
+      }
+    }
+  ],
+  "01-with_gate": [
+    {
+      "seq": 1,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 2,
+      "kind": "validation_rejected",
+      "errors": [
+        "artifact_missing"
+      ]
+    },
+    {
+      "seq": 3,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 4,
+      "kind": "validation_rejected",
+      "errors": [
+        "artifact_missing"
+      ]
+    },
+    {
+      "seq": 5,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 6,
+      "kind": "validation_rejected",
+      "errors": [
+        "artifact_missing"
+      ]
+    },
+    {
+      "seq": 7,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 8,
+      "kind": "validation_rejected",
+      "errors": [
+        "artifact_missing"
+      ]
+    },
+    {
+      "seq": 9,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 10,
+      "kind": "validation_rejected",
+      "errors": [
+        "artifact_missing"
+      ]
+    },
+    {
+      "seq": 11,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 12,
+      "kind": "validation_rejected",
+      "errors": [
+        "artifact_missing"
+      ]
+    },
+    {
+      "seq": 13,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 14,
+      "kind": "validation_rejected",
+      "errors": [
+        "artifact_missing"
+      ]
+    },
+    {
+      "seq": 15,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 16,
+      "kind": "validation_rejected",
+      "errors": [
+        "artifact_missing"
+      ]
+    },
+    {
+      "seq": 17,
+      "kind": "turn_budget_exhausted"
+    }
+  ],
+  "02-without_gate": [
+    {
+      "seq": 1,
+      "kind": "proposal",
+      "action": {
+        "kind": "write_report",
+        "text": ""
+      }
+    },
+    {
+      "seq": 2,
+      "kind": "artifact_written",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "seq": 3,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 4,
+      "kind": "accepted",
+      "receipt": {
+        "artifact_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "contract_sha256": "da5a7cae11cb60a3660d2b84677ead9572958a235f4875031178cdcc9f315f8a",
+        "contract_version": "review-contract-v1",
+        "verification": "bypassed_for_experiment",
+        "evidence_sha256": {}
+      }
+    }
+  ],
+  "02-with_gate": [
+    {
+      "seq": 1,
+      "kind": "proposal",
+      "action": {
+        "kind": "write_report",
+        "text": ""
+      }
+    },
+    {
+      "seq": 2,
+      "kind": "artifact_written",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "seq": 3,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 4,
+      "kind": "validation_rejected",
+      "errors": [
+        "artifact_empty",
+        "section_missing_or_empty:结论",
+        "section_missing_or_empty:证据",
+        "section_missing_or_empty:局限",
+        "insufficient_observed_sources"
+      ]
+    },
+    {
+      "seq": 5,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 6,
+      "kind": "validation_rejected",
+      "errors": [
+        "artifact_empty",
+        "section_missing_or_empty:结论",
+        "section_missing_or_empty:证据",
+        "section_missing_or_empty:局限",
+        "insufficient_observed_sources"
+      ]
+    },
+    {
+      "seq": 7,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 8,
+      "kind": "validation_rejected",
+      "errors": [
+        "artifact_empty",
+        "section_missing_or_empty:结论",
+        "section_missing_or_empty:证据",
+        "section_missing_or_empty:局限",
+        "insufficient_observed_sources"
+      ]
+    },
+    {
+      "seq": 9,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 10,
+      "kind": "validation_rejected",
+      "errors": [
+        "artifact_empty",
+        "section_missing_or_empty:结论",
+        "section_missing_or_empty:证据",
+        "section_missing_or_empty:局限",
+        "insufficient_observed_sources"
+      ]
+    },
+    {
+      "seq": 11,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 12,
+      "kind": "validation_rejected",
+      "errors": [
+        "artifact_empty",
+        "section_missing_or_empty:结论",
+        "section_missing_or_empty:证据",
+        "section_missing_or_empty:局限",
+        "insufficient_observed_sources"
+      ]
+    },
+    {
+      "seq": 13,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 14,
+      "kind": "validation_rejected",
+      "errors": [
+        "artifact_empty",
+        "section_missing_or_empty:结论",
+        "section_missing_or_empty:证据",
+        "section_missing_or_empty:局限",
+        "insufficient_observed_sources"
+      ]
+    },
+    {
+      "seq": 15,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 16,
+      "kind": "validation_rejected",
+      "errors": [
+        "artifact_empty",
+        "section_missing_or_empty:结论",
+        "section_missing_or_empty:证据",
+        "section_missing_or_empty:局限",
+        "insufficient_observed_sources"
+      ]
+    },
+    {
+      "seq": 17,
+      "kind": "turn_budget_exhausted"
+    }
+  ],
+  "03-without_gate": [
+    {
+      "seq": 1,
+      "kind": "proposal",
+      "action": {
+        "kind": "write_report",
+        "text": "## 结论\n运行时按契约检查报告。\n## 证据\n运行时记录见 [E:a]；校验边界见 [E:b]。\n## 局限\n这些本地测试笔记不能证明任意模型的实际可靠性。\n"
+      }
+    },
+    {
+      "seq": 2,
+      "kind": "artifact_written",
+      "sha256": "8d03b87acd111de56fd6f7fe875edfe22c0f134e8a50584ef93a71b4baf62d75"
+    },
+    {
+      "seq": 3,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 4,
+      "kind": "accepted",
+      "receipt": {
+        "artifact_sha256": "8d03b87acd111de56fd6f7fe875edfe22c0f134e8a50584ef93a71b4baf62d75",
+        "contract_sha256": "da5a7cae11cb60a3660d2b84677ead9572958a235f4875031178cdcc9f315f8a",
+        "contract_version": "review-contract-v1",
+        "verification": "bypassed_for_experiment",
+        "evidence_sha256": {}
+      }
+    }
+  ],
+  "03-with_gate": [
+    {
+      "seq": 1,
+      "kind": "proposal",
+      "action": {
+        "kind": "write_report",
+        "text": "## 结论\n运行时按契约检查报告。\n## 证据\n运行时记录见 [E:a]；校验边界见 [E:b]。\n## 局限\n这些本地测试笔记不能证明任意模型的实际可靠性。\n"
+      }
+    },
+    {
+      "seq": 2,
+      "kind": "artifact_written",
+      "sha256": "8d03b87acd111de56fd6f7fe875edfe22c0f134e8a50584ef93a71b4baf62d75"
+    },
+    {
+      "seq": 3,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 4,
+      "kind": "validation_rejected",
+      "errors": [
+        "unobserved_evidence:a",
+        "unobserved_evidence:b",
+        "insufficient_observed_sources"
+      ]
+    },
+    {
+      "seq": 5,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 6,
+      "kind": "validation_rejected",
+      "errors": [
+        "unobserved_evidence:a",
+        "unobserved_evidence:b",
+        "insufficient_observed_sources"
+      ]
+    },
+    {
+      "seq": 7,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 8,
+      "kind": "validation_rejected",
+      "errors": [
+        "unobserved_evidence:a",
+        "unobserved_evidence:b",
+        "insufficient_observed_sources"
+      ]
+    },
+    {
+      "seq": 9,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 10,
+      "kind": "validation_rejected",
+      "errors": [
+        "unobserved_evidence:a",
+        "unobserved_evidence:b",
+        "insufficient_observed_sources"
+      ]
+    },
+    {
+      "seq": 11,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 12,
+      "kind": "validation_rejected",
+      "errors": [
+        "unobserved_evidence:a",
+        "unobserved_evidence:b",
+        "insufficient_observed_sources"
+      ]
+    },
+    {
+      "seq": 13,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 14,
+      "kind": "validation_rejected",
+      "errors": [
+        "unobserved_evidence:a",
+        "unobserved_evidence:b",
+        "insufficient_observed_sources"
+      ]
+    },
+    {
+      "seq": 15,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 16,
+      "kind": "validation_rejected",
+      "errors": [
+        "unobserved_evidence:a",
+        "unobserved_evidence:b",
+        "insufficient_observed_sources"
+      ]
+    },
+    {
+      "seq": 17,
+      "kind": "turn_budget_exhausted"
+    }
+  ],
+  "04-without_gate": [
+    {
+      "seq": 1,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "a"
+      }
+    },
+    {
+      "seq": 2,
+      "kind": "evidence_observed",
+      "id": "a"
+    },
+    {
+      "seq": 3,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "b"
+      }
+    },
+    {
+      "seq": 4,
+      "kind": "evidence_observed",
+      "id": "b"
+    },
+    {
+      "seq": 5,
+      "kind": "proposal",
+      "action": {
+        "kind": "write_report",
+        "text": "## 结论\n运行时按契约检查报告。\n## 证据\n运行时记录见 [E:a]；校验边界见 [E:missing]。\n## 局限\n这些本地测试笔记不能证明任意模型的实际可靠性。\n"
+      }
+    },
+    {
+      "seq": 6,
+      "kind": "artifact_written",
+      "sha256": "f4e9e5a762b89de7394d28b53e1ed1d8519e63c1dfd3f64779466c9c0347353d"
+    },
+    {
+      "seq": 7,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 8,
+      "kind": "accepted",
+      "receipt": {
+        "artifact_sha256": "f4e9e5a762b89de7394d28b53e1ed1d8519e63c1dfd3f64779466c9c0347353d",
+        "contract_sha256": "da5a7cae11cb60a3660d2b84677ead9572958a235f4875031178cdcc9f315f8a",
+        "contract_version": "review-contract-v1",
+        "verification": "bypassed_for_experiment",
+        "evidence_sha256": {
+          "a": "c78a3e7ddb1fe0cda958b6abd64b4185993b6a95ff17590677925c31ebbce4cd",
+          "b": "8fc23c5d4fed9661097af287411da7347571e23315275af0dcc3ca7f87ffadf9"
+        }
+      }
+    }
+  ],
+  "04-with_gate": [
+    {
+      "seq": 1,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "a"
+      }
+    },
+    {
+      "seq": 2,
+      "kind": "evidence_observed",
+      "id": "a"
+    },
+    {
+      "seq": 3,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "b"
+      }
+    },
+    {
+      "seq": 4,
+      "kind": "evidence_observed",
+      "id": "b"
+    },
+    {
+      "seq": 5,
+      "kind": "proposal",
+      "action": {
+        "kind": "write_report",
+        "text": "## 结论\n运行时按契约检查报告。\n## 证据\n运行时记录见 [E:a]；校验边界见 [E:missing]。\n## 局限\n这些本地测试笔记不能证明任意模型的实际可靠性。\n"
+      }
+    },
+    {
+      "seq": 6,
+      "kind": "artifact_written",
+      "sha256": "f4e9e5a762b89de7394d28b53e1ed1d8519e63c1dfd3f64779466c9c0347353d"
+    },
+    {
+      "seq": 7,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 8,
+      "kind": "validation_rejected",
+      "errors": [
+        "unobserved_evidence:missing",
+        "insufficient_observed_sources"
+      ]
+    },
+    {
+      "seq": 9,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 10,
+      "kind": "validation_rejected",
+      "errors": [
+        "unobserved_evidence:missing",
+        "insufficient_observed_sources"
+      ]
+    },
+    {
+      "seq": 11,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 12,
+      "kind": "validation_rejected",
+      "errors": [
+        "unobserved_evidence:missing",
+        "insufficient_observed_sources"
+      ]
+    },
+    {
+      "seq": 13,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 14,
+      "kind": "validation_rejected",
+      "errors": [
+        "unobserved_evidence:missing",
+        "insufficient_observed_sources"
+      ]
+    },
+    {
+      "seq": 15,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 16,
+      "kind": "validation_rejected",
+      "errors": [
+        "unobserved_evidence:missing",
+        "insufficient_observed_sources"
+      ]
+    },
+    {
+      "seq": 17,
+      "kind": "turn_budget_exhausted"
+    }
+  ],
+  "05-without_gate": [
+    {
+      "seq": 1,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "a"
+      }
+    },
+    {
+      "seq": 2,
+      "kind": "evidence_observed",
+      "id": "a"
+    },
+    {
+      "seq": 3,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "b"
+      }
+    },
+    {
+      "seq": 4,
+      "kind": "evidence_observed",
+      "id": "b"
+    },
+    {
+      "seq": 5,
+      "kind": "proposal",
+      "action": {
+        "kind": "write_report",
+        "text": "## 结论\n运行时按契约检查报告。\n## 证据\n运行时记录见 [E:a]；校验边界见 [E:b]。\n"
+      }
+    },
+    {
+      "seq": 6,
+      "kind": "artifact_written",
+      "sha256": "5ec9f958ad00d2ad5591e553fce3d2e27df9b90e8e158bfa6dc3c040d73fda58"
+    },
+    {
+      "seq": 7,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 8,
+      "kind": "accepted",
+      "receipt": {
+        "artifact_sha256": "5ec9f958ad00d2ad5591e553fce3d2e27df9b90e8e158bfa6dc3c040d73fda58",
+        "contract_sha256": "da5a7cae11cb60a3660d2b84677ead9572958a235f4875031178cdcc9f315f8a",
+        "contract_version": "review-contract-v1",
+        "verification": "bypassed_for_experiment",
+        "evidence_sha256": {
+          "a": "c78a3e7ddb1fe0cda958b6abd64b4185993b6a95ff17590677925c31ebbce4cd",
+          "b": "8fc23c5d4fed9661097af287411da7347571e23315275af0dcc3ca7f87ffadf9"
+        }
+      }
+    }
+  ],
+  "05-with_gate": [
+    {
+      "seq": 1,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "a"
+      }
+    },
+    {
+      "seq": 2,
+      "kind": "evidence_observed",
+      "id": "a"
+    },
+    {
+      "seq": 3,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "b"
+      }
+    },
+    {
+      "seq": 4,
+      "kind": "evidence_observed",
+      "id": "b"
+    },
+    {
+      "seq": 5,
+      "kind": "proposal",
+      "action": {
+        "kind": "write_report",
+        "text": "## 结论\n运行时按契约检查报告。\n## 证据\n运行时记录见 [E:a]；校验边界见 [E:b]。\n"
+      }
+    },
+    {
+      "seq": 6,
+      "kind": "artifact_written",
+      "sha256": "5ec9f958ad00d2ad5591e553fce3d2e27df9b90e8e158bfa6dc3c040d73fda58"
+    },
+    {
+      "seq": 7,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 8,
+      "kind": "validation_rejected",
+      "errors": [
+        "section_missing_or_empty:局限"
+      ]
+    },
+    {
+      "seq": 9,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 10,
+      "kind": "validation_rejected",
+      "errors": [
+        "section_missing_or_empty:局限"
+      ]
+    },
+    {
+      "seq": 11,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 12,
+      "kind": "validation_rejected",
+      "errors": [
+        "section_missing_or_empty:局限"
+      ]
+    },
+    {
+      "seq": 13,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 14,
+      "kind": "validation_rejected",
+      "errors": [
+        "section_missing_or_empty:局限"
+      ]
+    },
+    {
+      "seq": 15,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 16,
+      "kind": "validation_rejected",
+      "errors": [
+        "section_missing_or_empty:局限"
+      ]
+    },
+    {
+      "seq": 17,
+      "kind": "turn_budget_exhausted"
+    }
+  ],
+  "06-without_gate": [
+    {
+      "seq": 1,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "a"
+      }
+    },
+    {
+      "seq": 2,
+      "kind": "evidence_observed",
+      "id": "a"
+    },
+    {
+      "seq": 3,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "b"
+      }
+    },
+    {
+      "seq": 4,
+      "kind": "evidence_observed",
+      "id": "b"
+    },
+    {
+      "seq": 5,
+      "kind": "proposal",
+      "action": {
+        "kind": "write_report",
+        "text": "## 结论\n运行时按契约检查报告。\n## 证据\n运行时记录见 [E:a]；校验边界见 [E:b]。\n"
+      }
+    },
+    {
+      "seq": 6,
+      "kind": "artifact_written",
+      "sha256": "5ec9f958ad00d2ad5591e553fce3d2e27df9b90e8e158bfa6dc3c040d73fda58"
+    },
+    {
+      "seq": 7,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 8,
+      "kind": "accepted",
+      "receipt": {
+        "artifact_sha256": "5ec9f958ad00d2ad5591e553fce3d2e27df9b90e8e158bfa6dc3c040d73fda58",
+        "contract_sha256": "da5a7cae11cb60a3660d2b84677ead9572958a235f4875031178cdcc9f315f8a",
+        "contract_version": "review-contract-v1",
+        "verification": "bypassed_for_experiment",
+        "evidence_sha256": {
+          "a": "c78a3e7ddb1fe0cda958b6abd64b4185993b6a95ff17590677925c31ebbce4cd",
+          "b": "8fc23c5d4fed9661097af287411da7347571e23315275af0dcc3ca7f87ffadf9"
+        }
+      }
+    }
+  ],
+  "06-with_gate": [
+    {
+      "seq": 1,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "a"
+      }
+    },
+    {
+      "seq": 2,
+      "kind": "evidence_observed",
+      "id": "a"
+    },
+    {
+      "seq": 3,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "b"
+      }
+    },
+    {
+      "seq": 4,
+      "kind": "evidence_observed",
+      "id": "b"
+    },
+    {
+      "seq": 5,
+      "kind": "proposal",
+      "action": {
+        "kind": "write_report",
+        "text": "## 结论\n运行时按契约检查报告。\n## 证据\n运行时记录见 [E:a]；校验边界见 [E:b]。\n"
+      }
+    },
+    {
+      "seq": 6,
+      "kind": "artifact_written",
+      "sha256": "5ec9f958ad00d2ad5591e553fce3d2e27df9b90e8e158bfa6dc3c040d73fda58"
+    },
+    {
+      "seq": 7,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 8,
+      "kind": "validation_rejected",
+      "errors": [
+        "section_missing_or_empty:局限"
+      ]
+    },
+    {
+      "seq": 9,
+      "kind": "proposal",
+      "action": {
+        "kind": "write_report",
+        "text": "## 结论\n运行时按契约检查报告。\n## 证据\n运行时记录见 [E:a]；校验边界见 [E:b]。\n## 局限\n这些本地测试笔记不能证明任意模型的实际可靠性。\n"
+      }
+    },
+    {
+      "seq": 10,
+      "kind": "artifact_written",
+      "sha256": "8d03b87acd111de56fd6f7fe875edfe22c0f134e8a50584ef93a71b4baf62d75"
+    },
+    {
+      "seq": 11,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 12,
+      "kind": "accepted",
+      "receipt": {
+        "artifact_sha256": "8d03b87acd111de56fd6f7fe875edfe22c0f134e8a50584ef93a71b4baf62d75",
+        "contract_sha256": "da5a7cae11cb60a3660d2b84677ead9572958a235f4875031178cdcc9f315f8a",
+        "contract_version": "review-contract-v1",
+        "verification": "structural_gate",
+        "evidence_sha256": {
+          "a": "c78a3e7ddb1fe0cda958b6abd64b4185993b6a95ff17590677925c31ebbce4cd",
+          "b": "8fc23c5d4fed9661097af287411da7347571e23315275af0dcc3ca7f87ffadf9"
+        }
+      }
+    }
+  ],
+  "07-without_gate": [
+    {
+      "seq": 1,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "a"
+      }
+    },
+    {
+      "seq": 2,
+      "kind": "evidence_observed",
+      "id": "a"
+    },
+    {
+      "seq": 3,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "b"
+      }
+    },
+    {
+      "seq": 4,
+      "kind": "evidence_observed",
+      "id": "b"
+    },
+    {
+      "seq": 5,
+      "kind": "proposal",
+      "action": {
+        "kind": "write_report",
+        "text": "## 结论\n运行时按契约检查报告。\n## 证据\n运行时记录见 [E:a]；校验边界见 [E:b]。\n## 局限\n这些本地测试笔记不能证明任意模型的实际可靠性。\n"
+      }
+    },
+    {
+      "seq": 6,
+      "kind": "artifact_written",
+      "sha256": "8d03b87acd111de56fd6f7fe875edfe22c0f134e8a50584ef93a71b4baf62d75"
+    },
+    {
+      "seq": 7,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 8,
+      "kind": "accepted",
+      "receipt": {
+        "artifact_sha256": "8d03b87acd111de56fd6f7fe875edfe22c0f134e8a50584ef93a71b4baf62d75",
+        "contract_sha256": "da5a7cae11cb60a3660d2b84677ead9572958a235f4875031178cdcc9f315f8a",
+        "contract_version": "review-contract-v1",
+        "verification": "bypassed_for_experiment",
+        "evidence_sha256": {
+          "a": "c78a3e7ddb1fe0cda958b6abd64b4185993b6a95ff17590677925c31ebbce4cd",
+          "b": "8fc23c5d4fed9661097af287411da7347571e23315275af0dcc3ca7f87ffadf9"
+        }
+      }
+    }
+  ],
+  "07-with_gate": [
+    {
+      "seq": 1,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "a"
+      }
+    },
+    {
+      "seq": 2,
+      "kind": "evidence_observed",
+      "id": "a"
+    },
+    {
+      "seq": 3,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "b"
+      }
+    },
+    {
+      "seq": 4,
+      "kind": "evidence_observed",
+      "id": "b"
+    },
+    {
+      "seq": 5,
+      "kind": "proposal",
+      "action": {
+        "kind": "write_report",
+        "text": "## 结论\n运行时按契约检查报告。\n## 证据\n运行时记录见 [E:a]；校验边界见 [E:b]。\n## 局限\n这些本地测试笔记不能证明任意模型的实际可靠性。\n"
+      }
+    },
+    {
+      "seq": 6,
+      "kind": "artifact_written",
+      "sha256": "8d03b87acd111de56fd6f7fe875edfe22c0f134e8a50584ef93a71b4baf62d75"
+    },
+    {
+      "seq": 7,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 8,
+      "kind": "accepted",
+      "receipt": {
+        "artifact_sha256": "8d03b87acd111de56fd6f7fe875edfe22c0f134e8a50584ef93a71b4baf62d75",
+        "contract_sha256": "da5a7cae11cb60a3660d2b84677ead9572958a235f4875031178cdcc9f315f8a",
+        "contract_version": "review-contract-v1",
+        "verification": "structural_gate",
+        "evidence_sha256": {
+          "a": "c78a3e7ddb1fe0cda958b6abd64b4185993b6a95ff17590677925c31ebbce4cd",
+          "b": "8fc23c5d4fed9661097af287411da7347571e23315275af0dcc3ca7f87ffadf9"
+        }
+      }
+    }
+  ],
+  "08-without_gate": [
+    {
+      "seq": 1,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "a"
+      }
+    },
+    {
+      "seq": 2,
+      "kind": "evidence_observed",
+      "id": "a"
+    },
+    {
+      "seq": 3,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "b"
+      }
+    },
+    {
+      "seq": 4,
+      "kind": "evidence_observed",
+      "id": "b"
+    },
+    {
+      "seq": 5,
+      "kind": "proposal",
+      "action": {
+        "kind": "write_report",
+        "text": "## 结论\n只要有 Harness，任何模型都能保证百分之百正确。\n## 证据\n运行时记录见 [E:a]；校验边界见 [E:b]。\n## 局限\n这些本地测试笔记不能证明任意模型的实际可靠性。\n"
+      }
+    },
+    {
+      "seq": 6,
+      "kind": "artifact_written",
+      "sha256": "f141b1a2e834ea1b79e63ff965596f9225679265908ca62acf09fce05c32b4f6"
+    },
+    {
+      "seq": 7,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 8,
+      "kind": "accepted",
+      "receipt": {
+        "artifact_sha256": "f141b1a2e834ea1b79e63ff965596f9225679265908ca62acf09fce05c32b4f6",
+        "contract_sha256": "da5a7cae11cb60a3660d2b84677ead9572958a235f4875031178cdcc9f315f8a",
+        "contract_version": "review-contract-v1",
+        "verification": "bypassed_for_experiment",
+        "evidence_sha256": {
+          "a": "c78a3e7ddb1fe0cda958b6abd64b4185993b6a95ff17590677925c31ebbce4cd",
+          "b": "8fc23c5d4fed9661097af287411da7347571e23315275af0dcc3ca7f87ffadf9"
+        }
+      }
+    }
+  ],
+  "08-with_gate": [
+    {
+      "seq": 1,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "a"
+      }
+    },
+    {
+      "seq": 2,
+      "kind": "evidence_observed",
+      "id": "a"
+    },
+    {
+      "seq": 3,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "b"
+      }
+    },
+    {
+      "seq": 4,
+      "kind": "evidence_observed",
+      "id": "b"
+    },
+    {
+      "seq": 5,
+      "kind": "proposal",
+      "action": {
+        "kind": "write_report",
+        "text": "## 结论\n只要有 Harness，任何模型都能保证百分之百正确。\n## 证据\n运行时记录见 [E:a]；校验边界见 [E:b]。\n## 局限\n这些本地测试笔记不能证明任意模型的实际可靠性。\n"
+      }
+    },
+    {
+      "seq": 6,
+      "kind": "artifact_written",
+      "sha256": "f141b1a2e834ea1b79e63ff965596f9225679265908ca62acf09fce05c32b4f6"
+    },
+    {
+      "seq": 7,
+      "kind": "proposal",
+      "action": {
+        "kind": "finish"
+      }
+    },
+    {
+      "seq": 8,
+      "kind": "accepted",
+      "receipt": {
+        "artifact_sha256": "f141b1a2e834ea1b79e63ff965596f9225679265908ca62acf09fce05c32b4f6",
+        "contract_sha256": "da5a7cae11cb60a3660d2b84677ead9572958a235f4875031178cdcc9f315f8a",
+        "contract_version": "review-contract-v1",
+        "verification": "structural_gate",
+        "evidence_sha256": {
+          "a": "c78a3e7ddb1fe0cda958b6abd64b4185993b6a95ff17590677925c31ebbce4cd",
+          "b": "8fc23c5d4fed9661097af287411da7347571e23315275af0dcc3ca7f87ffadf9"
+        }
+      }
+    }
+  ],
+  "09-without_gate": [
+    {
+      "seq": 1,
+      "kind": "proposal",
+      "action": {
+        "kind": "set_status",
+        "status": "REVIEW_READY"
+      }
+    },
+    {
+      "seq": 2,
+      "kind": "action_denied",
+      "name": "set_status"
+    }
+  ],
+  "09-with_gate": [
+    {
+      "seq": 1,
+      "kind": "proposal",
+      "action": {
+        "kind": "set_status",
+        "status": "REVIEW_READY"
+      }
+    },
+    {
+      "seq": 2,
+      "kind": "action_denied",
+      "name": "set_status"
+    }
+  ],
+  "10-without_gate": [
+    {
+      "seq": 1,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "a"
+      }
+    },
+    {
+      "seq": 2,
+      "kind": "evidence_observed",
+      "id": "a"
+    },
+    {
+      "seq": 3,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "a"
+      }
+    },
+    {
+      "seq": 4,
+      "kind": "evidence_observed",
+      "id": "a"
+    },
+    {
+      "seq": 5,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "a"
+      }
+    },
+    {
+      "seq": 6,
+      "kind": "evidence_observed",
+      "id": "a"
+    },
+    {
+      "seq": 7,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "a"
+      }
+    },
+    {
+      "seq": 8,
+      "kind": "evidence_observed",
+      "id": "a"
+    },
+    {
+      "seq": 9,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "a"
+      }
+    },
+    {
+      "seq": 10,
+      "kind": "evidence_observed",
+      "id": "a"
+    },
+    {
+      "seq": 11,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "a"
+      }
+    },
+    {
+      "seq": 12,
+      "kind": "tool_budget_exhausted"
+    }
+  ],
+  "10-with_gate": [
+    {
+      "seq": 1,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "a"
+      }
+    },
+    {
+      "seq": 2,
+      "kind": "evidence_observed",
+      "id": "a"
+    },
+    {
+      "seq": 3,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "a"
+      }
+    },
+    {
+      "seq": 4,
+      "kind": "evidence_observed",
+      "id": "a"
+    },
+    {
+      "seq": 5,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "a"
+      }
+    },
+    {
+      "seq": 6,
+      "kind": "evidence_observed",
+      "id": "a"
+    },
+    {
+      "seq": 7,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "a"
+      }
+    },
+    {
+      "seq": 8,
+      "kind": "evidence_observed",
+      "id": "a"
+    },
+    {
+      "seq": 9,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "a"
+      }
+    },
+    {
+      "seq": 10,
+      "kind": "evidence_observed",
+      "id": "a"
+    },
+    {
+      "seq": 11,
+      "kind": "proposal",
+      "action": {
+        "kind": "read_evidence",
+        "id": "a"
+      }
+    },
+    {
+      "seq": 12,
+      "kind": "tool_budget_exhausted"
+    }
+  ]
+}

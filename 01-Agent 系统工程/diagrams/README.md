@@ -5,5 +5,6 @@
 | 篇次 | 图示 | 正文与图片 | 交互图与源文件 |
 | --- | --- | --- | --- |
 | 01 | 完成请求的验收流程 | [正文](<../01｜模型之外，Harness 到底该负责什么？/README.md>) · [PNG](<../01｜模型之外，Harness 到底该负责什么？/assets/diagram.png>) · [SVG](<../01｜模型之外，Harness 到底该负责什么？/assets/diagram.svg>) | [HTML](<01.html>) · [JSON](<01.workflow.json>) |
+| 02 | 同一事务中的任务检查点 | [正文](<../02｜任务跑到一半挂了，如何恢复到正确状态？/README.md>) · [PNG](<../02｜任务跑到一半挂了，如何恢复到正确状态？/assets/diagram.png>) · [SVG](<../02｜任务跑到一半挂了，如何恢复到正确状态？/assets/diagram.svg>) | [HTML](<02.html>) · [JSON](<02.workflow.json>) |
 
 [返回专栏目录](../README.md)

@@ -1,0 +1,134 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "同一事务中的任务检查点",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "处理流程"
+    },
+    {
+      "id": "other",
+      "label": "分支与限制",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "begin",
+    "version",
+    "write",
+    "commit"
+  ],
+  "nodes": [
+    {
+      "id": "begin",
+      "lane": "main",
+      "col": 0,
+      "type": "backend",
+      "label": "开启写事务",
+      "sublabel": "BEGIN IMMEDIATE",
+      "width": 178
+    },
+    {
+      "id": "version",
+      "lane": "main",
+      "col": 1,
+      "type": "security",
+      "label": "检查预期版本",
+      "sublabel": "拒绝过期执行者",
+      "width": 178
+    },
+    {
+      "id": "write",
+      "lane": "main",
+      "col": 2,
+      "type": "database",
+      "label": "写入三类记录",
+      "sublabel": "状态 · 事件 · 产物",
+      "width": 178
+    },
+    {
+      "id": "commit",
+      "lane": "main",
+      "col": 3,
+      "type": "database",
+      "label": "事务提交",
+      "sublabel": "成为已提交版本",
+      "width": 178
+    },
+    {
+      "id": "rollback",
+      "lane": "other",
+      "col": 2,
+      "type": "messagebus",
+      "label": "提交前退出",
+      "sublabel": "恢复到旧版本",
+      "width": 178
+    },
+    {
+      "id": "recover",
+      "lane": "other",
+      "col": 3,
+      "type": "backend",
+      "label": "提交后退出",
+      "sublabel": "恢复到新版本",
+      "width": 178
+    }
+  ],
+  "edges": [
+    {
+      "id": "begin-version",
+      "from": "begin",
+      "to": "version",
+      "label": "读取当前任务",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "version-write",
+      "from": "version",
+      "to": "write",
+      "label": "版本一致",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "write-commit",
+      "from": "write",
+      "to": "commit",
+      "label": "一起提交",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "write-rollback",
+      "from": "write",
+      "to": "rollback",
+      "label": "尚未提交",
+      "role": "branch",
+      "variant": "security"
+    },
+    {
+      "id": "commit-recover",
+      "from": "commit",
+      "to": "recover",
+      "label": "重启读取",
+      "role": "branch",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "适用范围",
+      "items": [
+        "状态、事件与报告字节存于同一个 SQLite 数据库。",
+        "实验覆盖进程退出，不覆盖断电、网络共享盘或远程工具。"
+      ]
+    }
+  ]
+}

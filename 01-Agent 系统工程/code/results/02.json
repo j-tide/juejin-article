@@ -1,0 +1,22 @@
+{
+  "episode": 2,
+  "cases": [
+    {
+      "crash": "before_commit",
+      "exit_code": 71,
+      "version": 0,
+      "events": 0,
+      "artifact_present": false
+    },
+    {
+      "crash": "after_commit",
+      "exit_code": 72,
+      "version": 1,
+      "events": 1,
+      "artifact_present": true
+    }
+  ],
+  "stale_version_rejected": true,
+  "boundary": "Local SQLite commit; remote tool effects are not atomic with this transaction.",
+  "scope": "Local deterministic experiment; no live model or network calls."
+}

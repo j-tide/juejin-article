@@ -1,0 +1,10 @@
+{
+  "episode": 3,
+  "naive_delivery_count": 2,
+  "stable_key_delivery_count": 1,
+  "after_timeout": "UNKNOWN",
+  "after_reconcile": "DELIVERED",
+  "receipt": "receipt:task-A/review/845e91831319e89c4d656bdb80c278ac09a7230d61e5dfd2e1b1fbb436ac8917",
+  "payload_conflict": "same_key_different_payload",
+  "scope": "Local deterministic experiment; no live model or network calls."
+}

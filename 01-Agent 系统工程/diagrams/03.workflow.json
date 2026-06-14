@@ -1,0 +1,134 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "交付超时后的结果确认",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "处理流程"
+    },
+    {
+      "id": "other",
+      "label": "分支与限制",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "intent",
+    "service",
+    "unknown",
+    "query"
+  ],
+  "nodes": [
+    {
+      "id": "intent",
+      "lane": "main",
+      "col": 0,
+      "type": "database",
+      "label": "保存交付意图",
+      "sublabel": "PENDING / 原操作键",
+      "width": 178
+    },
+    {
+      "id": "service",
+      "lane": "main",
+      "col": 1,
+      "type": "backend",
+      "label": "服务端保存",
+      "sublabel": "操作键绑定内容与回执",
+      "width": 178
+    },
+    {
+      "id": "unknown",
+      "lane": "main",
+      "col": 2,
+      "type": "messagebus",
+      "label": "客户端结果未知",
+      "sublabel": "UNKNOWN",
+      "width": 178
+    },
+    {
+      "id": "query",
+      "lane": "main",
+      "col": 3,
+      "type": "database",
+      "label": "查询原操作",
+      "sublabel": "保存回执后 DELIVERED",
+      "width": 178
+    },
+    {
+      "id": "conflict",
+      "lane": "other",
+      "col": 1,
+      "type": "security",
+      "label": "拒绝内容冲突",
+      "sublabel": "同键不能提交不同正文",
+      "width": 178
+    },
+    {
+      "id": "wait",
+      "lane": "other",
+      "col": 3,
+      "type": "security",
+      "label": "保留未知状态",
+      "sublabel": "不能直接假定失败",
+      "width": 178
+    }
+  ],
+  "edges": [
+    {
+      "id": "intent-service",
+      "from": "intent",
+      "to": "service",
+      "label": "发送原键",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "service-unknown",
+      "from": "service",
+      "to": "unknown",
+      "label": "模拟回执丢失",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "unknown-query",
+      "from": "unknown",
+      "to": "query",
+      "label": "恢复后对账",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "service-conflict",
+      "from": "service",
+      "to": "conflict",
+      "label": "同键异内容",
+      "role": "branch",
+      "variant": "security"
+    },
+    {
+      "id": "query-wait",
+      "from": "query",
+      "to": "wait",
+      "label": "无确定回执",
+      "role": "branch",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "适用范围",
+      "items": [
+        "两个数据库分别模拟客户端与服务端，没有真实网络发送。",
+        "去重保证依赖服务端键作用域、保存期与查询语义。"
+      ]
+    }
+  ]
+}

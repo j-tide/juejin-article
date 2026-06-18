@@ -1,0 +1,117 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "工具执行前的授权核对",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "处理流程"
+    },
+    {
+      "id": "other",
+      "label": "分支与限制",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "proposal",
+    "schema",
+    "grant",
+    "send"
+  ],
+  "nodes": [
+    {
+      "id": "proposal",
+      "lane": "main",
+      "col": 0,
+      "type": "cloud",
+      "label": "模型动作提案",
+      "sublabel": "任务 · 目标 · 报告",
+      "width": 194
+    },
+    {
+      "id": "schema",
+      "lane": "main",
+      "col": 1,
+      "type": "security",
+      "label": "验证字段结构",
+      "sublabel": "拒绝额外批准字段",
+      "width": 194
+    },
+    {
+      "id": "grant",
+      "lane": "main",
+      "col": 2,
+      "type": "security",
+      "label": "核对可信授权",
+      "sublabel": "任务、期限、目标、哈希",
+      "width": 194
+    },
+    {
+      "id": "send",
+      "lane": "main",
+      "col": 3,
+      "type": "backend",
+      "label": "提交已检查字节",
+      "sublabel": "避免重新读取可变文件",
+      "width": 194
+    },
+    {
+      "id": "reject",
+      "lane": "other",
+      "col": 2,
+      "type": "security",
+      "label": "返回拒绝原因",
+      "sublabel": "不执行交付",
+      "width": 194
+    }
+  ],
+  "edges": [
+    {
+      "id": "proposal-schema",
+      "from": "proposal",
+      "to": "schema",
+      "label": "提交提案",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "schema-grant",
+      "from": "schema",
+      "to": "grant",
+      "label": "结构合法",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "grant-send",
+      "from": "grant",
+      "to": "send",
+      "label": "全部匹配",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "grant-reject",
+      "from": "grant",
+      "to": "reject",
+      "label": "缺授权或不匹配",
+      "role": "branch",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "适用范围",
+      "items": [
+        "Grant 由受信任的应用路径创建，网页和模型不能自行批准。",
+        "frozen 对象不是进程沙箱；内容真实性仍需另外审查。"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "episode": 4,
+  "cases": [
+    {
+      "case": "authorized_snapshot",
+      "decision": "allowed"
+    },
+    {
+      "case": "retrieved_text_claims_approval",
+      "decision": "invalid_schema"
+    },
+    {
+      "case": "redirect_target",
+      "decision": "target_denied"
+    },
+    {
+      "case": "modified_after_review",
+      "decision": "artifact_changed"
+    },
+    {
+      "case": "expired",
+      "decision": "expired_grant"
+    },
+    {
+      "case": "cross_task",
+      "decision": "wrong_task"
+    },
+    {
+      "case": "no_trusted_approval",
+      "decision": "no_grant"
+    }
+  ],
+  "boundary": "Tests execution authorization, not a model's resistance to prompt injection or report truth.",
+  "scope": "Local deterministic experiment; no live model or network calls."
+}

@@ -8,5 +8,6 @@
 | 02 | 同一事务中的任务检查点 | [正文](<../02｜任务跑到一半挂了，如何恢复到正确状态？/README.md>) · [PNG](<../02｜任务跑到一半挂了，如何恢复到正确状态？/assets/diagram.png>) · [SVG](<../02｜任务跑到一半挂了，如何恢复到正确状态？/assets/diagram.svg>) | [HTML](<02.html>) · [JSON](<02.workflow.json>) |
 | 03 | 交付超时后的结果确认 | [正文](<../03｜工具执行成功但回执丢了，重试还是不重试？/README.md>) · [PNG](<../03｜工具执行成功但回执丢了，重试还是不重试？/assets/diagram.png>) · [SVG](<../03｜工具执行成功但回执丢了，重试还是不重试？/assets/diagram.svg>) | [HTML](<03.html>) · [JSON](<03.workflow.json>) |
 | 04 | 工具执行前的授权核对 | [正文](<../04｜外部资料何时变成了指令？用权限边界约束提示注入/README.md>) · [PNG](<../04｜外部资料何时变成了指令？用权限边界约束提示注入/assets/diagram.png>) · [SVG](<../04｜外部资料何时变成了指令？用权限边界约束提示注入/assets/diagram.svg>) | [HTML](<04.html>) · [JSON](<04.workflow.json>) |
+| 05 | 控制字段与上下文预算 | [正文](<../05｜上下文压缩以后，怎样知道关键信息有没有丢？/README.md>) · [PNG](<../05｜上下文压缩以后，怎样知道关键信息有没有丢？/assets/diagram.png>) · [SVG](<../05｜上下文压缩以后，怎样知道关键信息有没有丢？/assets/diagram.svg>) | [HTML](<05.html>) · [JSON](<05.workflow.json>) |
 
 [返回专栏目录](../README.md)

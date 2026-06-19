@@ -1,0 +1,11 @@
+{
+  "episode": 5,
+  "original_chars": 5934,
+  "structured_chars": 600,
+  "naive_action": "propose_delivery",
+  "structured_action": "request_review",
+  "tiny_budget": "explicit_failure",
+  "source_version_change_rejected": true,
+  "measurement": "Unicode characters in canonical JSON, not tokens or model accuracy",
+  "scope": "Local deterministic experiment; no live model or network calls."
+}

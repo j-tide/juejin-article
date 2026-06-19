@@ -1,0 +1,117 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "控制字段与上下文预算",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "处理流程"
+    },
+    {
+      "id": "other",
+      "label": "分支与限制",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "state",
+    "pinned",
+    "budget",
+    "summary"
+  ],
+  "nodes": [
+    {
+      "id": "state",
+      "lane": "main",
+      "col": 0,
+      "type": "database",
+      "label": "读取任务状态",
+      "sublabel": "约束与待确认操作",
+      "width": 194
+    },
+    {
+      "id": "pinned",
+      "lane": "main",
+      "col": 1,
+      "type": "security",
+      "label": "保留控制字段",
+      "sublabel": "附带版本化证据句柄",
+      "width": 194
+    },
+    {
+      "id": "budget",
+      "lane": "main",
+      "col": 2,
+      "type": "backend",
+      "label": "检查最小空间",
+      "sublabel": "按规范 JSON 字符数",
+      "width": 194
+    },
+    {
+      "id": "summary",
+      "lane": "main",
+      "col": 3,
+      "type": "messagebus",
+      "label": "填入叙述摘要",
+      "sublabel": "剩余预算内裁剪",
+      "width": 194
+    },
+    {
+      "id": "overflow",
+      "lane": "other",
+      "col": 2,
+      "type": "security",
+      "label": "报告预算不足",
+      "sublabel": "不静默删除控制字段",
+      "width": 194
+    }
+  ],
+  "edges": [
+    {
+      "id": "state-pinned",
+      "from": "state",
+      "to": "pinned",
+      "label": "提取",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "pinned-budget",
+      "from": "pinned",
+      "to": "budget",
+      "label": "序列化计量",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "budget-summary",
+      "from": "budget",
+      "to": "summary",
+      "label": "预算足够",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "budget-overflow",
+      "from": "budget",
+      "to": "overflow",
+      "label": "控制区超限",
+      "role": "branch",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "适用范围",
+      "items": [
+        "示例预算是 600 个字符，不是 600 Token。",
+        "读取证据句柄时再校验哈希；固定策略测试不等于模型服从率。"
+      ]
+    }
+  ]
+}

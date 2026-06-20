@@ -1,0 +1,134 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "记忆撤回沿依赖关系传播",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "处理流程"
+    },
+    {
+      "id": "other",
+      "label": "分支与限制",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "evidence",
+    "memory",
+    "plan",
+    "report"
+  ],
+  "nodes": [
+    {
+      "id": "evidence",
+      "lane": "main",
+      "col": 0,
+      "type": "database",
+      "label": "证据 E1",
+      "sublabel": "来源记录",
+      "width": 194
+    },
+    {
+      "id": "memory",
+      "lane": "main",
+      "col": 1,
+      "type": "database",
+      "label": "记忆 M1",
+      "sublabel": "依赖 E1",
+      "width": 194
+    },
+    {
+      "id": "plan",
+      "lane": "main",
+      "col": 2,
+      "type": "backend",
+      "label": "计划依据 M2",
+      "sublabel": "依赖 M1",
+      "width": 194
+    },
+    {
+      "id": "report",
+      "lane": "main",
+      "col": 3,
+      "type": "frontend",
+      "label": "报告 R1",
+      "sublabel": "依赖 M2",
+      "width": 194
+    },
+    {
+      "id": "revoked",
+      "lane": "other",
+      "col": 0,
+      "type": "security",
+      "label": "根记录撤回",
+      "sublabel": "REVOKED",
+      "width": 194
+    },
+    {
+      "id": "stale",
+      "lane": "other",
+      "col": 3,
+      "type": "security",
+      "label": "下游待重验",
+      "sublabel": "M1、M2、R1 → STALE",
+      "width": 194
+    }
+  ],
+  "edges": [
+    {
+      "id": "evidence-memory",
+      "from": "evidence",
+      "to": "memory",
+      "label": "支持",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "memory-plan",
+      "from": "memory",
+      "to": "plan",
+      "label": "推导",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "plan-report",
+      "from": "plan",
+      "to": "report",
+      "label": "采用",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "evidence-revoked",
+      "from": "evidence",
+      "to": "revoked",
+      "label": "撤回 E1",
+      "role": "branch",
+      "variant": "security"
+    },
+    {
+      "id": "report-stale",
+      "from": "report",
+      "to": "stale",
+      "label": "沿依赖传播",
+      "role": "branch",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "适用范围",
+      "items": [
+        "撤回不自动判断全部下游为假，也不删除已交付副本。",
+        "只沿已登记依赖传播；独立证据 E2 仍可读取。"
+      ]
+    }
+  ]
+}

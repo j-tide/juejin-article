@@ -1,0 +1,15 @@
+{
+  "episode": 6,
+  "revocation_affected": [
+    "E1",
+    "M1",
+    "M2",
+    "R1"
+  ],
+  "unrelated_record_survived": true,
+  "cross_scope": "MISSING",
+  "expired_record": "MISSING",
+  "conflicting_claims": "CONFLICT",
+  "boundary": "STALE means revalidation needed, not that every descendant is false.",
+  "scope": "Local deterministic experiment; no live model or network calls."
+}

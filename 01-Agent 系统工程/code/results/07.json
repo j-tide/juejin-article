@@ -1,0 +1,61 @@
+{
+  "episode": 7,
+  "fixed_plan": {
+    "ready": false,
+    "tool_calls": 6,
+    "replans": 0,
+    "events": [
+      {
+        "source": "A",
+        "success": false
+      },
+      {
+        "source": "A",
+        "success": false
+      },
+      {
+        "source": "A",
+        "success": false
+      },
+      {
+        "source": "A",
+        "success": false
+      },
+      {
+        "source": "A",
+        "success": false
+      },
+      {
+        "source": "A",
+        "success": false
+      }
+    ]
+  },
+  "event_triggered": {
+    "ready": true,
+    "tool_calls": 3,
+    "replans": 1,
+    "events": [
+      {
+        "source": "A",
+        "success": false
+      },
+      {
+        "source": "A",
+        "success": false
+      },
+      {
+        "source": "B",
+        "success": true
+      }
+    ]
+  },
+  "controls": {
+    "unknown_delivery": "RECONCILE",
+    "contradiction": "ASK_FOR_SCOPE_OR_MORE_EVIDENCE",
+    "repeat_failure_after_replan": "ASK_FOR_HELP",
+    "exhausted": "PAUSE_BUDGET"
+  },
+  "boundary": "Known fixture fallback, no evidence of LLM planning superiority.",
+  "scope": "Local deterministic experiment; no live model or network calls."
+}

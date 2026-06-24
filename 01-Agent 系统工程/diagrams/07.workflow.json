@@ -1,0 +1,117 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "规划控制条件的检查顺序",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "处理流程"
+    },
+    {
+      "id": "other",
+      "label": "分支与限制",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "budget",
+    "unknown",
+    "conflict",
+    "progress"
+  ],
+  "nodes": [
+    {
+      "id": "budget",
+      "lane": "main",
+      "col": 0,
+      "type": "security",
+      "label": "检查剩余预算",
+      "sublabel": "不足则暂停",
+      "width": 194
+    },
+    {
+      "id": "unknown",
+      "lane": "main",
+      "col": 1,
+      "type": "database",
+      "label": "检查未知交付",
+      "sublabel": "先确认原操作",
+      "width": 194
+    },
+    {
+      "id": "conflict",
+      "lane": "main",
+      "col": 2,
+      "type": "security",
+      "label": "检查证据冲突",
+      "sublabel": "补证或求助",
+      "width": 194
+    },
+    {
+      "id": "progress",
+      "lane": "main",
+      "col": 3,
+      "type": "backend",
+      "label": "检查停滞与版本",
+      "sublabel": "必要时重规划",
+      "width": 194
+    },
+    {
+      "id": "replan",
+      "lane": "other",
+      "col": 3,
+      "type": "messagebus",
+      "label": "请求重规划",
+      "sublabel": "连续失败或依据变化",
+      "width": 194
+    }
+  ],
+  "edges": [
+    {
+      "id": "budget-unknown",
+      "from": "budget",
+      "to": "unknown",
+      "label": "预算足够",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "unknown-conflict",
+      "from": "unknown",
+      "to": "conflict",
+      "label": "无未知交付",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "conflict-progress",
+      "from": "conflict",
+      "to": "progress",
+      "label": "无冲突",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "progress-replan",
+      "from": "progress",
+      "to": "replan",
+      "label": "满足触发条件",
+      "role": "branch",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "适用范围",
+      "items": [
+        "已重规划后再次停滞会求助；没有命中条件则继续。",
+        "来源 A/B 的切换是固定规则，没有在线模型规划成本。"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "episode": 8,
+  "three_votes_one_root": "NEEDS_INDEPENDENT_EVIDENCE",
+  "contradicting_independent_root": "CONFLICT",
+  "analytic_independent_error_p_0_2": 0.104,
+  "analytic_shared_failure_q_0_15_residual_p_0_1": 0.1738,
+  "analytic_correlated_single_agent_error": 0.235,
+  "boundary": "Analytical assumptions and scripted provenance fixtures, not multi-model benchmarks.",
+  "scope": "Local deterministic experiment; no live model or network calls."
+}

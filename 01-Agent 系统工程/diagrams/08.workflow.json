@@ -1,0 +1,134 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "协作检查主张与证据根",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "处理流程"
+    },
+    {
+      "id": "other",
+      "label": "分支与限制",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "reports",
+    "claims",
+    "roots",
+    "review"
+  ],
+  "nodes": [
+    {
+      "id": "reports",
+      "lane": "main",
+      "col": 0,
+      "type": "messagebus",
+      "label": "收集角色报告",
+      "sublabel": "主张与 roots",
+      "width": 194
+    },
+    {
+      "id": "claims",
+      "lane": "main",
+      "col": 1,
+      "type": "security",
+      "label": "比较主张",
+      "sublabel": "先检查是否互相冲突",
+      "width": 194
+    },
+    {
+      "id": "roots",
+      "lane": "main",
+      "col": 2,
+      "type": "database",
+      "label": "统计独立来源",
+      "sublabel": "按已登记根身份去重",
+      "width": 194
+    },
+    {
+      "id": "review",
+      "lane": "main",
+      "col": 3,
+      "type": "backend",
+      "label": "进入语义审查",
+      "sublabel": "仍需核对条件与时效",
+      "width": 194
+    },
+    {
+      "id": "conflict",
+      "lane": "other",
+      "col": 1,
+      "type": "security",
+      "label": "返回 CONFLICT",
+      "sublabel": "补充证据后再检查",
+      "width": 194
+    },
+    {
+      "id": "independent",
+      "lane": "other",
+      "col": 2,
+      "type": "security",
+      "label": "需要独立证据",
+      "sublabel": "角色数不代替来源数",
+      "width": 194
+    }
+  ],
+  "edges": [
+    {
+      "id": "reports-claims",
+      "from": "reports",
+      "to": "claims",
+      "label": "提取主张",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "claims-roots",
+      "from": "claims",
+      "to": "roots",
+      "label": "主张一致",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "roots-review",
+      "from": "roots",
+      "to": "review",
+      "label": "多个来源根",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "claims-conflict",
+      "from": "claims",
+      "to": "conflict",
+      "label": "主张不同",
+      "role": "branch",
+      "variant": "security"
+    },
+    {
+      "id": "roots-independent",
+      "from": "roots",
+      "to": "independent",
+      "label": "只有一个根",
+      "role": "branch",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "适用范围",
+      "items": [
+        "角色输出与来源根是固定测试数据，没有运行多个在线模型。",
+        "多个来源只是结构条件，不保证内容正确或彼此独立。"
+      ]
+    }
+  ]
+}

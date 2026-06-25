@@ -11,5 +11,6 @@
 | 05 | 控制字段与上下文预算 | [正文](<../05｜上下文压缩以后，怎样知道关键信息有没有丢？/README.md>) · [PNG](<../05｜上下文压缩以后，怎样知道关键信息有没有丢？/assets/diagram.png>) · [SVG](<../05｜上下文压缩以后，怎样知道关键信息有没有丢？/assets/diagram.svg>) | [HTML](<05.html>) · [JSON](<05.workflow.json>) |
 | 06 | 记忆撤回沿依赖关系传播 | [正文](<../06｜错误记忆如何越用越真？设计可追溯、可撤销的记忆系统/README.md>) · [PNG](<../06｜错误记忆如何越用越真？设计可追溯、可撤销的记忆系统/assets/diagram.png>) · [SVG](<../06｜错误记忆如何越用越真？设计可追溯、可撤销的记忆系统/assets/diagram.svg>) | [HTML](<06.html>) · [JSON](<06.workflow.json>) |
 | 07 | 规划控制条件的检查顺序 | [正文](<../07｜计划赶不上变化：Agent 何时该继续、重规划或求助？/README.md>) · [PNG](<../07｜计划赶不上变化：Agent 何时该继续、重规划或求助？/assets/diagram.png>) · [SVG](<../07｜计划赶不上变化：Agent 何时该继续、重规划或求助？/assets/diagram.svg>) | [HTML](<07.html>) · [JSON](<07.workflow.json>) |
+| 08 | 协作检查主张与证据根 | [正文](<../08｜多个 Agent 一致同意，为什么仍然可能一起错？/README.md>) · [PNG](<../08｜多个 Agent 一致同意，为什么仍然可能一起错？/assets/diagram.png>) · [SVG](<../08｜多个 Agent 一致同意，为什么仍然可能一起错？/assets/diagram.svg>) | [HTML](<08.html>) · [JSON](<08.workflow.json>) |
 
 [返回专栏目录](../README.md)

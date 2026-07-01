@@ -1,0 +1,117 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "按任务计算重复执行指标",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "处理流程"
+    },
+    {
+      "id": "other",
+      "label": "分支与限制",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "contract",
+    "trials",
+    "scores",
+    "aggregate"
+  ],
+  "nodes": [
+    {
+      "id": "contract",
+      "lane": "main",
+      "col": 0,
+      "type": "security",
+      "label": "定义成功条件",
+      "sublabel": "任务目标与预算",
+      "width": 194
+    },
+    {
+      "id": "trials",
+      "lane": "main",
+      "col": 1,
+      "type": "database",
+      "label": "分组试验记录",
+      "sublabel": "每项任务 n 次、c 次成功",
+      "width": 194
+    },
+    {
+      "id": "scores",
+      "lane": "main",
+      "col": 2,
+      "type": "backend",
+      "label": "计算两类指标",
+      "sublabel": "pass@k 与 pass^k",
+      "width": 194
+    },
+    {
+      "id": "aggregate",
+      "lane": "main",
+      "col": 3,
+      "type": "frontend",
+      "label": "按任务汇总",
+      "sublabel": "明确权重与样本条件",
+      "width": 194
+    },
+    {
+      "id": "faults",
+      "lane": "other",
+      "col": 2,
+      "type": "security",
+      "label": "故障回归单列",
+      "sublabel": "不并入自然任务成功率",
+      "width": 194
+    }
+  ],
+  "edges": [
+    {
+      "id": "contract-trials",
+      "from": "contract",
+      "to": "trials",
+      "label": "确定口径",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "trials-scores",
+      "from": "trials",
+      "to": "scores",
+      "label": "检查 k ≤ n",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "scores-aggregate",
+      "from": "scores",
+      "to": "aggregate",
+      "label": "统一权重",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "scores-faults",
+      "from": "scores",
+      "to": "faults",
+      "label": "另记边界用例",
+      "role": "branch",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "适用范围",
+      "items": [
+        "本章四个任务的成功次数是教学输入，没有测模型成功率。",
+        "成本、延迟、故障恢复与评分器误判需要分别记录。"
+      ]
+    }
+  ]
+}

@@ -1,11 +1,11 @@
-# Agent 系统工程 · 截至第 08 篇的配套实验
+# Agent 系统工程 · 截至第 09 篇的配套实验
 
-Python 3.10+，只使用标准库。当前可运行第 02—08 篇的本地机制实验。
+Python 3.10+，只使用标准库。当前可运行第 02—09 篇的本地机制实验。
 
 在本目录执行，例如：
 
 ```bash
-python3 run.py 08 --output results/08.json
+python3 run.py 09 --output results/09.json
 ```
 
 `lab/` 保存截至本章的实现，`results/` 保存实际输出。各篇另附独立的累计 `code.zip`；第 01 篇的原始程序与单元测试在该篇目录。

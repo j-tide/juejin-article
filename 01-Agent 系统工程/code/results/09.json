@@ -1,0 +1,37 @@
+{
+  "episode": 9,
+  "dataset": "synthetic teaching counts, not model runs",
+  "tasks": [
+    {
+      "task": "A",
+      "n": 5,
+      "c": 5
+    },
+    {
+      "task": "B",
+      "n": 5,
+      "c": 4
+    },
+    {
+      "task": "C",
+      "n": 5,
+      "c": 2
+    },
+    {
+      "task": "D",
+      "n": 5,
+      "c": 0
+    }
+  ],
+  "k_1": {
+    "pass_at_k": 0.55,
+    "pass_all_k": 0.55
+  },
+  "k_2": {
+    "pass_at_k": 0.675,
+    "pass_all_k": 0.42500000000000004
+  },
+  "n_too_small": "explicit_error",
+  "assumptions": "Same task definition and reset conditions; exchangeability required for future-trial interpretation.",
+  "scope": "Local deterministic experiment; no live model or network calls."
+}

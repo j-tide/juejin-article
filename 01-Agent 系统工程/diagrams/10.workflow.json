@@ -1,0 +1,117 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "用固定失败输入验证修复",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "处理流程"
+    },
+    {
+      "id": "other",
+      "label": "分支与限制",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "trace",
+    "old",
+    "fixed",
+    "regression"
+  ],
+  "nodes": [
+    {
+      "id": "trace",
+      "lane": "main",
+      "col": 0,
+      "type": "database",
+      "label": "保存失败输入",
+      "sublabel": "报告快照与来源 a、b",
+      "width": 194
+    },
+    {
+      "id": "old",
+      "lane": "main",
+      "col": 1,
+      "type": "backend",
+      "label": "运行旧解析器",
+      "sublabel": "漏掉大写未知引用",
+      "width": 194
+    },
+    {
+      "id": "fixed",
+      "lane": "main",
+      "col": 2,
+      "type": "security",
+      "label": "替换解析逻辑",
+      "sublabel": "先识别再检查格式与登记",
+      "width": 194
+    },
+    {
+      "id": "regression",
+      "lane": "main",
+      "col": 3,
+      "type": "backend",
+      "label": "运行回归集",
+      "sublabel": "保留正例与异常语法",
+      "width": 194
+    },
+    {
+      "id": "integration",
+      "lane": "other",
+      "col": 3,
+      "type": "database",
+      "label": "检查集成状态",
+      "sublabel": "交付与有效性分别保存",
+      "width": 194
+    }
+  ],
+  "edges": [
+    {
+      "id": "trace-old",
+      "from": "trace",
+      "to": "old",
+      "label": "固定条件",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "old-fixed",
+      "from": "old",
+      "to": "fixed",
+      "label": "仅替换实现",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "fixed-regression",
+      "from": "fixed",
+      "to": "regression",
+      "label": "比较结果",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "regression-integration",
+      "from": "regression",
+      "to": "integration",
+      "label": "模块集成",
+      "role": "branch",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "适用范围",
+      "items": [
+        "报告与来源固定；验证解析缺陷，不推断模型输出分布。",
+        "证据撤回后仍为 DELIVERED，有效性改为 NEEDS_REVALIDATION。"
+      ]
+    }
+  ]
+}

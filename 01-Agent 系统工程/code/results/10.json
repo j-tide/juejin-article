@@ -1,0 +1,58 @@
+{
+  "episode": 10,
+  "frozen_artifact_sha": "4bc4153efb8b3b9b328fda1da03385432693ef7a5251073d86da2323446f3ca6",
+  "before_errors": [],
+  "after_errors": [
+    "invalid_citation_id:UNKNOWN",
+    "unobserved_evidence:UNKNOWN"
+  ],
+  "regressions": [
+    {
+      "case": "valid",
+      "accepted": true
+    },
+    {
+      "case": "unknown_lower",
+      "accepted": false
+    },
+    {
+      "case": "unknown_upper",
+      "accepted": false
+    },
+    {
+      "case": "unclosed",
+      "accepted": false
+    },
+    {
+      "case": "empty_id",
+      "accepted": false
+    }
+  ],
+  "trace": [
+    {
+      "task_id": "task-A",
+      "action_id": "a1",
+      "kind": "evidence_observed",
+      "ids": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "task_id": "task-A",
+      "action_id": "a2",
+      "kind": "artifact_written",
+      "sha": "4bc4153efb8b3b9b328fda1da03385432693ef7a5251073d86da2323446f3ca6"
+    },
+    {
+      "task_id": "task-A",
+      "action_id": "a3",
+      "parent_action_id": "a2",
+      "kind": "validation",
+      "validator_version": "original",
+      "errors": []
+    }
+  ],
+  "boundary": "Evidence for one parser defect; not a causal attribution method for arbitrary LLM failures.",
+  "scope": "Local deterministic experiment; no live model or network calls."
+}

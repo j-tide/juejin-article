@@ -13,5 +13,6 @@
 | 07 | 规划控制条件的检查顺序 | [正文](<../07｜计划赶不上变化：Agent 何时该继续、重规划或求助？/README.md>) · [PNG](<../07｜计划赶不上变化：Agent 何时该继续、重规划或求助？/assets/diagram.png>) · [SVG](<../07｜计划赶不上变化：Agent 何时该继续、重规划或求助？/assets/diagram.svg>) | [HTML](<07.html>) · [JSON](<07.workflow.json>) |
 | 08 | 协作检查主张与证据根 | [正文](<../08｜多个 Agent 一致同意，为什么仍然可能一起错？/README.md>) · [PNG](<../08｜多个 Agent 一致同意，为什么仍然可能一起错？/assets/diagram.png>) · [SVG](<../08｜多个 Agent 一致同意，为什么仍然可能一起错？/assets/diagram.svg>) | [HTML](<08.html>) · [JSON](<08.workflow.json>) |
 | 09 | 按任务计算重复执行指标 | [正文](<../09｜Agent 的可靠性怎么测？成功率、恢复能力与成本/README.md>) · [PNG](<../09｜Agent 的可靠性怎么测？成功率、恢复能力与成本/assets/diagram.png>) · [SVG](<../09｜Agent 的可靠性怎么测？成功率、恢复能力与成本/assets/diagram.svg>) | [HTML](<09.html>) · [JSON](<09.workflow.json>) |
+| 10 | 用固定失败输入验证修复 | [正文](<../10｜一次长任务失败，如何定位原因并验证修复？/README.md>) · [PNG](<../10｜一次长任务失败，如何定位原因并验证修复？/assets/diagram.png>) · [SVG](<../10｜一次长任务失败，如何定位原因并验证修复？/assets/diagram.svg>) | [HTML](<10.html>) · [JSON](<10.workflow.json>) |
 
 [返回专栏目录](../README.md)

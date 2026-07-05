@@ -1,0 +1,52 @@
+{
+  "mode": "local fixture integration, no LLM",
+  "delivery_count": 1,
+  "task": {
+    "task_id": "task-A",
+    "version": 4,
+    "state": {
+      "phase": "DELIVERED",
+      "validity": "NEEDS_REVALIDATION"
+    },
+    "contract_sha": "e7a295c6eb92a9d6a45d8d0e033287ab5f9fc26ed97975b6e3eb670105518aa3"
+  },
+  "events": [
+    {
+      "task_id": "task-A",
+      "version": 1,
+      "kind": "artifact_verified",
+      "data": {
+        "artifact_sha": "8d03b87acd111de56fd6f7fe875edfe22c0f134e8a50584ef93a71b4baf62d75"
+      }
+    },
+    {
+      "task_id": "task-A",
+      "version": 2,
+      "kind": "delivery_uncertain",
+      "data": {
+        "op_key": "task-A/review-1"
+      }
+    },
+    {
+      "task_id": "task-A",
+      "version": 3,
+      "kind": "delivery_confirmed",
+      "data": {
+        "receipt": "receipt:task-A/review-1"
+      }
+    },
+    {
+      "task_id": "task-A",
+      "version": 4,
+      "kind": "evidence_revoked",
+      "data": {
+        "affected": [
+          "a",
+          "report-1"
+        ]
+      }
+    }
+  ],
+  "accepted_artifact_unchanged": true,
+  "revocation_does_not_undo_delivery": true
+}

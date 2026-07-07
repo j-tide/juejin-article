@@ -1,0 +1,45 @@
+{
+  "model": "scripted MockAdapter; no real model invocation",
+  "reviewTools": [
+    "review_checklist"
+  ],
+  "plainTools": [],
+  "requestCount": 2,
+  "result": {
+    "type": "tool/result",
+    "seq": 10,
+    "time": 1789662118827,
+    "data": {
+      "turn": 1,
+      "step": 1,
+      "message": {
+        "source": {
+          "kind": "tool",
+          "callId": "check-1"
+        },
+        "content": [
+          {
+            "type": "tool-result",
+            "toolCallId": "check-1",
+            "content": [
+              {
+                "type": "text",
+                "text": "位置 → 触发条件 → 可复现步骤 → 实际结果 → 影响 → 修复验证"
+              }
+            ],
+            "isError": false
+          }
+        ],
+        "role": "user",
+        "id": "48c274da-cb18-488c-bee4-75494ed55e45"
+      }
+    },
+    "sourceEventSeqs": [
+      9
+    ],
+    "surfaceOp": "append"
+  },
+  "standingSurvivesAgent": true,
+  "toolRemovedAfterRosterDispose": true,
+  "promptRemovedAfterRosterDispose": true
+}

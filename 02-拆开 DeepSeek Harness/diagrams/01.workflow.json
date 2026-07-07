@@ -1,0 +1,117 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "一次读、改、测任务的执行路径",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "处理流程"
+    },
+    {
+      "id": "other",
+      "label": "分支与限制",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "inbox",
+    "request",
+    "tool",
+    "result"
+  ],
+  "nodes": [
+    {
+      "id": "inbox",
+      "lane": "main",
+      "col": 0,
+      "type": "messagebus",
+      "label": "接收 followup",
+      "sublabel": "next-turn 收件箱",
+      "width": 194
+    },
+    {
+      "id": "request",
+      "lane": "main",
+      "col": 1,
+      "type": "cloud",
+      "label": "准备模型请求",
+      "sublabel": "路由、会话消息、工具",
+      "width": 194
+    },
+    {
+      "id": "tool",
+      "lane": "main",
+      "col": 2,
+      "type": "backend",
+      "label": "执行工具管线",
+      "sublabel": "读取、写入或测试",
+      "width": 194
+    },
+    {
+      "id": "result",
+      "lane": "main",
+      "col": 3,
+      "type": "database",
+      "label": "记录工具结果",
+      "sublabel": "供后续 step 使用",
+      "width": 194
+    },
+    {
+      "id": "finish",
+      "lane": "other",
+      "col": 1,
+      "type": "security",
+      "label": "无继续条件时结束",
+      "sublabel": "检查收件箱与取消",
+      "width": 194
+    }
+  ],
+  "edges": [
+    {
+      "id": "inbox-request",
+      "from": "inbox",
+      "to": "request",
+      "label": "唤醒 turn",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "request-tool",
+      "from": "request",
+      "to": "tool",
+      "label": "提交工具调用",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "tool-result",
+      "from": "tool",
+      "to": "result",
+      "label": "记录结果",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "request-finish",
+      "from": "request",
+      "to": "finish",
+      "label": "无工具调用",
+      "role": "branch",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "适用范围",
+      "items": [
+        "每次工具结果进入后续请求；本实验为 1 turn、4 step、3 次工具往返。",
+        "MockAdapter 回复预先给定；文件与 Node 测试进程实际执行。"
+      ]
+    }
+  ]
+}

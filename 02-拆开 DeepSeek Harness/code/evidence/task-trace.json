@@ -1,0 +1,801 @@
+{
+  "model": "scripted MockAdapter; no real model invocation",
+  "tools": "column-owned deterministic tools; real DSH registry, loop, log, filesystem and child Node assertion",
+  "counts": {
+    "turn/start": 1,
+    "step/start": 4,
+    "tool/call": 3,
+    "tool/result": 3,
+    "turn/end": 1
+  },
+  "modelRequests": 4,
+  "baselineExitCode": 1,
+  "fixedExitCode": 0,
+  "before": "export const total = (price, count) => price + count;\n",
+  "after": "export const total = (price, count) => price * count;\n",
+  "requestRoles": [
+    [
+      "system",
+      "user"
+    ],
+    [
+      "system",
+      "user",
+      "assistant",
+      "user"
+    ],
+    [
+      "system",
+      "user",
+      "assistant",
+      "user",
+      "assistant",
+      "user"
+    ],
+    [
+      "system",
+      "user",
+      "assistant",
+      "user",
+      "assistant",
+      "user",
+      "assistant",
+      "user"
+    ]
+  ],
+  "events": [
+    {
+      "type": "agent/inbox/spliced",
+      "seq": 0,
+      "time": 1789662118767,
+      "data": {
+        "target": "next-turn",
+        "start": 0,
+        "inserted": [
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "帮我修复 total 的乘法错误，并运行测试。"
+              }
+            ],
+            "source": {
+              "kind": "user"
+            },
+            "role": "user",
+            "id": "1d1a447b-a91c-4cd7-bd5f-0f6d256109d1"
+          }
+        ]
+      }
+    },
+    {
+      "type": "turn/start",
+      "seq": 1,
+      "time": 1789662118767,
+      "data": {
+        "turn": 1
+      }
+    },
+    {
+      "type": "agent/inbox/spliced",
+      "seq": 2,
+      "time": 1789662118768,
+      "data": {
+        "target": "next-turn",
+        "start": 0,
+        "removedCount": 1,
+        "inserted": []
+      }
+    },
+    {
+      "type": "step/start",
+      "seq": 3,
+      "time": 1789662118768,
+      "data": {
+        "turn": 1,
+        "step": 1
+      }
+    },
+    {
+      "type": "system/message",
+      "seq": 4,
+      "time": 1789662118769,
+      "data": {
+        "turn": 1,
+        "step": 1,
+        "message": {
+          "role": "system",
+          "content": [
+            {
+              "type": "text",
+              "text": "You are an AI agent powered by DeepSeek Harness."
+            }
+          ],
+          "source": {
+            "kind": "plugin",
+            "plugin": "@deepseek-ai/dsh-system-prompt"
+          },
+          "id": "4346c207-43c8-4a5e-86f9-c086063384f7"
+        }
+      },
+      "surfaceOp": "append"
+    },
+    {
+      "type": "user/message",
+      "seq": 5,
+      "time": 1789662118769,
+      "data": {
+        "content": [
+          {
+            "type": "text",
+            "text": "帮我修复 total 的乘法错误，并运行测试。"
+          }
+        ],
+        "source": {
+          "kind": "user"
+        },
+        "role": "user",
+        "id": "1d1a447b-a91c-4cd7-bd5f-0f6d256109d1"
+      },
+      "surfaceOp": "append"
+    },
+    {
+      "type": "request/header",
+      "seq": 6,
+      "time": 1789662118769,
+      "data": {
+        "header": {
+          "config": {
+            "provider": "mock",
+            "model": "mock"
+          },
+          "tools": [
+            {
+              "name": "column_edit",
+              "description": "应用预先给定的修复",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            {
+              "name": "column_read",
+              "description": "读取隔离测试文件",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            {
+              "name": "column_test",
+              "description": "用独立 Node 进程验证结果",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          ]
+        },
+        "reason": "initial"
+      }
+    },
+    {
+      "type": "request/context",
+      "seq": 7,
+      "time": 1789662118769,
+      "data": {
+        "provider": "mock",
+        "model": "mock"
+      }
+    },
+    {
+      "type": "assistant/message",
+      "seq": 8,
+      "time": 1789662118770,
+      "data": {
+        "turn": 1,
+        "step": 1,
+        "message": {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "tool-call",
+              "id": "read-1",
+              "name": "column_read",
+              "arguments": "{}"
+            }
+          ],
+          "source": {
+            "kind": "model",
+            "provider": "mock",
+            "model": "mock"
+          },
+          "id": "f3aac0c5-79f6-4165-aa3b-fdd74437d090"
+        },
+        "usage": {
+          "inputTokens": 10,
+          "outputTokens": 5
+        },
+        "stream": [
+          {
+            "type": "chunk",
+            "time": 1789662118770,
+            "chunk": {
+              "type": "block-start",
+              "index": 0,
+              "blockType": "tool-call"
+            }
+          },
+          {
+            "type": "tool-call-chunks",
+            "time0": 1789662118770,
+            "index": 0,
+            "dt": [],
+            "id": "read-1",
+            "name": "column_read",
+            "args": [
+              "{}"
+            ]
+          },
+          {
+            "type": "tool-call-chunks",
+            "time0": 1789662118770,
+            "index": 0,
+            "dt": [],
+            "id": "read-1",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "type": "chunk",
+            "time": 1789662118770,
+            "chunk": {
+              "type": "block-end",
+              "index": 0,
+              "block": {
+                "type": "tool-call",
+                "id": "read-1",
+                "name": "column_read",
+                "arguments": "{}"
+              }
+            }
+          },
+          {
+            "type": "chunk",
+            "time": 1789662118770,
+            "chunk": {
+              "type": "usage",
+              "usage": {
+                "inputTokens": 10,
+                "outputTokens": 5
+              }
+            }
+          },
+          {
+            "type": "chunk",
+            "time": 1789662118770,
+            "chunk": {
+              "type": "finish",
+              "reason": {
+                "kind": "tool-calls"
+              }
+            }
+          }
+        ]
+      },
+      "surfaceOp": "append"
+    },
+    {
+      "type": "tool/call",
+      "seq": 9,
+      "time": 1789662118771,
+      "data": {
+        "turn": 1,
+        "step": 1,
+        "callId": "read-1",
+        "name": "column_read",
+        "arguments": "{}"
+      }
+    },
+    {
+      "type": "tool/result",
+      "seq": 10,
+      "time": 1789662118772,
+      "data": {
+        "turn": 1,
+        "step": 1,
+        "message": {
+          "source": {
+            "kind": "tool",
+            "callId": "read-1"
+          },
+          "content": [
+            {
+              "type": "tool-result",
+              "toolCallId": "read-1",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "export const total = (price, count) => price + count;\n"
+                }
+              ],
+              "isError": false
+            }
+          ],
+          "role": "user",
+          "id": "63fdba97-83ce-4ffe-9653-363a2b59c45b"
+        }
+      },
+      "sourceEventSeqs": [
+        9
+      ],
+      "surfaceOp": "append"
+    },
+    {
+      "type": "step/end",
+      "seq": 11,
+      "time": 1789662118772,
+      "data": {
+        "turn": 1,
+        "step": 1
+      }
+    },
+    {
+      "type": "step/start",
+      "seq": 12,
+      "time": 1789662118773,
+      "data": {
+        "turn": 1,
+        "step": 2
+      }
+    },
+    {
+      "type": "assistant/message",
+      "seq": 13,
+      "time": 1789662118773,
+      "data": {
+        "turn": 1,
+        "step": 2,
+        "message": {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "tool-call",
+              "id": "edit-1",
+              "name": "column_edit",
+              "arguments": "{}"
+            }
+          ],
+          "source": {
+            "kind": "model",
+            "provider": "mock",
+            "model": "mock"
+          },
+          "id": "b5ea2258-ee0a-4858-8c1c-73d1abcc3a64"
+        },
+        "usage": {
+          "inputTokens": 10,
+          "outputTokens": 5
+        },
+        "stream": [
+          {
+            "type": "chunk",
+            "time": 1789662118773,
+            "chunk": {
+              "type": "block-start",
+              "index": 0,
+              "blockType": "tool-call"
+            }
+          },
+          {
+            "type": "tool-call-chunks",
+            "time0": 1789662118773,
+            "index": 0,
+            "dt": [],
+            "id": "edit-1",
+            "name": "column_edit",
+            "args": [
+              "{}"
+            ]
+          },
+          {
+            "type": "tool-call-chunks",
+            "time0": 1789662118773,
+            "index": 0,
+            "dt": [],
+            "id": "edit-1",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "type": "chunk",
+            "time": 1789662118773,
+            "chunk": {
+              "type": "block-end",
+              "index": 0,
+              "block": {
+                "type": "tool-call",
+                "id": "edit-1",
+                "name": "column_edit",
+                "arguments": "{}"
+              }
+            }
+          },
+          {
+            "type": "chunk",
+            "time": 1789662118773,
+            "chunk": {
+              "type": "usage",
+              "usage": {
+                "inputTokens": 10,
+                "outputTokens": 5
+              }
+            }
+          },
+          {
+            "type": "chunk",
+            "time": 1789662118773,
+            "chunk": {
+              "type": "finish",
+              "reason": {
+                "kind": "tool-calls"
+              }
+            }
+          }
+        ]
+      },
+      "surfaceOp": "append"
+    },
+    {
+      "type": "tool/call",
+      "seq": 14,
+      "time": 1789662118773,
+      "data": {
+        "turn": 1,
+        "step": 2,
+        "callId": "edit-1",
+        "name": "column_edit",
+        "arguments": "{}"
+      }
+    },
+    {
+      "type": "tool/result",
+      "seq": 15,
+      "time": 1789662118774,
+      "data": {
+        "turn": 1,
+        "step": 2,
+        "message": {
+          "source": {
+            "kind": "tool",
+            "callId": "edit-1"
+          },
+          "content": [
+            {
+              "type": "tool-result",
+              "toolCallId": "edit-1",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "written"
+                }
+              ],
+              "isError": false
+            }
+          ],
+          "role": "user",
+          "id": "d1b7f6ee-27ee-4322-a873-59996004826f"
+        }
+      },
+      "sourceEventSeqs": [
+        14
+      ],
+      "surfaceOp": "append"
+    },
+    {
+      "type": "step/end",
+      "seq": 16,
+      "time": 1789662118774,
+      "data": {
+        "turn": 1,
+        "step": 2
+      }
+    },
+    {
+      "type": "step/start",
+      "seq": 17,
+      "time": 1789662118774,
+      "data": {
+        "turn": 1,
+        "step": 3
+      }
+    },
+    {
+      "type": "assistant/message",
+      "seq": 18,
+      "time": 1789662118775,
+      "data": {
+        "turn": 1,
+        "step": 3,
+        "message": {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "tool-call",
+              "id": "test-1",
+              "name": "column_test",
+              "arguments": "{}"
+            }
+          ],
+          "source": {
+            "kind": "model",
+            "provider": "mock",
+            "model": "mock"
+          },
+          "id": "3fe1f3de-810b-4d3d-8e31-b7a069408e1f"
+        },
+        "usage": {
+          "inputTokens": 10,
+          "outputTokens": 5
+        },
+        "stream": [
+          {
+            "type": "chunk",
+            "time": 1789662118775,
+            "chunk": {
+              "type": "block-start",
+              "index": 0,
+              "blockType": "tool-call"
+            }
+          },
+          {
+            "type": "tool-call-chunks",
+            "time0": 1789662118775,
+            "index": 0,
+            "dt": [],
+            "id": "test-1",
+            "name": "column_test",
+            "args": [
+              "{}"
+            ]
+          },
+          {
+            "type": "tool-call-chunks",
+            "time0": 1789662118775,
+            "index": 0,
+            "dt": [],
+            "id": "test-1",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "type": "chunk",
+            "time": 1789662118775,
+            "chunk": {
+              "type": "block-end",
+              "index": 0,
+              "block": {
+                "type": "tool-call",
+                "id": "test-1",
+                "name": "column_test",
+                "arguments": "{}"
+              }
+            }
+          },
+          {
+            "type": "chunk",
+            "time": 1789662118775,
+            "chunk": {
+              "type": "usage",
+              "usage": {
+                "inputTokens": 10,
+                "outputTokens": 5
+              }
+            }
+          },
+          {
+            "type": "chunk",
+            "time": 1789662118775,
+            "chunk": {
+              "type": "finish",
+              "reason": {
+                "kind": "tool-calls"
+              }
+            }
+          }
+        ]
+      },
+      "surfaceOp": "append"
+    },
+    {
+      "type": "tool/call",
+      "seq": 19,
+      "time": 1789662118775,
+      "data": {
+        "turn": 1,
+        "step": 3,
+        "callId": "test-1",
+        "name": "column_test",
+        "arguments": "{}"
+      }
+    },
+    {
+      "type": "tool/result",
+      "seq": 20,
+      "time": 1789662118802,
+      "data": {
+        "turn": 1,
+        "step": 3,
+        "message": {
+          "source": {
+            "kind": "tool",
+            "callId": "test-1"
+          },
+          "content": [
+            {
+              "type": "tool-result",
+              "toolCallId": "test-1",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "exit=0"
+                }
+              ],
+              "isError": false
+            }
+          ],
+          "role": "user",
+          "id": "2ee0a0e6-acc4-4a18-a363-ea525a81210d"
+        }
+      },
+      "sourceEventSeqs": [
+        19
+      ],
+      "surfaceOp": "append"
+    },
+    {
+      "type": "step/end",
+      "seq": 21,
+      "time": 1789662118802,
+      "data": {
+        "turn": 1,
+        "step": 3
+      }
+    },
+    {
+      "type": "step/start",
+      "seq": 22,
+      "time": 1789662118802,
+      "data": {
+        "turn": 1,
+        "step": 4
+      }
+    },
+    {
+      "type": "assistant/message",
+      "seq": 23,
+      "time": 1789662118803,
+      "data": {
+        "turn": 1,
+        "step": 4,
+        "message": {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "修复已完成，测试通过。"
+            }
+          ],
+          "source": {
+            "kind": "model",
+            "provider": "mock",
+            "model": "mock"
+          },
+          "id": "302145c5-39d2-43c5-a2f8-70d772265845"
+        },
+        "usage": {
+          "inputTokens": 10,
+          "outputTokens": 11
+        },
+        "stream": [
+          {
+            "type": "chunk",
+            "time": 1789662118802,
+            "chunk": {
+              "type": "block-start",
+              "index": 0,
+              "blockType": "text"
+            }
+          },
+          {
+            "type": "text-chunks",
+            "time0": 1789662118802,
+            "index": 0,
+            "dt": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "texts": [
+              "修",
+              "复",
+              "已",
+              "完",
+              "成",
+              "，",
+              "测",
+              "试",
+              "通",
+              "过",
+              "。"
+            ]
+          },
+          {
+            "type": "chunk",
+            "time": 1789662118802,
+            "chunk": {
+              "type": "block-end",
+              "index": 0,
+              "block": {
+                "type": "text",
+                "text": "修复已完成，测试通过。"
+              }
+            }
+          },
+          {
+            "type": "chunk",
+            "time": 1789662118802,
+            "chunk": {
+              "type": "usage",
+              "usage": {
+                "inputTokens": 10,
+                "outputTokens": 11
+              }
+            }
+          },
+          {
+            "type": "chunk",
+            "time": 1789662118802,
+            "chunk": {
+              "type": "finish",
+              "reason": {
+                "kind": "stop"
+              }
+            }
+          }
+        ]
+      },
+      "surfaceOp": "append"
+    },
+    {
+      "type": "step/end",
+      "seq": 24,
+      "time": 1789662118803,
+      "data": {
+        "turn": 1,
+        "step": 4
+      }
+    },
+    {
+      "type": "turn/end",
+      "seq": 25,
+      "time": 1789662118803,
+      "data": {
+        "turn": 1,
+        "reason": {
+          "kind": "completed"
+        }
+      }
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 学习 AI Agent 的一些记录。边读源码边做小实验，把遇到的问题和自己的理解整理下来。
 
-目前整理了 11 篇学习笔记。文章按专栏和篇号排列，配套代码与图片放在对应目录。
+目前整理了 12 篇学习笔记。文章按专栏和篇号排列，配套代码与图片放在对应目录。
 
 ## 01 · Agent 系统工程
 
@@ -26,6 +26,7 @@
 从“帮我修个 Bug”这句话发出去开始，沿执行顺序读 DeepSeek Harness：输入怎么进来，模型何时被调用，工具怎么执行，又在什么条件下结束。
 
 1. [“帮我修个 Bug”发出去后，跑了哪条路？](<02-拆开 DeepSeek Harness/01｜“帮我修个 Bug”发出去后，跑了哪条路？/README.md>)
+2. [连 Agent Loop 都是插件，谁把这些插件组装成 Agent？](<02-拆开 DeepSeek Harness/02｜连 Agent Loop 都是插件，谁把这些插件组装成 Agent？/README.md>)
 
 [掘金专栏](https://juejin.cn/column/7686394441277259822) · [专栏目录](<02-拆开 DeepSeek Harness/README.md>) · [代码与运行方法](<02-拆开 DeepSeek Harness/code/README.md>)
 

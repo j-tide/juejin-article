@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "共享环境与 Agent 作用域",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "viewBox": [
+      1220,
+      580
+    ],
+    "legend": {
+      "mode": "hidden"
+    }
+  },
+  "components": [
+    {
+      "id": "profile",
+      "label": "Profile 与 bundles",
+      "sublabel": "配置按覆盖顺序合成",
+      "type": "external",
+      "pos": [
+        60,
+        90
+      ],
+      "size": [
+        210,
+        78
+      ]
+    },
+    {
+      "id": "host",
+      "label": "Cordis 共享环境",
+      "sublabel": "模型、会话、工具等服务",
+      "type": "backend",
+      "pos": [
+        460,
+        90
+      ],
+      "size": [
+        210,
+        78
+      ]
+    },
+    {
+      "id": "factory",
+      "label": "Agent 工厂",
+      "sublabel": "setup 完成后公开对象",
+      "type": "backend",
+      "pos": [
+        860,
+        90
+      ],
+      "size": [
+        210,
+        78
+      ]
+    },
+    {
+      "id": "preset",
+      "label": "Preset 常驻组合",
+      "sublabel": "工具与提示贡献",
+      "type": "messagebus",
+      "pos": [
+        460,
+        360
+      ],
+      "size": [
+        210,
+        78
+      ]
+    },
+    {
+      "id": "scope",
+      "label": "Agent scope",
+      "sublabel": "可见性与生命周期",
+      "type": "security",
+      "pos": [
+        860,
+        360
+      ],
+      "size": [
+        210,
+        78
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "profile-host",
+      "from": "profile",
+      "to": "host",
+      "label": "装配",
+      "variant": "emphasis"
+    },
+    {
+      "id": "host-factory",
+      "from": "host",
+      "to": "factory",
+      "label": "提供依赖",
+      "variant": "emphasis"
+    },
+    {
+      "id": "factory-scope",
+      "from": "factory",
+      "to": "scope",
+      "label": "创建",
+      "variant": "emphasis",
+      "labelDy": 70
+    },
+    {
+      "id": "preset-scope",
+      "from": "preset",
+      "to": "scope",
+      "label": "加入组合",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "实现边界",
+      "items": [
+        "相同 preset 代际可复用插件实例，会话数据仍需单独管理。",
+        "scope 隔离注册可见性，不等于操作系统沙箱。"
+      ]
+    }
+  ]
+}

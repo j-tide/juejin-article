@@ -5,5 +5,6 @@
 | 篇次 | 图示 | 正文与图片 | 交互图与源文件 |
 | --- | --- | --- | --- |
 | 01 | 一次读、改、测任务的执行路径 | [正文](<../01｜“帮我修个 Bug”发出去后，跑了哪条路？/README.md>) · [PNG](<../01｜“帮我修个 Bug”发出去后，跑了哪条路？/assets/diagram.png>) · [SVG](<../01｜“帮我修个 Bug”发出去后，跑了哪条路？/assets/diagram.svg>) | [HTML](<01.html>) · [JSON](<01.workflow.json>) |
+| 02 | 共享环境与 Agent 作用域 | [正文](<../02｜连 Agent Loop 都是插件，谁把这些插件组装成 Agent？/README.md>) · [PNG](<../02｜连 Agent Loop 都是插件，谁把这些插件组装成 Agent？/assets/diagram.png>) · [SVG](<../02｜连 Agent Loop 都是插件，谁把这些插件组装成 Agent？/assets/diagram.svg>) | [HTML](<02.html>) · [JSON](<02.architecture.json>) |
 
 [返回专栏目录](../README.md)

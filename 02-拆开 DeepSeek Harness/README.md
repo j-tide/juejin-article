@@ -7,6 +7,7 @@
 ## 文章
 
 1. [“帮我修个 Bug”发出去后，跑了哪条路？](<01｜“帮我修个 Bug”发出去后，跑了哪条路？/README.md>)
+2. [连 Agent Loop 都是插件，谁把这些插件组装成 Agent？](<02｜连 Agent Loop 都是插件，谁把这些插件组装成 Agent？/README.md>)
 
 ## 对应版本
 

@@ -1,0 +1,134 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "从 step 结束到 turn 结束",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "处理流程"
+    },
+    {
+      "id": "other",
+      "label": "分支与限制",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "step",
+    "completion",
+    "inbox",
+    "stopping"
+  ],
+  "nodes": [
+    {
+      "id": "step",
+      "lane": "main",
+      "col": 0,
+      "type": "backend",
+      "label": "执行一个 step",
+      "sublabel": "请求尝试及工具处理",
+      "width": 178
+    },
+    {
+      "id": "completion",
+      "lane": "main",
+      "col": 1,
+      "type": "security",
+      "label": "检查结束结果",
+      "sublabel": "工具默认需要继续",
+      "width": 178
+    },
+    {
+      "id": "inbox",
+      "lane": "main",
+      "col": 2,
+      "type": "messagebus",
+      "label": "检查 next-step",
+      "sublabel": "处理追加输入",
+      "width": 178
+    },
+    {
+      "id": "stopping",
+      "lane": "main",
+      "col": 3,
+      "type": "security",
+      "label": "触发停止扩展",
+      "sublabel": "再查收件箱与取消",
+      "width": 178
+    },
+    {
+      "id": "next",
+      "lane": "other",
+      "col": 1,
+      "type": "backend",
+      "label": "继续下一步",
+      "sublabel": "消费工具结果或新输入",
+      "width": 178
+    },
+    {
+      "id": "end",
+      "lane": "other",
+      "col": 3,
+      "type": "frontend",
+      "label": "结束当前 turn",
+      "sublabel": "没有新输入且允许停止",
+      "width": 178
+    }
+  ],
+  "edges": [
+    {
+      "id": "step-completion",
+      "from": "step",
+      "to": "completion",
+      "label": "步骤返回",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "completion-inbox",
+      "from": "completion",
+      "to": "inbox",
+      "label": "具备结束条件",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "inbox-stopping",
+      "from": "inbox",
+      "to": "stopping",
+      "label": "队列为空",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "completion-next",
+      "from": "completion",
+      "to": "next",
+      "label": "尚未完成",
+      "role": "branch",
+      "variant": "security"
+    },
+    {
+      "id": "stopping-end",
+      "from": "stopping",
+      "to": "end",
+      "label": "复查后可结束",
+      "role": "branch",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "适用范围",
+      "items": [
+        "followup 排入 next-turn；steer 与 inject 排入 next-step。",
+        "inject 不主动唤醒；stopping 监听者仍可追加工作。"
+      ]
+    }
+  ]
+}

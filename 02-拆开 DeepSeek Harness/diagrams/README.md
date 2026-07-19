@@ -7,5 +7,6 @@
 | 01 | 一次读、改、测任务的执行路径 | [正文](<../01｜“帮我修个 Bug”发出去后，跑了哪条路？/README.md>) · [PNG](<../01｜“帮我修个 Bug”发出去后，跑了哪条路？/assets/diagram.png>) · [SVG](<../01｜“帮我修个 Bug”发出去后，跑了哪条路？/assets/diagram.svg>) | [HTML](<01.html>) · [JSON](<01.workflow.json>) |
 | 02 | 共享环境与 Agent 作用域 | [正文](<../02｜连 Agent Loop 都是插件，谁把这些插件组装成 Agent？/README.md>) · [PNG](<../02｜连 Agent Loop 都是插件，谁把这些插件组装成 Agent？/assets/diagram.png>) · [SVG](<../02｜连 Agent Loop 都是插件，谁把这些插件组装成 Agent？/assets/diagram.svg>) | [HTML](<02.html>) · [JSON](<02.architecture.json>) |
 | 03 | 从 step 结束到 turn 结束 | [正文](<../03｜模型已经回答完了，Agent 为什么还没结束？/README.md>) · [PNG](<../03｜模型已经回答完了，Agent 为什么还没结束？/assets/diagram.png>) · [SVG](<../03｜模型已经回答完了，Agent 为什么还没结束？/assets/diagram.svg>) | [HTML](<03.html>) · [JSON](<03.workflow.json>) |
+| 04 | 同一会话的三种读取视图 | [正文](<../04｜模型看到的上下文，为什么要从日志里重新生成？/README.md>) · [PNG](<../04｜模型看到的上下文，为什么要从日志里重新生成？/assets/diagram.png>) · [SVG](<../04｜模型看到的上下文，为什么要从日志里重新生成？/assets/diagram.svg>) | [HTML](<04.html>) · [JSON](<04.architecture.json>) |
 
 [返回专栏目录](../README.md)

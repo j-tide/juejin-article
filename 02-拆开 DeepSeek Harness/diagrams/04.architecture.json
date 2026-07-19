@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "同一会话的三种读取视图",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "viewBox": [
+      1220,
+      580
+    ],
+    "legend": {
+      "mode": "hidden"
+    }
+  },
+  "components": [
+    {
+      "id": "events",
+      "label": "Session 事件",
+      "sublabel": "消息、工具、请求与尝试",
+      "type": "database",
+      "pos": [
+        70,
+        225
+      ],
+      "size": [
+        210,
+        78
+      ]
+    },
+    {
+      "id": "surface",
+      "label": "模型可见 surface",
+      "sublabel": "投影与增量缓存",
+      "type": "backend",
+      "pos": [
+        470,
+        60
+      ],
+      "size": [
+        210,
+        78
+      ]
+    },
+    {
+      "id": "chat",
+      "label": "用户聊天记录",
+      "sublabel": "append-origin 内容",
+      "type": "frontend",
+      "pos": [
+        470,
+        390
+      ],
+      "size": [
+        210,
+        78
+      ]
+    },
+    {
+      "id": "request",
+      "label": "请求快照",
+      "sublabel": "冻结消息与请求配置",
+      "type": "cloud",
+      "pos": [
+        880,
+        60
+      ],
+      "size": [
+        210,
+        78
+      ]
+    },
+    {
+      "id": "stream",
+      "label": "实时输出",
+      "sublabel": "start / chunk / end",
+      "type": "messagebus",
+      "pos": [
+        880,
+        390
+      ],
+      "size": [
+        210,
+        78
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "events-surface",
+      "from": "events",
+      "to": "surface",
+      "label": "筛选与投影",
+      "variant": "emphasis"
+    },
+    {
+      "id": "surface-request",
+      "from": "surface",
+      "to": "request",
+      "label": "deriveMessages",
+      "variant": "emphasis"
+    },
+    {
+      "id": "events-chat",
+      "from": "events",
+      "to": "chat",
+      "label": "读取历史",
+      "variant": "emphasis"
+    },
+    {
+      "id": "stream-chat",
+      "from": "stream",
+      "to": "chat",
+      "label": "临时展示",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "实现边界",
+      "items": [
+        "实时流完成后才提交对应消息或失败尝试；强制退出可能丢失片段。",
+        "持久化另行装配，deriveMessages 不等于每次全量读取磁盘。"
+      ]
+    }
+  ]
+}

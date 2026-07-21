@@ -2,7 +2,7 @@
 
 学习 AI Agent 的一些记录。边读源码边做小实验，把遇到的问题和自己的理解整理下来。
 
-目前整理了 14 篇学习笔记。文章按专栏和篇号排列，配套代码与图片放在对应目录。
+目前整理了 15 篇学习笔记。文章按专栏和篇号排列，配套代码与图片放在对应目录。
 
 ## 01 · Agent 系统工程
 
@@ -29,6 +29,7 @@
 2. [连 Agent Loop 都是插件，谁把这些插件组装成 Agent？](<02-拆开 DeepSeek Harness/02｜连 Agent Loop 都是插件，谁把这些插件组装成 Agent？/README.md>)
 3. [模型已经回答完了，Agent 为什么还没结束？](<02-拆开 DeepSeek Harness/03｜模型已经回答完了，Agent 为什么还没结束？/README.md>)
 4. [模型看到的上下文，为什么要从日志里重新生成？](<02-拆开 DeepSeek Harness/04｜模型看到的上下文，为什么要从日志里重新生成？/README.md>)
+5. [模型想调用工具，为什么不是直接执行？](<02-拆开 DeepSeek Harness/05｜模型想调用工具，为什么不是直接执行？/README.md>)
 
 [掘金专栏](https://juejin.cn/column/7686394441277259822) · [专栏目录](<02-拆开 DeepSeek Harness/README.md>) · [代码与运行方法](<02-拆开 DeepSeek Harness/code/README.md>)
 

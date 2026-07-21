@@ -1,0 +1,134 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "工具提案到最终结果",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "处理流程"
+    },
+    {
+      "id": "other",
+      "label": "分支与限制",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "prepare",
+    "permission",
+    "execute",
+    "finalize"
+  ],
+  "nodes": [
+    {
+      "id": "prepare",
+      "lane": "main",
+      "col": 0,
+      "type": "backend",
+      "label": "准备调用",
+      "sublabel": "解析工具与参数",
+      "width": 194
+    },
+    {
+      "id": "permission",
+      "lane": "main",
+      "col": 1,
+      "type": "security",
+      "label": "执行前检查",
+      "sublabel": "审批与 guards",
+      "width": 194
+    },
+    {
+      "id": "execute",
+      "lane": "main",
+      "col": 2,
+      "type": "backend",
+      "label": "执行工具本体",
+      "sublabel": "包装层与取消信号",
+      "width": 194
+    },
+    {
+      "id": "finalize",
+      "lane": "main",
+      "col": 3,
+      "type": "database",
+      "label": "处理并定型结果",
+      "sublabel": "post-execute 与冻结",
+      "width": 194
+    },
+    {
+      "id": "denied",
+      "lane": "other",
+      "col": 1,
+      "type": "security",
+      "label": "返回拒绝结果",
+      "sublabel": "函数体不执行",
+      "width": 194
+    },
+    {
+      "id": "blocked",
+      "lane": "other",
+      "col": 3,
+      "type": "security",
+      "label": "执行后阻断结果",
+      "sublabel": "不会回滚已发生写入",
+      "width": 194
+    }
+  ],
+  "edges": [
+    {
+      "id": "prepare-permission",
+      "from": "prepare",
+      "to": "permission",
+      "label": "解析成功",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "permission-execute",
+      "from": "permission",
+      "to": "execute",
+      "label": "允许执行",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "execute-finalize",
+      "from": "execute",
+      "to": "finalize",
+      "label": "函数返回",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "permission-denied",
+      "from": "permission",
+      "to": "denied",
+      "label": "拒绝或取消",
+      "role": "branch",
+      "variant": "security"
+    },
+    {
+      "id": "finalize-blocked",
+      "from": "finalize",
+      "to": "blocked",
+      "label": "后处理 block",
+      "role": "branch",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "适用范围",
+      "items": [
+        "tools/result 是运行时通知，tool/result 是会话记录。",
+        "工具可见性、调用审批与操作系统沙箱是不同层次。"
+      ]
+    }
+  ]
+}

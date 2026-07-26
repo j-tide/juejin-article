@@ -1,0 +1,134 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "取消到达时的执行阶段",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "处理流程"
+    },
+    {
+      "id": "other",
+      "label": "分支与限制",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "route",
+    "stream",
+    "registered",
+    "running"
+  ],
+  "nodes": [
+    {
+      "id": "route",
+      "lane": "main",
+      "col": 0,
+      "type": "cloud",
+      "label": "请求尚未发出",
+      "sublabel": "可在路由准备阶段取消",
+      "width": 178
+    },
+    {
+      "id": "stream",
+      "lane": "main",
+      "col": 1,
+      "type": "messagebus",
+      "label": "模型流式输出",
+      "sublabel": "保留可用文字前缀",
+      "width": 178
+    },
+    {
+      "id": "registered",
+      "lane": "main",
+      "col": 2,
+      "type": "database",
+      "label": "调用已记录",
+      "sublabel": "补上对应取消结果",
+      "width": 178
+    },
+    {
+      "id": "running",
+      "lane": "main",
+      "col": 3,
+      "type": "backend",
+      "label": "工具已经执行",
+      "sublabel": "传递 signal 并等待结束",
+      "width": 178
+    },
+    {
+      "id": "skipped",
+      "lane": "other",
+      "col": 2,
+      "type": "security",
+      "label": "函数体不执行",
+      "sublabel": "调用与结果保持配对",
+      "width": 178
+    },
+    {
+      "id": "effect",
+      "lane": "other",
+      "col": 3,
+      "type": "security",
+      "label": "核查已有副作用",
+      "sublabel": "写入不随取消回滚",
+      "width": 178
+    }
+  ],
+  "edges": [
+    {
+      "id": "route-stream",
+      "from": "route",
+      "to": "stream",
+      "label": "已发出请求",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "stream-registered",
+      "from": "stream",
+      "to": "registered",
+      "label": "工具消息已提交",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "registered-running",
+      "from": "registered",
+      "to": "running",
+      "label": "函数体开始",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "registered-skipped",
+      "from": "registered",
+      "to": "skipped",
+      "label": "执行前取消",
+      "role": "branch",
+      "variant": "security"
+    },
+    {
+      "id": "running-effect",
+      "from": "running",
+      "to": "effect",
+      "label": "执行中取消",
+      "role": "branch",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "适用范围",
+      "items": [
+        "图按时间阶段列出取消窗口，不表示取消后仍执行全部后续阶段。",
+        "keepInbox 保留排队输入，不恢复已领取消息。"
+      ]
+    }
+  ]
+}

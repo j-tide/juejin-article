@@ -1,0 +1,134 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "进程内子 Agent 的创建与收束",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "处理流程"
+    },
+    {
+      "id": "other",
+      "label": "分支与限制",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "policy",
+    "seed",
+    "create",
+    "settle"
+  ],
+  "nodes": [
+    {
+      "id": "policy",
+      "lane": "main",
+      "col": 0,
+      "type": "security",
+      "label": "捕获委派策略",
+      "sublabel": "首次异步等待之前",
+      "width": 178
+    },
+    {
+      "id": "seed",
+      "lane": "main",
+      "col": 1,
+      "type": "database",
+      "label": "准备会话种子",
+      "sublabel": "spawn 新建 / fork 前缀",
+      "width": 178
+    },
+    {
+      "id": "create",
+      "lane": "main",
+      "col": 2,
+      "type": "backend",
+      "label": "创建子 Agent",
+      "sublabel": "加入父 preset 的同代际",
+      "width": 178
+    },
+    {
+      "id": "settle",
+      "lane": "main",
+      "col": 3,
+      "type": "frontend",
+      "label": "收束并处置",
+      "sublabel": "再返回本次子任务结果",
+      "width": 178
+    },
+    {
+      "id": "prefix",
+      "lane": "other",
+      "col": 1,
+      "type": "messagebus",
+      "label": "只复制完整 turn",
+      "sublabel": "当前 turn 新事实另传",
+      "width": 178
+    },
+    {
+      "id": "cancel",
+      "lane": "other",
+      "col": 2,
+      "type": "security",
+      "label": "传递父侧取消",
+      "sublabel": "按 provider 契约清理",
+      "width": 178
+    }
+  ],
+  "edges": [
+    {
+      "id": "policy-seed",
+      "from": "policy",
+      "to": "seed",
+      "label": "固定策略",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "seed-create",
+      "from": "seed",
+      "to": "create",
+      "label": "应用 setup",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "create-settle",
+      "from": "create",
+      "to": "settle",
+      "label": "完成一次性任务",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "seed-prefix",
+      "from": "seed",
+      "to": "prefix",
+      "label": "fork",
+      "role": "branch",
+      "variant": "security"
+    },
+    {
+      "id": "create-cancel",
+      "from": "create",
+      "to": "cancel",
+      "label": "取消到达",
+      "role": "branch",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "适用范围",
+      "items": [
+        "图对应进程内一次性委派；可继续对话的子任务有不同生命周期。",
+        "结果必须排除继承的父历史，作用域不提供文件系统隔离。"
+      ]
+    }
+  ]
+}

@@ -11,5 +11,6 @@
 | 05 | 工具提案到最终结果 | [正文](<../05｜模型想调用工具，为什么不是直接执行？/README.md>) · [PNG](<../05｜模型想调用工具，为什么不是直接执行？/assets/diagram.png>) · [SVG](<../05｜模型想调用工具，为什么不是直接执行？/assets/diagram.svg>) | [HTML](<05.html>) · [JSON](<05.workflow.json>) |
 | 06 | 取消到达时的执行阶段 | [正文](<../06｜点下“停止”以后，哪些事已经来不及撤回？/README.md>) · [PNG](<../06｜点下“停止”以后，哪些事已经来不及撤回？/assets/diagram.png>) · [SVG](<../06｜点下“停止”以后，哪些事已经来不及撤回？/assets/diagram.svg>) | [HTML](<06.html>) · [JSON](<06.workflow.json>) |
 | 07 | 进程内子 Agent 的创建与收束 | [正文](<../07｜子 Agent 接到的，究竟是一句话还是一套运行环境？/README.md>) · [PNG](<../07｜子 Agent 接到的，究竟是一句话还是一套运行环境？/assets/diagram.png>) · [SVG](<../07｜子 Agent 接到的，究竟是一句话还是一套运行环境？/assets/diagram.svg>) | [HTML](<07.html>) · [JSON](<07.workflow.json>) |
+| 08 | PTC 程序与宿主工具管线 | [正文](<../08｜把多次工具调用写成一段程序，PTC 到底改变了什么？/README.md>) · [PNG](<../08｜把多次工具调用写成一段程序，PTC 到底改变了什么？/assets/diagram.png>) · [SVG](<../08｜把多次工具调用写成一段程序，PTC 到底改变了什么？/assets/diagram.svg>) | [HTML](<08.html>) · [JSON](<08.workflow.json>) |
 
 [返回专栏目录](../README.md)

@@ -1,0 +1,117 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "PTC 程序与宿主工具管线",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "处理流程"
+    },
+    {
+      "id": "other",
+      "label": "分支与限制",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "program",
+    "process",
+    "dispatch",
+    "output"
+  ],
+  "nodes": [
+    {
+      "id": "program",
+      "lane": "main",
+      "col": 0,
+      "type": "cloud",
+      "label": "生成 run_code",
+      "sublabel": "组织循环与条件",
+      "width": 178
+    },
+    {
+      "id": "process",
+      "lane": "main",
+      "col": 1,
+      "type": "backend",
+      "label": "Node 子进程",
+      "sublabel": "每次执行新建进程",
+      "width": 178
+    },
+    {
+      "id": "dispatch",
+      "lane": "main",
+      "col": 2,
+      "type": "security",
+      "label": "宿主调度绑定",
+      "sublabel": "审批与有序提交",
+      "width": 178
+    },
+    {
+      "id": "output",
+      "lane": "main",
+      "col": 3,
+      "type": "messagebus",
+      "label": "返回程序输出",
+      "sublabel": "外层结果交给模型",
+      "width": 178
+    },
+    {
+      "id": "exclusive",
+      "lane": "other",
+      "col": 2,
+      "type": "security",
+      "label": "独占调用等待",
+      "sublabel": "屏障保持至后处理完成",
+      "width": 178
+    }
+  ],
+  "edges": [
+    {
+      "id": "program-process",
+      "from": "program",
+      "to": "process",
+      "label": "执行函数体",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "process-dispatch",
+      "from": "process",
+      "to": "dispatch",
+      "label": "tools.xxx 调用",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "dispatch-output",
+      "from": "dispatch",
+      "to": "output",
+      "label": "汇总 JSON",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "dispatch-exclusive",
+      "from": "dispatch",
+      "to": "exclusive",
+      "label": "exclusive",
+      "role": "branch",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "适用范围",
+      "items": [
+        "Promise.all 表达并发意图，parallel/exclusive 决定是否重叠。",
+        "直接使用 Node 文件与网络 API 由沙箱约束，不自动经过工具审批。"
+      ]
+    }
+  ]
+}

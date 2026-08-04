@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "常驻 preset 的资源所有权",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "viewBox": [
+      1220,
+      580
+    ],
+    "legend": {
+      "mode": "hidden"
+    }
+  },
+  "components": [
+    {
+      "id": "roster",
+      "label": "Roster 插件",
+      "sublabel": "拥有常驻组合",
+      "type": "backend",
+      "pos": [
+        60,
+        100
+      ],
+      "size": [
+        210,
+        78
+      ]
+    },
+    {
+      "id": "standing",
+      "label": "Preset 常驻组合",
+      "sublabel": "按配置代际复用",
+      "type": "messagebus",
+      "pos": [
+        470,
+        100
+      ],
+      "size": [
+        210,
+        78
+      ]
+    },
+    {
+      "id": "contributions",
+      "label": "工具与提示定义",
+      "sublabel": "随所属组合释放",
+      "type": "database",
+      "pos": [
+        880,
+        100
+      ],
+      "size": [
+        210,
+        78
+      ]
+    },
+    {
+      "id": "agent",
+      "label": "Agent scope",
+      "sublabel": "加入组合并持有关系",
+      "type": "backend",
+      "pos": [
+        470,
+        390
+      ],
+      "size": [
+        210,
+        78
+      ]
+    },
+    {
+      "id": "dispose",
+      "label": "Agent 处置",
+      "sublabel": "取消、等待、关闭与注销",
+      "type": "security",
+      "pos": [
+        880,
+        390
+      ],
+      "size": [
+        210,
+        78
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "roster-standing",
+      "from": "roster",
+      "to": "standing",
+      "label": "拥有",
+      "variant": "emphasis"
+    },
+    {
+      "id": "standing-contributions",
+      "from": "standing",
+      "to": "contributions",
+      "label": "注册",
+      "variant": "emphasis"
+    },
+    {
+      "id": "agent-standing",
+      "from": "agent",
+      "to": "standing",
+      "label": "加入",
+      "variant": "emphasis"
+    },
+    {
+      "id": "agent-dispose",
+      "from": "agent",
+      "to": "dispose",
+      "label": "结束单个 Agent",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "实现边界",
+      "items": [
+        "处置 Agent 不释放常驻定义；处置 roster 才移除工具与提示。",
+        "本版本旧代际没有引用计数回收，保留到整个树卸载。"
+      ]
+    }
+  ]
+}

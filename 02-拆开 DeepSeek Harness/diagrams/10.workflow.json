@@ -1,0 +1,117 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "证据审查 preset 的加载与验证",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "处理流程"
+    },
+    {
+      "id": "other",
+      "label": "分支与限制",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "files",
+    "loader",
+    "scope",
+    "call"
+  ],
+  "nodes": [
+    {
+      "id": "files",
+      "lane": "main",
+      "col": 0,
+      "type": "database",
+      "label": "编写三个文件",
+      "sublabel": "两份 YAML 与插件模块",
+      "width": 178
+    },
+    {
+      "id": "loader",
+      "lane": "main",
+      "col": 1,
+      "type": "backend",
+      "label": "Loader 加载",
+      "sublabel": "应用工具与提示贡献",
+      "width": 178
+    },
+    {
+      "id": "scope",
+      "lane": "main",
+      "col": 2,
+      "type": "security",
+      "label": "核对作用域",
+      "sublabel": "review 可见 / plain 不可见",
+      "width": 178
+    },
+    {
+      "id": "call",
+      "lane": "main",
+      "col": 3,
+      "type": "backend",
+      "label": "执行清单工具",
+      "sublabel": "核对会话中的结果",
+      "width": 178
+    },
+    {
+      "id": "dispose",
+      "lane": "other",
+      "col": 3,
+      "type": "security",
+      "label": "验证资源释放",
+      "sublabel": "Agent 与 roster 分别处置",
+      "width": 178
+    }
+  ],
+  "edges": [
+    {
+      "id": "files-loader",
+      "from": "files",
+      "to": "loader",
+      "label": "读取配置",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "loader-scope",
+      "from": "loader",
+      "to": "scope",
+      "label": "创建两个 Agent",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "scope-call",
+      "from": "scope",
+      "to": "call",
+      "label": "脚本模型请求",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "call-dispose",
+      "from": "call",
+      "to": "dispose",
+      "label": "运行结束",
+      "role": "branch",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "适用范围",
+      "items": [
+        "清单是固定结果，实验验证装配和调用，不评价模型审查质量。",
+        "只使用临时目录，没有持久化安装插件或修改实际 profile。"
+      ]
+    }
+  ]
+}

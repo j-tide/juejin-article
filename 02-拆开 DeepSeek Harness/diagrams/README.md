@@ -13,5 +13,6 @@
 | 07 | 进程内子 Agent 的创建与收束 | [正文](<../07｜子 Agent 接到的，究竟是一句话还是一套运行环境？/README.md>) · [PNG](<../07｜子 Agent 接到的，究竟是一句话还是一套运行环境？/assets/diagram.png>) · [SVG](<../07｜子 Agent 接到的，究竟是一句话还是一套运行环境？/assets/diagram.svg>) | [HTML](<07.html>) · [JSON](<07.workflow.json>) |
 | 08 | PTC 程序与宿主工具管线 | [正文](<../08｜把多次工具调用写成一段程序，PTC 到底改变了什么？/README.md>) · [PNG](<../08｜把多次工具调用写成一段程序，PTC 到底改变了什么？/assets/diagram.png>) · [SVG](<../08｜把多次工具调用写成一段程序，PTC 到底改变了什么？/assets/diagram.svg>) | [HTML](<08.html>) · [JSON](<08.workflow.json>) |
 | 09 | 常驻 preset 的资源所有权 | [正文](<../09｜插件卸载了，它注册过的工具、监听器和任务怎么办？/README.md>) · [PNG](<../09｜插件卸载了，它注册过的工具、监听器和任务怎么办？/assets/diagram.png>) · [SVG](<../09｜插件卸载了，它注册过的工具、监听器和任务怎么办？/assets/diagram.svg>) | [HTML](<09.html>) · [JSON](<09.architecture.json>) |
+| 10 | 证据审查 preset 的加载与验证 | [正文](<../10｜创造模式在“创造”什么？让 Agent 组装一种新工作方式/README.md>) · [PNG](<../10｜创造模式在“创造”什么？让 Agent 组装一种新工作方式/assets/diagram.png>) · [SVG](<../10｜创造模式在“创造”什么？让 Agent 组装一种新工作方式/assets/diagram.svg>) | [HTML](<10.html>) · [JSON](<10.workflow.json>) |
 
 [返回专栏目录](../README.md)

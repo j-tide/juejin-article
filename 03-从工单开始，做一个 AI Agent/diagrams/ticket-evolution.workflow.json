@@ -1,0 +1,183 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "工单经验怎样进入下一次调查",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "learn",
+      "label": "整理候选经验"
+    },
+    {
+      "id": "release",
+      "label": "评测与启用"
+    },
+    {
+      "id": "observe",
+      "label": "使用与纠错"
+    }
+  ],
+  "mainPath": [
+    "outcome",
+    "extract",
+    "candidate",
+    "replay",
+    "canary",
+    "active",
+    "next"
+  ],
+  "nodes": [
+    {
+      "id": "outcome",
+      "lane": "learn",
+      "col": 0,
+      "type": "external",
+      "label": "确认处理结果",
+      "sublabel": "事实 · 人工纠正",
+      "width": 148
+    },
+    {
+      "id": "extract",
+      "lane": "learn",
+      "col": 1,
+      "type": "backend",
+      "label": "复盘与脱敏",
+      "sublabel": "有效步骤 · 错误假设",
+      "width": 148
+    },
+    {
+      "id": "candidate",
+      "lane": "learn",
+      "col": 2,
+      "type": "database",
+      "label": "候选经验",
+      "sublabel": "条件 · 证据 · 版本",
+      "width": 148
+    },
+    {
+      "id": "replay",
+      "lane": "release",
+      "col": 2,
+      "type": "security",
+      "label": "隔离回放评测",
+      "sublabel": "新旧策略 · 保留测试集",
+      "width": 148
+    },
+    {
+      "id": "canary",
+      "lane": "release",
+      "col": 3,
+      "type": "backend",
+      "label": "小范围启用",
+      "sublabel": "审核通过 · 影子对照",
+      "width": 148
+    },
+    {
+      "id": "active",
+      "lane": "release",
+      "col": 4,
+      "type": "database",
+      "label": "生效经验版本",
+      "sublabel": "检索 · 技能 · 路由",
+      "width": 148
+    },
+    {
+      "id": "next",
+      "lane": "release",
+      "col": 5,
+      "type": "backend",
+      "label": "后续工单调查",
+      "sublabel": "按适用条件调用",
+      "width": 148
+    },
+    {
+      "id": "metrics",
+      "lane": "observe",
+      "col": 5,
+      "type": "backend",
+      "label": "观察实际效果",
+      "sublabel": "定位 · 误判 · 成本",
+      "width": 148
+    },
+    {
+      "id": "revoke",
+      "lane": "observe",
+      "col": 4,
+      "type": "security",
+      "label": "撤销或回滚",
+      "sublabel": "版本失效 · 效果退步",
+      "width": 148
+    }
+  ],
+  "edges": [
+    {
+      "id": "outcome-extract",
+      "from": "outcome",
+      "to": "extract"
+    },
+    {
+      "id": "extract-candidate",
+      "from": "extract",
+      "to": "candidate"
+    },
+    {
+      "id": "candidate-replay",
+      "from": "candidate",
+      "to": "replay"
+    },
+    {
+      "id": "replay-canary",
+      "from": "replay",
+      "to": "canary",
+      "label": "达到准入条件"
+    },
+    {
+      "id": "canary-active",
+      "from": "canary",
+      "to": "active",
+      "label": "审核后启用"
+    },
+    {
+      "id": "active-next",
+      "from": "active",
+      "to": "next"
+    },
+    {
+      "id": "next-metrics",
+      "from": "next",
+      "to": "metrics"
+    },
+    {
+      "id": "metrics-revoke",
+      "from": "metrics",
+      "to": "revoke",
+      "label": "发现退步"
+    },
+    {
+      "id": "revoke-active",
+      "from": "revoke",
+      "to": "active",
+      "label": "恢复上一版本",
+      "role": "return"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "自动更新需要外部反馈",
+      "items": [
+        "模型复盘只生成候选；关闭工单、点赞或自评分不能单独证明根因正确。"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "目标是可测量的改进",
+      "items": [
+        "按故障类型和版本检查收益；新工单的确认结果再次进入流程。"
+      ]
+    }
+  ]
+}

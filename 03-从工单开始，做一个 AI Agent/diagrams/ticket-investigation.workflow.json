@@ -1,0 +1,182 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "工单排查 Agent：从话题接单到证据交付",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "online",
+      "label": "接单与调查"
+    },
+    {
+      "id": "evidence",
+      "label": "只读取证"
+    },
+    {
+      "id": "delivery",
+      "label": "核验与交付"
+    }
+  ],
+  "mainPath": [
+    "topic",
+    "ingress",
+    "plan",
+    "workers",
+    "merge",
+    "verify",
+    "report"
+  ],
+  "nodes": [
+    {
+      "id": "topic",
+      "lane": "online",
+      "col": 0,
+      "type": "external",
+      "label": "飞书话题",
+      "sublabel": "消息与附件",
+      "width": 160
+    },
+    {
+      "id": "ingress",
+      "lane": "online",
+      "col": 1,
+      "type": "messagebus",
+      "label": "接单与排队",
+      "sublabel": "去重 · 优先级",
+      "width": 160
+    },
+    {
+      "id": "plan",
+      "lane": "online",
+      "col": 2,
+      "type": "backend",
+      "label": "调查计划",
+      "sublabel": "假设 · 任务依赖",
+      "width": 160
+    },
+    {
+      "id": "workers",
+      "lane": "online",
+      "col": 3,
+      "type": "backend",
+      "label": "调查执行",
+      "sublabel": "单 Agent 或蜂群",
+      "width": 160
+    },
+    {
+      "id": "gateway",
+      "lane": "evidence",
+      "col": 3,
+      "type": "security",
+      "label": "工具权限校验",
+      "sublabel": "任务范围 · 查询预算",
+      "width": 160
+    },
+    {
+      "id": "sources",
+      "lane": "evidence",
+      "col": 4,
+      "type": "database",
+      "label": "业务与技术资料",
+      "sublabel": "工单 · 知识 · 代码 · 数据",
+      "width": 160
+    },
+    {
+      "id": "merge",
+      "lane": "delivery",
+      "col": 3,
+      "type": "backend",
+      "label": "汇合证据",
+      "sublabel": "稳定编号 · 保留来源",
+      "width": 160
+    },
+    {
+      "id": "verify",
+      "lane": "delivery",
+      "col": 4,
+      "type": "security",
+      "label": "核验结论",
+      "sublabel": "反证 · 缺口 · 人工接手",
+      "width": 160
+    },
+    {
+      "id": "report",
+      "lane": "delivery",
+      "col": 5,
+      "type": "frontend",
+      "label": "回复与反馈",
+      "sublabel": "回到原话题 · 确认结果",
+      "width": 160
+    }
+  ],
+  "edges": [
+    {
+      "id": "topic-ingress",
+      "from": "topic",
+      "to": "ingress"
+    },
+    {
+      "id": "ingress-plan",
+      "from": "ingress",
+      "to": "plan"
+    },
+    {
+      "id": "plan-workers",
+      "from": "plan",
+      "to": "workers"
+    },
+    {
+      "id": "workers-gateway",
+      "from": "workers",
+      "to": "gateway",
+      "label": "读取请求"
+    },
+    {
+      "id": "gateway-sources",
+      "from": "gateway",
+      "to": "sources",
+      "label": "授权范围内"
+    },
+    {
+      "id": "sources-merge",
+      "from": "sources",
+      "to": "merge",
+      "label": "证据结果"
+    },
+    {
+      "id": "workers-merge",
+      "from": "workers",
+      "to": "merge",
+      "label": "任务状态"
+    },
+    {
+      "id": "merge-verify",
+      "from": "merge",
+      "to": "verify"
+    },
+    {
+      "id": "verify-report",
+      "from": "verify",
+      "to": "report"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "调查过程可恢复",
+      "items": [
+        "工单状态、证据和任务结果持久化；超时后继续处理。"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "图示为目标设计",
+      "items": [
+        "确认后的处理记录进入经验更新流程；现有示例尚未实现该系统。"
+      ]
+    }
+  ]
+}

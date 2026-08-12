@@ -1,0 +1,160 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "文字工单 Demo：查询与证据回复",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "text",
+      "label": "输入与决策"
+    },
+    {
+      "id": "data",
+      "label": "受限读取"
+    },
+    {
+      "id": "reply",
+      "label": "核验与交付"
+    }
+  ],
+  "mainPath": [
+    "input",
+    "model",
+    "guard",
+    "lookup",
+    "evidence",
+    "answer",
+    "verify",
+    "output"
+  ],
+  "nodes": [
+    {
+      "id": "input",
+      "lane": "text",
+      "col": 0,
+      "type": "frontend",
+      "label": "文字工单",
+      "sublabel": "门店范围由入口绑定",
+      "width": 164
+    },
+    {
+      "id": "model",
+      "lane": "text",
+      "col": 1,
+      "type": "cloud",
+      "label": "模型提出查询",
+      "sublabel": "工具名与 JSON 参数",
+      "width": 164
+    },
+    {
+      "id": "guard",
+      "lane": "text",
+      "col": 2,
+      "type": "security",
+      "label": "校验工具请求",
+      "sublabel": "白名单 · 参数 · 次数",
+      "width": 164
+    },
+    {
+      "id": "lookup",
+      "lane": "data",
+      "col": 2,
+      "type": "database",
+      "label": "只读查询",
+      "sublabel": "支付 → 订单 → 出单任务",
+      "width": 164
+    },
+    {
+      "id": "evidence",
+      "lane": "data",
+      "col": 3,
+      "type": "backend",
+      "label": "返回证据",
+      "sublabel": "来源 · 状态 · 采集时间",
+      "width": 164
+    },
+    {
+      "id": "answer",
+      "lane": "reply",
+      "col": 3,
+      "type": "cloud",
+      "label": "模型组织回复",
+      "sublabel": "事实引用与待确认项",
+      "width": 164
+    },
+    {
+      "id": "verify",
+      "lane": "reply",
+      "col": 4,
+      "type": "security",
+      "label": "核验引用",
+      "sublabel": "禁止编造来源与状态",
+      "width": 164
+    },
+    {
+      "id": "output",
+      "lane": "reply",
+      "col": 5,
+      "type": "frontend",
+      "label": "交给值班人员",
+      "sublabel": "已知事实 / 仍需排查",
+      "width": 164
+    }
+  ],
+  "edges": [
+    {
+      "id": "input-model",
+      "from": "input",
+      "to": "model"
+    },
+    {
+      "id": "model-guard",
+      "from": "model",
+      "to": "guard"
+    },
+    {
+      "id": "guard-lookup",
+      "from": "guard",
+      "to": "lookup"
+    },
+    {
+      "id": "lookup-evidence",
+      "from": "lookup",
+      "to": "evidence"
+    },
+    {
+      "id": "evidence-answer",
+      "from": "evidence",
+      "to": "answer"
+    },
+    {
+      "id": "answer-verify",
+      "from": "answer",
+      "to": "verify"
+    },
+    {
+      "id": "verify-output",
+      "from": "verify",
+      "to": "output"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "模型决定查什么，程序决定能查什么",
+      "items": [
+        "品牌与门店不接受模型改写；当前工具只读合成数据。"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "查到记录不等于现场恢复",
+      "items": [
+        "出单任务已发送，仍不能推出小票已打印；错误与超限转交人工。"
+      ]
+    }
+  ]
+}

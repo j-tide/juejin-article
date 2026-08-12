@@ -1,0 +1,72 @@
+{
+  "synthetic": true,
+  "observed_at": "2026-09-18T14:05:00+08:00",
+  "orders": [
+    {
+      "brand": "demo-brand",
+      "store": "store-001",
+      "order_id": "O1001",
+      "payment_id": "P1001",
+      "payment": {
+        "description": "支付渠道确认成功，金额 16.00 元",
+        "event_at": "2026-09-18T14:02:11+08:00"
+      },
+      "order": {
+        "description": "订单已创建，门店接单状态尚未取得",
+        "event_at": "2026-09-18T14:02:12+08:00"
+      },
+      "dispatch": {
+        "description": "出单任务已发送到设备网关，不代表纸质小票已打印",
+        "event_at": "2026-09-18T14:02:13+08:00"
+      },
+      "receipt": {
+        "description": "未发现打印回执，不能确认是否已打印",
+        "event_at": null
+      }
+    },
+    {
+      "brand": "demo-brand",
+      "store": "store-001",
+      "order_id": "O1002",
+      "payment_id": "P1002",
+      "payment": {
+        "description": "支付渠道确认成功，金额 16.00 元",
+        "event_at": "2026-09-18T14:02:11+08:00"
+      },
+      "order": {
+        "description": "订单已创建，门店接单状态尚未取得",
+        "event_at": "2026-09-18T14:02:12+08:00"
+      },
+      "dispatch": {
+        "description": "出单任务已发送到设备网关，不代表纸质小票已打印",
+        "event_at": "2026-09-18T14:02:13+08:00"
+      },
+      "receipt": {
+        "description": "设备已返回打印完成回执；现场是否拿到小票仍需核对",
+        "event_at": "2026-09-18T14:02:15+08:00"
+      }
+    },
+    {
+      "brand": "other-brand",
+      "store": "store-009",
+      "order_id": "O2001",
+      "payment_id": "P2001",
+      "payment": {
+        "description": "支付渠道确认成功，金额 16.00 元",
+        "event_at": "2026-09-18T14:02:11+08:00"
+      },
+      "order": {
+        "description": "订单已创建，门店接单状态尚未取得",
+        "event_at": "2026-09-18T14:02:12+08:00"
+      },
+      "dispatch": {
+        "description": "出单任务已发送到设备网关，不代表纸质小票已打印",
+        "event_at": "2026-09-18T14:02:13+08:00"
+      },
+      "receipt": {
+        "description": "设备返回打印完成回执",
+        "event_at": "2026-09-18T14:02:15+08:00"
+      }
+    }
+  ]
+}

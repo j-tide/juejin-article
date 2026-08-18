@@ -1,0 +1,160 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "飞书入口：接单、调查与回复分开执行",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "intake",
+      "label": "接收回调"
+    },
+    {
+      "id": "work",
+      "label": "单 Worker 调查"
+    },
+    {
+      "id": "delivery",
+      "label": "消息交付"
+    }
+  ],
+  "mainPath": [
+    "event",
+    "scope",
+    "inbox",
+    "worker",
+    "outbox",
+    "sending",
+    "receipt",
+    "state"
+  ],
+  "nodes": [
+    {
+      "id": "event",
+      "lane": "intake",
+      "col": 0,
+      "type": "external",
+      "label": "飞书文字与附件",
+      "sublabel": "官方 SDK 长连接接收",
+      "width": 164
+    },
+    {
+      "id": "scope",
+      "lane": "intake",
+      "col": 1,
+      "type": "security",
+      "label": "核对应用和门店",
+      "sublabel": "忽略机器人 · 绑定群",
+      "width": 164
+    },
+    {
+      "id": "inbox",
+      "lane": "intake",
+      "col": 2,
+      "type": "database",
+      "label": "持久化 Inbox",
+      "sublabel": "事件与消息双重去重",
+      "width": 164
+    },
+    {
+      "id": "worker",
+      "lane": "work",
+      "col": 2,
+      "type": "backend",
+      "label": "后台调查",
+      "sublabel": "调用第 01 篇执行器",
+      "width": 164
+    },
+    {
+      "id": "outbox",
+      "lane": "work",
+      "col": 3,
+      "type": "database",
+      "label": "保存待发回复",
+      "sublabel": "正文与目标一起落库",
+      "width": 164
+    },
+    {
+      "id": "sending",
+      "lane": "delivery",
+      "col": 3,
+      "type": "messagebus",
+      "label": "回复原话题",
+      "sublabel": "稳定 UUID · 指定根消息",
+      "width": 164
+    },
+    {
+      "id": "receipt",
+      "lane": "delivery",
+      "col": 4,
+      "type": "backend",
+      "label": "检查发送结果",
+      "sublabel": "平台消息 ID / 不确定",
+      "width": 164
+    },
+    {
+      "id": "state",
+      "lane": "delivery",
+      "col": 5,
+      "type": "frontend",
+      "label": "保留交付状态",
+      "sublabel": "不确定时停止自动重发",
+      "width": 164
+    }
+  ],
+  "edges": [
+    {
+      "id": "event-scope",
+      "from": "event",
+      "to": "scope"
+    },
+    {
+      "id": "scope-inbox",
+      "from": "scope",
+      "to": "inbox"
+    },
+    {
+      "id": "inbox-worker",
+      "from": "inbox",
+      "to": "worker"
+    },
+    {
+      "id": "worker-outbox",
+      "from": "worker",
+      "to": "outbox"
+    },
+    {
+      "id": "outbox-sending",
+      "from": "outbox",
+      "to": "sending"
+    },
+    {
+      "id": "sending-receipt",
+      "from": "sending",
+      "to": "receipt"
+    },
+    {
+      "id": "receipt-state",
+      "from": "receipt",
+      "to": "state"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "收到消息和完成调查是两件事",
+      "items": [
+        "回调只负责入库；模型请求放到后台 Worker。"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "发送超时不等于没有发送",
+      "items": [
+        "保留 uncertain 状态；核对平台消息后再决定下一步。"
+      ]
+    }
+  ]
+}

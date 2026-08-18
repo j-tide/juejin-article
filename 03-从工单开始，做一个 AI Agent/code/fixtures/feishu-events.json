@@ -1,0 +1,104 @@
+[
+  {
+    "schema": "2.0",
+    "header": {
+      "event_id": "event-001",
+      "event_type": "im.message.receive_v1",
+      "app_id": "app-demo",
+      "tenant_key": "tenant-demo"
+    },
+    "event": {
+      "sender": {
+        "sender_id": {
+          "open_id": "user-demo"
+        },
+        "sender_type": "user"
+      },
+      "message": {
+        "message_id": "message-001",
+        "chat_id": "chat-demo",
+        "chat_type": "group",
+        "message_type": "text",
+        "create_time": "1789711500000",
+        "content": "{\"text\": \"顾客付款流水 P1001，店长说没出单\"}"
+      }
+    }
+  },
+  {
+    "schema": "2.0",
+    "header": {
+      "event_id": "event-001",
+      "event_type": "im.message.receive_v1",
+      "app_id": "app-demo",
+      "tenant_key": "tenant-demo"
+    },
+    "event": {
+      "sender": {
+        "sender_id": {
+          "open_id": "user-demo"
+        },
+        "sender_type": "user"
+      },
+      "message": {
+        "message_id": "message-001",
+        "chat_id": "chat-demo",
+        "chat_type": "group",
+        "message_type": "text",
+        "create_time": "1789711500000",
+        "content": "{\"text\": \"顾客付款流水 P1001，店长说没出单\"}"
+      }
+    }
+  },
+  {
+    "schema": "2.0",
+    "header": {
+      "event_id": "event-002",
+      "event_type": "im.message.receive_v1",
+      "app_id": "app-demo",
+      "tenant_key": "tenant-demo"
+    },
+    "event": {
+      "sender": {
+        "sender_id": {
+          "open_id": "user-demo"
+        },
+        "sender_type": "user"
+      },
+      "message": {
+        "message_id": "message-002",
+        "chat_id": "chat-demo",
+        "chat_type": "group",
+        "message_type": "image",
+        "create_time": "1789711500000",
+        "content": "{\"image_key\": \"synthetic-image-key\"}",
+        "root_id": "message-001",
+        "parent_id": "message-001"
+      }
+    }
+  },
+  {
+    "schema": "2.0",
+    "header": {
+      "event_id": "event-003",
+      "event_type": "im.message.receive_v1",
+      "app_id": "app-demo",
+      "tenant_key": "tenant-demo"
+    },
+    "event": {
+      "sender": {
+        "sender_id": {
+          "open_id": "user-demo"
+        },
+        "sender_type": "app"
+      },
+      "message": {
+        "message_id": "message-001",
+        "chat_id": "chat-demo",
+        "chat_type": "group",
+        "message_type": "text",
+        "create_time": "1789711500000",
+        "content": "{\"text\": \"顾客付款流水 P1001，店长说没出单\"}"
+      }
+    }
+  }
+]

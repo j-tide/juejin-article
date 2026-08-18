@@ -1,6 +1,6 @@
 # 茶饮工单 Agent Demo
 
-当前版本对应第 01 篇：文字工单、只读查询和证据回复。Python 3.11+，只使用标准库。
+当前版本对应第 02 篇：文字工单、只读查询、飞书事件接入和持久化回复。Python 3.11+，只使用标准库。
 
 ## 运行
 
@@ -34,3 +34,30 @@ python3 -m ticket_agent --mode live '顾客付款流水 P1001，店长说没出�
 - 在 Python 3.11.9 上通过 19 项脚本化测试。未配置 API Key，真实模型端到端调用尚未验证。
 
 每篇目录中的 `code.zip` 冻结该章代码，可独立解压运行；共享目录会随着后续文章演进。代码使用规则见 COPYRIGHT.md；未另行授予开源许可。
+
+## 第 02 篇：飞书事件接入
+
+```bash
+python3 -m ticket_agent.feishu --db /tmp/ticket-agent-ch02.sqlite3
+```
+
+默认本地事件回放，包含重复事件、同话题图片和机器人消息；不会联网发送。复用同一个数据库再次执行，不重复创建回复。真实运行数据请放仓库外。
+
+可选官方 SDK：
+
+```bash
+python3 -m pip install -r requirements-feishu.txt
+python3 -m unittest discover -s tests -v
+```
+
+共 32 项测试；没有 SDK 时跳过其中 1 项契约测试。SDK 固定 `lark-oapi==1.7.3`，本地契约测试通过，实际平台收发未联调。
+
+真实模式需要环境变量 `FEISHU_APP_ID`、`FEISHU_APP_SECRET`、`DEEPSEEK_API_KEY`，以及已启用长连接、机器人和所需消息权限的应用。参考 `fixtures/bindings.example.json` 在仓库外建立私有绑定文件：
+
+```bash
+python3 -m ticket_agent.feishu --live --db /tmp/ticket-agent-live.sqlite3 --bindings /path/to/private-bindings.json
+```
+
+一个租户与群绑定一个门店，仅适合本章测试群。没有多门店身份授权实现。回调不调用模型；单 Worker 读取 Inbox，再保存 Outbox。发送异常或进程在发送中退出，保留 `uncertain` 等待人工核对，不自动重发。只启动一个进程/Worker；恢复函数不支持并发工作者。
+
+附件只保存引用，未下载、未解析。尚未合并话题的多条消息、同步编辑撤回或自动重试失败任务。数据库包含输入正文和调查结果，请勿公开提交。

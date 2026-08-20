@@ -1,0 +1,132 @@
+[
+  {
+    "schema": "2.0",
+    "header": {
+      "event_id": "conversation-1",
+      "event_type": "im.message.receive_v1",
+      "app_id": "app-demo",
+      "tenant_key": "tenant-demo"
+    },
+    "event": {
+      "sender": {
+        "sender_id": {
+          "open_id": "customer"
+        },
+        "sender_type": "user"
+      },
+      "message": {
+        "message_id": "conversation-message-1",
+        "root_id": "conversation-root",
+        "parent_id": "conversation-root",
+        "chat_id": "chat-demo",
+        "message_type": "text",
+        "create_time": "1789711501000",
+        "content": "{\"text\": \"又没出来，帮忙看一下\"}"
+      }
+    }
+  },
+  {
+    "schema": "2.0",
+    "header": {
+      "event_id": "conversation-2",
+      "event_type": "im.message.receive_v1",
+      "app_id": "app-demo",
+      "tenant_key": "tenant-demo"
+    },
+    "event": {
+      "sender": {
+        "sender_id": {
+          "open_id": "customer"
+        },
+        "sender_type": "user"
+      },
+      "message": {
+        "message_id": "conversation-message-2",
+        "root_id": "conversation-root",
+        "parent_id": "conversation-root",
+        "chat_id": "chat-demo",
+        "message_type": "text",
+        "create_time": "1789711502000",
+        "content": "{\"text\": \"订单 P1001\"}"
+      }
+    }
+  },
+  {
+    "schema": "2.0",
+    "header": {
+      "event_id": "conversation-3",
+      "event_type": "im.message.receive_v1",
+      "app_id": "app-demo",
+      "tenant_key": "tenant-demo"
+    },
+    "event": {
+      "sender": {
+        "sender_id": {
+          "open_id": "customer"
+        },
+        "sender_type": "user"
+      },
+      "message": {
+        "message_id": "conversation-message-3",
+        "root_id": "conversation-root",
+        "parent_id": "conversation-root",
+        "chat_id": "chat-demo",
+        "message_type": "text",
+        "create_time": "1789711503000",
+        "content": "{\"text\": \"/订单 P1002\"}"
+      }
+    }
+  },
+  {
+    "schema": "2.0",
+    "header": {
+      "event_id": "conversation-4",
+      "event_type": "im.message.receive_v1",
+      "app_id": "app-demo",
+      "tenant_key": "tenant-demo"
+    },
+    "event": {
+      "sender": {
+        "sender_id": {
+          "open_id": "backend-oncall"
+        },
+        "sender_type": "user"
+      },
+      "message": {
+        "message_id": "conversation-message-4",
+        "root_id": "conversation-root",
+        "parent_id": "conversation-root",
+        "chat_id": "chat-demo",
+        "message_type": "text",
+        "create_time": "1789711504000",
+        "content": "{\"text\": \"/接手\"}"
+      }
+    }
+  },
+  {
+    "schema": "2.0",
+    "header": {
+      "event_id": "conversation-5",
+      "event_type": "im.message.receive_v1",
+      "app_id": "app-demo",
+      "tenant_key": "tenant-demo"
+    },
+    "event": {
+      "sender": {
+        "sender_id": {
+          "open_id": "backend-oncall"
+        },
+        "sender_type": "user"
+      },
+      "message": {
+        "message_id": "conversation-message-5",
+        "root_id": "conversation-root",
+        "parent_id": "conversation-root",
+        "chat_id": "chat-demo",
+        "message_type": "text",
+        "create_time": "1789711505000",
+        "content": "{\"text\": \"/继续\"}"
+      }
+    }
+  }
+]

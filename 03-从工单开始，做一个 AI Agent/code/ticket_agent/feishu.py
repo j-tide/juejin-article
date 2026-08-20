@@ -17,12 +17,16 @@ def reply_request(lark, root_id, text, send_uuid):
     return ReplyMessageRequest.builder().message_id(root_id).request_body(body).build()
 
 
-def live(db_path, bindings_path):
+def live(db_path, bindings_path, conversation=False):
     import lark_oapi as lark
     app_id, secret = os.environ["FEISHU_APP_ID"], os.environ["FEISHU_APP_SECRET"]
     provider = DeepSeek(os.environ["DEEPSEEK_API_KEY"], os.getenv("DEEPSEEK_MODEL", "deepseek-flash"))
     bindings = json.loads(Path(bindings_path).read_text())
-    inbox = Inbox(db_path)
+    if conversation:
+        from .conversation import ConversationInbox
+        inbox = ConversationInbox(db_path, bindings)
+    else:
+        inbox = Inbox(db_path)
     reader = OrderReader()
     client = lark.Client.builder().app_id(app_id).app_secret(secret).log_level(lark.LogLevel.ERROR).build()
 
@@ -78,13 +82,19 @@ def main():
     p.add_argument("--db", required=True, help="运行数据库路径，建议放在临时或专用运行目录")
     p.add_argument("--live", action="store_true")
     p.add_argument("--bindings", help="租户和群到品牌门店的受信任绑定文件")
+    p.add_argument("--conversation", action="store_true", help="使用第 03 篇话题状态；请使用独立运行数据库")
     a = p.parse_args()
     if a.live:
         if not a.bindings:
             p.error("--live 需要 --bindings")
-        live(a.db, a.bindings)
+        live(a.db, a.bindings, a.conversation)
     else:
-        print(json.dumps(replay(a.db), ensure_ascii=False, indent=2))
+        if a.conversation:
+            from .conversation_replay import replay_conversation
+            result = replay_conversation(a.db)
+        else:
+            result = replay(a.db)
+        print(json.dumps(result, ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":

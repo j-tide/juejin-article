@@ -1,0 +1,160 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "话题持续更新：让旧查询结果退出当前回复",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "input",
+      "label": "接收与状态"
+    },
+    {
+      "id": "work",
+      "label": "调查与核对"
+    },
+    {
+      "id": "output",
+      "label": "回复与等待"
+    }
+  ],
+  "mainPath": [
+    "message",
+    "state",
+    "snapshot",
+    "query",
+    "compare",
+    "queue",
+    "check",
+    "reply"
+  ],
+  "nodes": [
+    {
+      "id": "message",
+      "lane": "input",
+      "col": 0,
+      "type": "external",
+      "label": "新话题消息",
+      "sublabel": "来源 · 时间 · 原话",
+      "width": 164
+    },
+    {
+      "id": "state",
+      "lane": "input",
+      "col": 1,
+      "type": "database",
+      "label": "更新话题状态",
+      "sublabel": "已确认对象 · 认领人",
+      "width": 164
+    },
+    {
+      "id": "snapshot",
+      "lane": "input",
+      "col": 2,
+      "type": "backend",
+      "label": "取得输入版本",
+      "sublabel": "仅 ready 发起调查",
+      "width": 164
+    },
+    {
+      "id": "query",
+      "lane": "work",
+      "col": 2,
+      "type": "cloud",
+      "label": "模型与工具调查",
+      "sublabel": "使用已确认编号",
+      "width": 164
+    },
+    {
+      "id": "compare",
+      "lane": "work",
+      "col": 3,
+      "type": "security",
+      "label": "核对当前版本",
+      "sublabel": "过期结果只存档",
+      "width": 164
+    },
+    {
+      "id": "queue",
+      "lane": "output",
+      "col": 3,
+      "type": "database",
+      "label": "保存版本化回复",
+      "sublabel": "缺信息时只追问一次",
+      "width": 164
+    },
+    {
+      "id": "check",
+      "lane": "output",
+      "col": 4,
+      "type": "security",
+      "label": "发送前再次核对",
+      "sublabel": "吸收尚未应用的新消息",
+      "width": 164
+    },
+    {
+      "id": "reply",
+      "lane": "output",
+      "col": 5,
+      "type": "frontend",
+      "label": "回复原话题",
+      "sublabel": "标明输入版本与对象",
+      "width": 164
+    }
+  ],
+  "edges": [
+    {
+      "id": "message-state",
+      "from": "message",
+      "to": "state"
+    },
+    {
+      "id": "state-snapshot",
+      "from": "state",
+      "to": "snapshot"
+    },
+    {
+      "id": "snapshot-query",
+      "from": "snapshot",
+      "to": "query"
+    },
+    {
+      "id": "query-compare",
+      "from": "query",
+      "to": "compare"
+    },
+    {
+      "id": "compare-queue",
+      "from": "compare",
+      "to": "queue"
+    },
+    {
+      "id": "queue-check",
+      "from": "queue",
+      "to": "check"
+    },
+    {
+      "id": "check-reply",
+      "from": "check",
+      "to": "reply"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "等待和人工认领也是有效状态",
+      "items": [
+        "缺少对象就等待；值班人员接手后暂停自动查询。"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "版本检查有明确的时间边界",
+      "items": [
+        "检查之后仍可能到达新消息；已发送回复不自动撤回。"
+      ]
+    }
+  ]
+}

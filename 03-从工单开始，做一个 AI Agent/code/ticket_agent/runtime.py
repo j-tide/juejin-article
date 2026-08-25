@@ -44,9 +44,13 @@ def validate_answer(answer, evidence, had_query):
     return len(ids) == len(set(ids)) and set(ids) == set(evidence)
 
 
-def run_ticket(text, scope, provider, reader, max_rounds=4, max_tools=2, seconds=45):
+def run_ticket(text, scope, provider, reader, max_rounds=4, max_tools=2, seconds=45,
+               tools=None, handlers=None, instructions=SYSTEM):
     started = time.monotonic()
-    messages = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": text}]
+    tools = [TOOL] if tools is None else tools
+    handlers = {"lookup_order": reader.lookup} if handlers is None else handlers
+    allowed = {t["function"]["name"] for t in tools} & set(handlers)
+    messages = [{"role": "system", "content": instructions}, {"role": "user", "content": text}]
     evidence, events, results = {}, [], []
     tool_count = 0
     usage = {"prompt_tokens": 0, "completion_tokens": 0}
@@ -65,7 +69,7 @@ def run_ticket(text, scope, provider, reader, max_rounds=4, max_tools=2, seconds
             return finish("deadline_exceeded")
         before = time.monotonic()
         try:
-            message, tokens = provider.complete(messages, [TOOL], timeout=min(20, remaining))
+            message, tokens = provider.complete(messages, tools, timeout=min(20, remaining))
         except (ProviderError, TimeoutError):
             return finish("model_unavailable")
         events.append({"event": "model_returned", "round": round_index + 1,
@@ -97,17 +101,18 @@ def run_ticket(text, scope, provider, reader, max_rounds=4, max_tools=2, seconds
                 tool_count += 1
                 function = call["function"]
                 before = time.monotonic()
-                if function.get("name") != "lookup_order":
+                name = function.get("name")
+                if not isinstance(name, str) or name not in allowed:
                     result = {"status": "tool_not_allowed", "evidence": []}
                 else:
                     try:
                         args = decode_object(function.get("arguments", ""))
-                        result = reader.lookup(args, scope)
+                        result = handlers[name](args, scope)
                     except (ValueError, TypeError):
                         result = {"status": "invalid_arguments", "evidence": []}
                     except TimeoutError:
                         result = {"status": "tool_timeout", "evidence": []}
-                results.append({"status": result["status"], "reference": result.get("reference")})
+                results.append({"tool": name, "status": result["status"], "reference": result.get("reference")})
                 for item in result.get("evidence", []):
                     evidence[item["id"]] = item
                 events.append({"event": "tool_returned", "status": result["status"],
@@ -134,11 +139,11 @@ def render(result):
             e = evidence[fact["evidence_id"]]
             lines.append(f"- {e['quote']} [{e['id']}]（采集于 {e['observed_at']}）")
         if answer["next_step"] == "ask_reference":
-            lines.append("待补充：当前门店的完整订单号或支付流水号。")
+            lines.append(result.get("input_hint", "待补充：当前门店的完整订单号或支付流水号。"))
         else:
             lines.append("待人工核对：记录与现场实际是否一致；未确认的环节继续调查。")
             if not answer["facts"]:
-                lines.append("本次没有取得业务证据，不能据此判断订单不存在。")
+                lines.append(result.get("empty_hint", "本次没有取得业务证据，不能据此判断订单不存在。"))
     else:
         lines.append("本轮未得到可核验回复，请值班人员接手；已查记录可从 JSON 结果核对。")
     lines.append("本工具没有执行补单、重打或退款。")

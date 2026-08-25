@@ -67,6 +67,10 @@ class Replay:
         results = [json.loads(m["content"]) for m in messages if m["role"] == "tool"]
         if not results:
             text = next(m["content"] for m in messages if m["role"] == "user")
+            if {t["function"]["name"] for t in tools} == {"search_knowledge"}:
+                return {"role":"assistant","content":None,"tool_calls":[{
+                    "id":"replay-search-1","type":"function","function":{
+                        "name":"search_knowledge","arguments":json.dumps({"query":text},ensure_ascii=False)}}]}, {}
             refs = re.findall(r"\b[OP][0-9]{4,12}\b", text)
             if refs:
                 return {"role": "assistant", "content": None, "tool_calls": [{

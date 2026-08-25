@@ -1,6 +1,6 @@
 # 茶饮工单 Agent Demo
 
-当前版本对应第 03 篇：文字查询、飞书事件接入、持续话题状态和版本化回复。Python 3.11+，只使用标准库。
+当前版本对应第 04 篇：增加活动规则与历史工单检索，沿用前三篇的执行器和话题代码。Python 3.11+，只使用标准库。
 
 ## 运行
 
@@ -75,3 +75,15 @@ python3 -m ticket_agent.feishu --conversation --db /tmp/ticket-agent-ch03.sqlite
 真实入口使用 `--live --conversation`；绑定格式见 `fixtures/conversation-bindings.example.json`，其他准备同第 02 篇。不要让不同模式或多个 Worker 共用运行库。没有实现从旧运行数据迁移的过程。
 
 累计 45 项测试；无 SDK 时跳过 1 项。等待、认领、输入版本和旧结果均持久化；结果保存及发送前检查版本。检查之后仍可能到达新消息，已发回复不自动撤回。乱序旧消息标记 `late_needs_review`，目前须人工查看；没有自动处理编辑撤回和多业务对象。
+
+## 第 04 篇：范围受限的资料检索
+
+```bash
+python3 -m ticket_agent.research '两杯水果茶，优惠券用不了' --campaign campaign-a --at 2026-09-18T14:00:00+08:00 --known-at 2026-09-18T14:10:00+08:00 --channel miniapp --product fruit-tea --basket-cents 3200
+```
+
+换成 `--campaign campaign-b --store store-002` 可对比条件匹配的另一场活动；不提供 `--product` 检查未知条件。活动 C 包含有意冲突的规则。`fixtures/knowledge.json` 全部为合成资料。
+
+先按授权范围、活动、生效时间和已知时间过滤，再执行原始/领域词扩展两路词法检索，以 RRF 合并名次。没有 Embedding 模型。规则条件分为 match/mismatch/unknown，历史工单不作本单根因证据；冲突检测仅针对相同 rule_key 的结构化要求。
+
+默认固定策略回放，`--live` 才请求模型。资料入口复用 Agent 执行器，但没有接入飞书自动活动识别和调查类型路由；上下文由运行者明确提供。累计 58 项测试通过（无 SDK 时跳过 1 项）。真实模型效果尚未验证。

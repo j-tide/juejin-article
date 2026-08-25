@@ -1,0 +1,269 @@
+{
+  "synthetic": true,
+  "documents": [
+    {
+      "id": "rule-a",
+      "title": "优惠券无法使用的适用条件",
+      "version": "1",
+      "kind": "rule",
+      "brand": "demo-brand",
+      "stores": [
+        "store-001"
+      ],
+      "campaign": "campaign-a",
+      "valid_from": "2026-09-01T00:00:00+08:00",
+      "valid_to": "2026-10-01T00:00:00+08:00",
+      "published_at": "2026-09-01T00:00:00+08:00",
+      "approved": true,
+      "revoked": false,
+      "requirements": {
+        "channel": [
+          "miniapp"
+        ],
+        "product": [
+          "milk-tea"
+        ],
+        "minimum_cents": 3000
+      },
+      "rule_key": "coupon_eligibility",
+      "text": "优惠券仅适用于小程序奶茶商品，实付前活动商品金额满 30 元可用；水果茶不参加。",
+      "source": "fixture://knowledge/rule-a"
+    },
+    {
+      "id": "case-a",
+      "title": "门店优惠券无法使用的历史排查",
+      "version": "1",
+      "kind": "case",
+      "brand": "demo-brand",
+      "stores": [
+        "store-001"
+      ],
+      "campaign": "campaign-a",
+      "valid_from": "2026-09-01T00:00:00+08:00",
+      "valid_to": "2026-10-01T00:00:00+08:00",
+      "published_at": "2026-09-01T00:00:00+08:00",
+      "approved": true,
+      "revoked": false,
+      "requirements": {
+        "channel": [
+          "miniapp"
+        ],
+        "product": [
+          "milk-tea"
+        ],
+        "minimum_cents": 3000
+      },
+      "rule_key": "coupon_eligibility",
+      "text": "曾有两杯水果茶不能使用优惠券，核对活动商品清单后确认商品未参加；该原因仅在当时工单得到确认。",
+      "source": "fixture://knowledge/case-a"
+    },
+    {
+      "id": "rule-b",
+      "title": "优惠券无法使用的适用条件",
+      "version": "1",
+      "kind": "rule",
+      "brand": "demo-brand",
+      "stores": [
+        "store-002"
+      ],
+      "campaign": "campaign-b",
+      "valid_from": "2026-09-18T00:00:00+08:00",
+      "valid_to": "2026-10-01T00:00:00+08:00",
+      "published_at": "2026-09-17T18:00:00+08:00",
+      "approved": true,
+      "revoked": false,
+      "requirements": {
+        "channel": [
+          "miniapp"
+        ],
+        "product": [
+          "fruit-tea"
+        ],
+        "minimum_cents": 3000
+      },
+      "rule_key": "coupon_eligibility",
+      "text": "优惠券适用于小程序水果茶，活动商品金额满 30 元可用；资料未证明本单的实际结算参数。",
+      "source": "fixture://knowledge/rule-b"
+    },
+    {
+      "id": "rule-b-expired",
+      "title": "优惠券无法使用的适用条件",
+      "version": "1",
+      "kind": "rule",
+      "brand": "demo-brand",
+      "stores": [
+        "store-002"
+      ],
+      "campaign": "campaign-b",
+      "valid_from": "2026-09-01T00:00:00+08:00",
+      "valid_to": "2026-09-18T00:00:00+08:00",
+      "published_at": "2026-09-01T00:00:00+08:00",
+      "approved": true,
+      "revoked": false,
+      "requirements": {
+        "channel": [
+          "miniapp"
+        ],
+        "product": [
+          "milk-tea"
+        ],
+        "minimum_cents": 3000
+      },
+      "rule_key": "coupon_eligibility",
+      "text": "优惠券只允许奶茶。",
+      "source": "fixture://knowledge/rule-b-expired"
+    },
+    {
+      "id": "rule-b-future",
+      "title": "优惠券无法使用的适用条件",
+      "version": "1",
+      "kind": "rule",
+      "brand": "demo-brand",
+      "stores": [
+        "store-002"
+      ],
+      "campaign": "campaign-b",
+      "valid_from": "2026-09-01T00:00:00+08:00",
+      "valid_to": "2026-10-01T00:00:00+08:00",
+      "published_at": "2026-09-19T00:00:00+08:00",
+      "approved": true,
+      "revoked": false,
+      "requirements": {
+        "channel": [
+          "miniapp"
+        ],
+        "product": [
+          "fruit-tea"
+        ],
+        "minimum_cents": 2000
+      },
+      "rule_key": "coupon_eligibility",
+      "text": "优惠券未来调整到 20 元可用。",
+      "source": "fixture://knowledge/rule-b-future"
+    },
+    {
+      "id": "rule-c-30",
+      "title": "优惠券无法使用的适用条件",
+      "version": "1",
+      "kind": "rule",
+      "brand": "demo-brand",
+      "stores": [
+        "store-001"
+      ],
+      "campaign": "campaign-c",
+      "valid_from": "2026-09-01T00:00:00+08:00",
+      "valid_to": "2026-10-01T00:00:00+08:00",
+      "published_at": "2026-09-01T00:00:00+08:00",
+      "approved": true,
+      "revoked": false,
+      "requirements": {
+        "channel": [
+          "miniapp"
+        ],
+        "product": [
+          "milk-tea"
+        ],
+        "minimum_cents": 3000
+      },
+      "rule_key": "coupon_eligibility",
+      "text": "优惠券满 30 元可用。",
+      "source": "fixture://knowledge/rule-c-30"
+    },
+    {
+      "id": "rule-c-40",
+      "title": "优惠券无法使用的适用条件",
+      "version": "1",
+      "kind": "rule",
+      "brand": "demo-brand",
+      "stores": [
+        "store-001"
+      ],
+      "campaign": "campaign-c",
+      "valid_from": "2026-09-01T00:00:00+08:00",
+      "valid_to": "2026-10-01T00:00:00+08:00",
+      "published_at": "2026-09-01T00:00:00+08:00",
+      "approved": true,
+      "revoked": false,
+      "requirements": {
+        "channel": [
+          "miniapp"
+        ],
+        "product": [
+          "milk-tea"
+        ],
+        "minimum_cents": 4000
+      },
+      "rule_key": "coupon_eligibility",
+      "text": "优惠券满 40 元可用。",
+      "source": "fixture://knowledge/rule-c-40"
+    },
+    {
+      "id": "case-unconfirmed",
+      "title": "门店优惠券无法使用的历史排查",
+      "version": "1",
+      "kind": "case",
+      "brand": "demo-brand",
+      "stores": [
+        "store-001"
+      ],
+      "campaign": "campaign-a",
+      "valid_from": "2026-09-01T00:00:00+08:00",
+      "valid_to": "2026-10-01T00:00:00+08:00",
+      "published_at": "2026-09-01T00:00:00+08:00",
+      "approved": false,
+      "revoked": false,
+      "requirements": {
+        "channel": [
+          "miniapp"
+        ],
+        "product": [
+          "milk-tea"
+        ],
+        "minimum_cents": 3000
+      },
+      "rule_key": "coupon_eligibility",
+      "text": "优惠券错误可能是缓存，未验证。",
+      "source": "fixture://knowledge/case-unconfirmed"
+    },
+    {
+      "id": "revoked-a",
+      "title": "优惠券无法使用的适用条件",
+      "version": "1",
+      "kind": "rule",
+      "brand": "demo-brand",
+      "stores": [
+        "store-001"
+      ],
+      "campaign": "campaign-a",
+      "valid_from": "2026-09-01T00:00:00+08:00",
+      "valid_to": "2026-10-01T00:00:00+08:00",
+      "published_at": "2026-09-01T00:00:00+08:00",
+      "approved": true,
+      "revoked": true,
+      "requirements": {},
+      "rule_key": "coupon_eligibility",
+      "text": "优惠券无需门槛。",
+      "source": "fixture://knowledge/revoked-a"
+    },
+    {
+      "id": "other-brand",
+      "title": "优惠券无法使用的适用条件",
+      "version": "1",
+      "kind": "rule",
+      "brand": "other-brand",
+      "stores": [
+        "store-001"
+      ],
+      "campaign": "campaign-a",
+      "valid_from": "2026-09-01T00:00:00+08:00",
+      "valid_to": "2026-10-01T00:00:00+08:00",
+      "published_at": "2026-09-01T00:00:00+08:00",
+      "approved": true,
+      "revoked": false,
+      "requirements": {},
+      "rule_key": "coupon_eligibility",
+      "text": "优惠券无需门槛。",
+      "source": "fixture://knowledge/other-brand"
+    }
+  ]
+}

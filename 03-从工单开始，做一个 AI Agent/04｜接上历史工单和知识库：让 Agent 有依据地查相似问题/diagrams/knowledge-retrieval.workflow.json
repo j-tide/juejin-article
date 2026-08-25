@@ -1,0 +1,160 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "工单资料检索：先检查适用范围，再组织回复",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "input",
+      "label": "输入与检索范围"
+    },
+    {
+      "id": "match",
+      "label": "候选与适用性"
+    },
+    {
+      "id": "reply",
+      "label": "证据与交付"
+    }
+  ],
+  "mainPath": [
+    "ticket",
+    "scope",
+    "retrieve",
+    "rank",
+    "conditions",
+    "conflict",
+    "model",
+    "output"
+  ],
+  "nodes": [
+    {
+      "id": "ticket",
+      "lane": "input",
+      "col": 0,
+      "type": "external",
+      "label": "工单与活动线索",
+      "sublabel": "问题 · 活动 · 发生时间",
+      "width": 164
+    },
+    {
+      "id": "scope",
+      "lane": "input",
+      "col": 1,
+      "type": "security",
+      "label": "先限定可读资料",
+      "sublabel": "品牌 · 门店 · 有效期",
+      "width": 164
+    },
+    {
+      "id": "retrieve",
+      "lane": "input",
+      "col": 2,
+      "type": "backend",
+      "label": "两路词法检索",
+      "sublabel": "原词与领域同义词",
+      "width": 164
+    },
+    {
+      "id": "rank",
+      "lane": "match",
+      "col": 2,
+      "type": "backend",
+      "label": "合并候选排序",
+      "sublabel": "RRF · 稳定排序",
+      "width": 164
+    },
+    {
+      "id": "conditions",
+      "lane": "match",
+      "col": 3,
+      "type": "security",
+      "label": "核对适用条件",
+      "sublabel": "商品 · 渠道 · 门槛",
+      "width": 164
+    },
+    {
+      "id": "conflict",
+      "lane": "reply",
+      "col": 3,
+      "type": "backend",
+      "label": "保留冲突与缺口",
+      "sublabel": "规则和历史案例分开",
+      "width": 164
+    },
+    {
+      "id": "model",
+      "lane": "reply",
+      "col": 4,
+      "type": "cloud",
+      "label": "模型引用资料",
+      "sublabel": "只使用本轮返回内容",
+      "width": 164
+    },
+    {
+      "id": "output",
+      "lane": "reply",
+      "col": 5,
+      "type": "frontend",
+      "label": "证据与下一步",
+      "sublabel": "未命中也有明确结果",
+      "width": 164
+    }
+  ],
+  "edges": [
+    {
+      "id": "ticket-scope",
+      "from": "ticket",
+      "to": "scope"
+    },
+    {
+      "id": "scope-retrieve",
+      "from": "scope",
+      "to": "retrieve"
+    },
+    {
+      "id": "retrieve-rank",
+      "from": "retrieve",
+      "to": "rank"
+    },
+    {
+      "id": "rank-conditions",
+      "from": "rank",
+      "to": "conditions"
+    },
+    {
+      "id": "conditions-conflict",
+      "from": "conditions",
+      "to": "conflict"
+    },
+    {
+      "id": "conflict-model",
+      "from": "conflict",
+      "to": "model"
+    },
+    {
+      "id": "model-output",
+      "from": "model",
+      "to": "output"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "相似描述不等于同一原因",
+      "items": [
+        "历史工单只提供排查线索；规则还要匹配本次活动与条件。"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "资料缺失时不补造解释",
+      "items": [
+        "不匹配、条件未知与规则冲突分别记录，交给人工继续确认。"
+      ]
+    }
+  ]
+}

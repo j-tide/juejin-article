@@ -1,0 +1,160 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "附件取证：把视频提示变成可回查的观察",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "input",
+      "label": "附件与抽帧"
+    },
+    {
+      "id": "observe",
+      "label": "观察与质量"
+    },
+    {
+      "id": "reply",
+      "label": "来源与调查"
+    }
+  ],
+  "mainPath": [
+    "attachment",
+    "integrity",
+    "frames",
+    "ocr",
+    "quality",
+    "evidence",
+    "tool",
+    "human"
+  ],
+  "nodes": [
+    {
+      "id": "attachment",
+      "lane": "input",
+      "col": 0,
+      "type": "external",
+      "label": "已授权附件",
+      "sublabel": "绑定消息和门店",
+      "width": 164
+    },
+    {
+      "id": "integrity",
+      "lane": "input",
+      "col": 1,
+      "type": "security",
+      "label": "核对文件身份",
+      "sublabel": "哈希 · 路径 · 大小",
+      "width": 164
+    },
+    {
+      "id": "frames",
+      "lane": "input",
+      "col": 2,
+      "type": "backend",
+      "label": "按时间抽取帧",
+      "sublabel": "保留原始 PTS",
+      "width": 164
+    },
+    {
+      "id": "ocr",
+      "lane": "observe",
+      "col": 2,
+      "type": "backend",
+      "label": "识别可见文字",
+      "sublabel": "macOS Vision OCR",
+      "width": 164
+    },
+    {
+      "id": "quality",
+      "lane": "observe",
+      "col": 3,
+      "type": "security",
+      "label": "保留不确定性",
+      "sublabel": "候选文字 · 分数 · 区域",
+      "width": 164
+    },
+    {
+      "id": "evidence",
+      "lane": "reply",
+      "col": 3,
+      "type": "database",
+      "label": "建立画面证据",
+      "sublabel": "原附件 · 帧号 · 时间点",
+      "width": 164
+    },
+    {
+      "id": "tool",
+      "lane": "reply",
+      "col": 4,
+      "type": "backend",
+      "label": "返回受限候选",
+      "sublabel": "接入同一工具执行器",
+      "width": 164
+    },
+    {
+      "id": "human",
+      "lane": "reply",
+      "col": 5,
+      "type": "frontend",
+      "label": "回看原片核对",
+      "sublabel": "页面现象不等于根因",
+      "width": 164
+    }
+  ],
+  "edges": [
+    {
+      "id": "attachment-integrity",
+      "from": "attachment",
+      "to": "integrity"
+    },
+    {
+      "id": "integrity-frames",
+      "from": "integrity",
+      "to": "frames"
+    },
+    {
+      "id": "frames-ocr",
+      "from": "frames",
+      "to": "ocr"
+    },
+    {
+      "id": "ocr-quality",
+      "from": "ocr",
+      "to": "quality"
+    },
+    {
+      "id": "quality-evidence",
+      "from": "quality",
+      "to": "evidence"
+    },
+    {
+      "id": "evidence-tool",
+      "from": "evidence",
+      "to": "tool"
+    },
+    {
+      "id": "tool-human",
+      "from": "tool",
+      "to": "human"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "没有抽到，不等于没有出现",
+      "items": [
+        "1 秒一帧漏掉闪现提示；局部加密后在 1.2 秒找到候选。"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "识别结果仍需回看",
+      "items": [
+        "本次提示 OCR 置信度为 0.5，保留低置信度标记。"
+      ]
+    }
+  ]
+}

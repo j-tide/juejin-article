@@ -1,6 +1,6 @@
 # 茶饮工单 Agent Demo
 
-当前版本对应第 04 篇：增加活动规则与历史工单检索，沿用前三篇的执行器和话题代码。Python 3.11+，只使用标准库。
+当前版本对应第 05 篇：增加本地附件抽帧、原生 OCR 和证据位置。Python 3.11+；核心逻辑使用标准库，原生媒体实验另需 macOS、Swift 和 FFmpeg。
 
 ## 运行
 
@@ -87,3 +87,27 @@ python3 -m ticket_agent.research '两杯水果茶，优惠券用不了' --campai
 先按授权范围、活动、生效时间和已知时间过滤，再执行原始/领域词扩展两路词法检索，以 RRF 合并名次。没有 Embedding 模型。规则条件分为 match/mismatch/unknown，历史工单不作本单根因证据；冲突检测仅针对相同 rule_key 的结构化要求。
 
 默认固定策略回放，`--live` 才请求模型。资料入口复用 Agent 执行器，但没有接入飞书自动活动识别和调查类型路由；上下文由运行者明确提供。累计 58 项测试通过（无 SDK 时跳过 1 项）。真实模型效果尚未验证。
+
+## 第 05 篇：附件抽帧与原生 OCR
+
+```bash
+swiftc scripts/vision_ocr.swift -o /tmp/vision-ocr
+python3 -m ticket_agent.media checkout --ocr /tmp/vision-ocr --fps 1
+python3 -m ticket_agent.media checkout --ocr /tmp/vision-ocr --fps 5 --start 0.8 --end 1.6
+python3 -m ticket_agent.media notice --ocr /tmp/vision-ocr
+TICKET_OCR_BINARY=/tmp/vision-ocr python3 -m unittest discover -s tests -v
+```
+
+视频已放在 `fixtures/media/`，不需要重新生成。单文件 20 MB、视频 20 秒、400 万像素、40 帧；每条外部命令超时 30 秒，不是整个任务的硬期限。附件、范围和采样计划由调用方绑定，`MEDIA_TOOL` / `media_handler` 可注册到已有执行器；尚未实现飞书附件自动下载、视频动作识别、ASR 或调查路由。
+
+实际运行：macOS 27.0、FFmpeg 8.1.2、Python 3.11.9。合成视频 3 秒，提示位于 [1.1,1.4) 秒。1 fps 采 3 帧未命中，局部 5 fps 采 4 帧在 1.2 秒发现候选，置信分数 0.5，保留 `uncertain_text`。结果在 `fixtures/media/experiment-results.json`。不是准确率评测；没有调用云模型。
+
+累计 70 项测试通过；未设置 `TICKET_OCR_BINARY` 跳过 1 项原生集成测试，没有飞书 SDK 再跳过 1 项 SDK 测试。OCR 路径依赖 macOS Vision；Python 逻辑测试可独立运行。
+
+仅在重建合成素材时需要 Pillow（本次 12.3.0），并提供本机中文字体，字体未随仓库分发：
+
+```bash
+python3 scripts/make_media_fixture.py --font /path/to/local-chinese-font.ttf
+```
+
+重新生成可能改变视频哈希和 OCR 输出；实验结果需随实际重跑更新。`ground-truth.json` 仅记录合成条件，解析器不读取它。图片和视频均为合成测试素材，没有真实顾客信息。

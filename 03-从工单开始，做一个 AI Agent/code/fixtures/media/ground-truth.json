@@ -1,0 +1,12 @@
+{
+  "synthetic": true,
+  "duration_s": 3,
+  "fps": 10,
+  "notice_interval_s": [
+    1.1,
+    1.4
+  ],
+  "notice": "价格已更新，请重新确认",
+  "audio": false,
+  "purpose": "Known input for sampling experiment; not passed into OCR."
+}

@@ -1,0 +1,28 @@
+{
+  "execution": "actual_ffmpeg_and_apple_vision",
+  "environment": {
+    "macOS": "27.0",
+    "ffmpeg": "8.1.2"
+  },
+  "model_api_called": false,
+  "runs": [
+    {
+      "strategy": "coarse",
+      "sampled_frames": 3,
+      "notice_candidates": []
+    },
+    {
+      "strategy": "refined",
+      "sampled_frames": 4,
+      "notice_candidates": [
+        {
+          "text": "价格已更新，请重新确认",
+          "media_time_s": 1.2,
+          "confidence": 0.5,
+          "certainty": "uncertain_text"
+        }
+      ]
+    }
+  ],
+  "scope": "One synthetic 3-second silent clip; not an accuracy benchmark."
+}

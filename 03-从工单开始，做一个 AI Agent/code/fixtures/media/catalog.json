@@ -1,0 +1,25 @@
+{
+  "synthetic": true,
+  "assets": [
+    {
+      "id": "checkout",
+      "file": "checkout.mp4",
+      "kind": "video",
+      "brand": "demo-brand",
+      "store": "store-001",
+      "sha256": "799f6fce781183ba3b2734d1df6ad9f6e18a57b712b95a1946afebc94feb87dd",
+      "message_id": "synthetic-media-message",
+      "observed_at": "2026-09-18T14:10:00+08:00"
+    },
+    {
+      "id": "notice",
+      "file": "notice.png",
+      "kind": "image",
+      "brand": "demo-brand",
+      "store": "store-001",
+      "sha256": "583d8b847e95cc8581ba33e63640ff458d419e6d8da6129783fb4bbe2fb0ce62",
+      "message_id": "synthetic-media-message",
+      "observed_at": "2026-09-18T14:10:00+08:00"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "synthetic": true,
+  "model_api_called": false,
+  "cart": {
+    "quote_version": "r1",
+    "quoted_total_cents": 3200
+  },
+  "rule": {
+    "version": "r2",
+    "total_cents": 3200
+  },
+  "actual": {
+    "deployed_v1": {
+      "requests": [
+        {
+          "path": "/checkout/quote",
+          "body": {
+            "quote_version": "r1",
+            "quoted_total_cents": 3200
+          },
+          "response": {
+            "code": "PRICE_CHANGED",
+            "total_cents": 3200
+          }
+        }
+      ],
+      "ui": {
+        "action": "show_notice",
+        "text": "价格已更新，请重新确认"
+      }
+    },
+    "main_v2": {
+      "requests": [
+        {
+          "path": "/checkout/quote",
+          "body": {
+            "quote_version": "r1",
+            "quoted_total_cents": 3200
+          },
+          "response": {
+            "code": "OK",
+            "total_cents": 3200
+          }
+        }
+      ],
+      "ui": {
+        "action": "confirm_quote",
+        "total_cents": 3200
+      }
+    }
+  }
+}

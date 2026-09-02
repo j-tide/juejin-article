@@ -1,6 +1,6 @@
 # 茶饮工单 Agent Demo
 
-当前版本对应第 05 篇：增加本地附件抽帧、原生 OCR 和证据位置。Python 3.11+；核心逻辑使用标准库，原生媒体实验另需 macOS、Swift 和 FFmpeg。
+当前版本对应第 06 篇：增加绑定部署提交的前后端源码检索与读取。Python 3.11+；源码实验需要 Git 和 Node.js，前文原生媒体实验另需 macOS、Swift 和 FFmpeg。
 
 ## 运行
 
@@ -111,3 +111,21 @@ python3 scripts/make_media_fixture.py --font /path/to/local-chinese-font.ttf
 ```
 
 重新生成可能改变视频哈希和 OCR 输出；实验结果需随实际重跑更新。`ground-truth.json` 仅记录合成条件，解析器不读取它。图片和视频均为合成测试素材，没有真实顾客信息。
+
+## 第 06 篇：绑定部署版本的代码读取
+
+```bash
+python3 -m ticket_agent.source --workspace /tmp/ticket-source-ch06
+python3 -m ticket_agent.source --workspace /tmp/ticket-source-ch06 --store store-002
+node scripts/source_comparison.mjs
+```
+
+首次传入空实验目录，会从 `fixtures/source/` 建立两个小型 Git 仓库及合成部署表；保留目录用于复核真实生成的提交 ID，再次运行复用它。不要指向已有业务仓库。没有连接真实发布平台；本地配置不是身份鉴权。门店 001 绑定 v1，002 绑定 v2；示例时间为 2026-09-18，匹配不到或匹配多条部署记录时停止读取。
+
+默认是固定五步源码阅读配方，不是模型推理。`--live` 注册 `search_source` 与 `read_source` 到现有执行器，需要 `DEEPSEEK_API_KEY`，未配置会明确失败。真实模型调用未验证。MCP 仅讨论接口映射，未实现 MCP Server 或平台联调。
+
+范围约束：应用绑定提交和允许文件，普通 Git blob、每文件 32 KiB、每次最多扫描 20 个文件、返回 6 处命中、每片段最多 40 行；拒绝符号链接和符号版本。Git 每次命令 10 秒；Agent 最多 6 次工具调用、7 轮、90 秒轮间检查。工具不执行被读取代码。
+
+独立对照脚本实际运行公开合成前后端函数：金额均为 3200 分、规则从 r1 变为 r2 时，v1 返回 PRICE_CHANGED，v2 返回 OK。结果在 `fixtures/source/experiment-results.json`。v2 只是对照条件，不是完整计价修复建议。静态路径与合成执行都不证明客户工单实际走过这个分支。
+
+Python 3.11.9、Git 2.55.0、Node.js 22.22.0 下累计 86 项测试通过（同时启用了前文 OCR 与飞书 SDK 测试）。缺少 OCR 路径跳过 1 项；没有 SDK 再跳过 1 项。Node.js 与 Git 是本章测试必需依赖。

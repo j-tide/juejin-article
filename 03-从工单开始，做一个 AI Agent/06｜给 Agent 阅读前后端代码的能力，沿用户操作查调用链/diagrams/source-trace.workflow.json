@@ -1,0 +1,180 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "从门店部署版本追到价格提示的代码分支",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "frontend": {
+          "label": "前端实现"
+        },
+        "backend": {
+          "label": "后端实现"
+        },
+        "database": {
+          "label": "源码与证据"
+        },
+        "security": {
+          "label": "范围检查"
+        },
+        "external": {
+          "label": "调查输入"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "scope",
+      "label": "版本与读取范围"
+    },
+    {
+      "id": "trace",
+      "label": "前端路径"
+    },
+    {
+      "id": "verify",
+      "label": "后端路径与证据"
+    }
+  ],
+  "mainPath": [
+    "incident",
+    "deployment",
+    "mount",
+    "page",
+    "request",
+    "route",
+    "pricing",
+    "evidence"
+  ],
+  "nodes": [
+    {
+      "id": "incident",
+      "lane": "scope",
+      "col": 0,
+      "type": "external",
+      "label": "门店与发生时间",
+      "sublabel": "由调查入口提供",
+      "width": 164
+    },
+    {
+      "id": "deployment",
+      "lane": "scope",
+      "col": 1,
+      "type": "security",
+      "label": "核对部署记录",
+      "sublabel": "唯一匹配 · 精确提交",
+      "width": 164
+    },
+    {
+      "id": "mount",
+      "lane": "scope",
+      "col": 2,
+      "type": "database",
+      "label": "挂载只读源码",
+      "sublabel": "允许文件 · Git blob",
+      "width": 164
+    },
+    {
+      "id": "page",
+      "lane": "trace",
+      "col": 2,
+      "type": "frontend",
+      "label": "结算页提示",
+      "sublabel": "checkout.mjs",
+      "width": 164
+    },
+    {
+      "id": "request",
+      "lane": "trace",
+      "col": 3,
+      "type": "frontend",
+      "label": "报价请求参数",
+      "sublabel": "api.mjs",
+      "width": 164
+    },
+    {
+      "id": "route",
+      "lane": "verify",
+      "col": 3,
+      "type": "backend",
+      "label": "后端路由分发",
+      "sublabel": "router.mjs",
+      "width": 164
+    },
+    {
+      "id": "pricing",
+      "lane": "verify",
+      "col": 4,
+      "type": "backend",
+      "label": "价格变化分支",
+      "sublabel": "pricing.mjs",
+      "width": 164
+    },
+    {
+      "id": "evidence",
+      "lane": "verify",
+      "col": 5,
+      "type": "database",
+      "label": "保留路径证据",
+      "sublabel": "提交 · 文件 · 行号",
+      "width": 164
+    }
+  ],
+  "edges": [
+    {
+      "id": "incident-deployment",
+      "from": "incident",
+      "to": "deployment"
+    },
+    {
+      "id": "deployment-mount",
+      "from": "deployment",
+      "to": "mount"
+    },
+    {
+      "id": "mount-page",
+      "from": "mount",
+      "to": "page"
+    },
+    {
+      "id": "page-request",
+      "from": "page",
+      "to": "request"
+    },
+    {
+      "id": "request-route",
+      "from": "request",
+      "to": "route"
+    },
+    {
+      "id": "route-pricing",
+      "from": "route",
+      "to": "pricing"
+    },
+    {
+      "id": "pricing-evidence",
+      "from": "pricing",
+      "to": "evidence"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "相同输入，不同版本",
+      "items": [
+        "旧版比较规则版本，新版比较金额；同一请求可得到不同提示。"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "代码路径仍需运行证据",
+      "items": [
+        "此图是人工核对的静态关系，不能代替本次请求的日志和数据。"
+      ]
+    }
+  ]
+}

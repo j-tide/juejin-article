@@ -1,0 +1,46 @@
+{
+  "execution": "actual_local_sqlite",
+  "synthetic_input": true,
+  "model_api_called": false,
+  "runs": [
+    {
+      "reference": "P1001",
+      "as_of": "2026-09-18T14:00:30+08:00",
+      "status": "observed_partial",
+      "print_receipt_observed": false,
+      "event_kinds": [
+        "PAYMENT_ACCEPTED",
+        "ORDER_CREATED",
+        "DISPATCH_SENT"
+      ],
+      "snapshot": "订单快照：支付=paid，出单任务=sent；快照不代表完整历史"
+    },
+    {
+      "reference": "P1002",
+      "as_of": "2026-09-18T14:00:15+08:00",
+      "status": "observed_partial",
+      "print_receipt_observed": false,
+      "event_kinds": [
+        "PAYMENT_ACCEPTED",
+        "ORDER_CREATED",
+        "DEVICE_OFFLINE",
+        "DISPATCH_SENT"
+      ],
+      "snapshot": "订单快照：支付=paid，出单任务=sent；快照不代表完整历史"
+    },
+    {
+      "reference": "P1002",
+      "as_of": "2026-09-18T14:00:30+08:00",
+      "status": "observed_partial",
+      "print_receipt_observed": true,
+      "event_kinds": [
+        "PAYMENT_ACCEPTED",
+        "ORDER_CREATED",
+        "DEVICE_OFFLINE",
+        "DISPATCH_SENT",
+        "PRINT_ACK"
+      ],
+      "snapshot": "订单快照：支付=paid，出单任务=sent；快照不代表完整历史"
+    }
+  ]
+}

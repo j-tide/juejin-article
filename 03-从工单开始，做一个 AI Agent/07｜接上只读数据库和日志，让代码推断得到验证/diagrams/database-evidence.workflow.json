@@ -1,0 +1,177 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "只读取证：把订单快照与事件记录放在一起核对",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "backend": {
+          "label": "处理逻辑"
+        },
+        "database": {
+          "label": "数据与证据"
+        },
+        "security": {
+          "label": "范围与检查"
+        },
+        "frontend": {
+          "label": "人员交互"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "l0",
+      "label": "范围与预算"
+    },
+    {
+      "id": "l1",
+      "label": "只读数据库"
+    },
+    {
+      "id": "l2",
+      "label": "证据与结论"
+    }
+  ],
+  "mainPath": [
+    "scope",
+    "params",
+    "readonly",
+    "order",
+    "events",
+    "coverage",
+    "evidence",
+    "reply"
+  ],
+  "nodes": [
+    {
+      "id": "scope",
+      "lane": "l0",
+      "col": 0,
+      "type": "security",
+      "label": "绑定对象和时间",
+      "sublabel": "品牌 · 门店 · 查询窗口",
+      "width": 164
+    },
+    {
+      "id": "params",
+      "lane": "l0",
+      "col": 1,
+      "type": "security",
+      "label": "校验模板参数",
+      "sublabel": "不接收自由 SQL",
+      "width": 164
+    },
+    {
+      "id": "readonly",
+      "lane": "l0",
+      "col": 2,
+      "type": "database",
+      "label": "打开只读快照",
+      "sublabel": "mode=ro · query_only",
+      "width": 164
+    },
+    {
+      "id": "order",
+      "lane": "l1",
+      "col": 2,
+      "type": "database",
+      "label": "读取订单当前值",
+      "sublabel": "支付和出单任务",
+      "width": 164
+    },
+    {
+      "id": "events",
+      "lane": "l1",
+      "col": 3,
+      "type": "database",
+      "label": "读取有序事件",
+      "sublabel": "发生时间与入库时间",
+      "width": 164
+    },
+    {
+      "id": "coverage",
+      "lane": "l2",
+      "col": 3,
+      "type": "security",
+      "label": "检查可见范围",
+      "sublabel": "水位 · 行数 · 迟到事件",
+      "width": 164
+    },
+    {
+      "id": "evidence",
+      "lane": "l2",
+      "col": 4,
+      "type": "backend",
+      "label": "形成阶段证据",
+      "sublabel": "不跨越未确认环节",
+      "width": 164
+    },
+    {
+      "id": "reply",
+      "lane": "l2",
+      "col": 5,
+      "type": "frontend",
+      "label": "交给值班人员",
+      "sublabel": "缺少打印回执仍待核对",
+      "width": 164
+    }
+  ],
+  "edges": [
+    {
+      "id": "scope-params",
+      "from": "scope",
+      "to": "params"
+    },
+    {
+      "id": "params-readonly",
+      "from": "params",
+      "to": "readonly"
+    },
+    {
+      "id": "readonly-order",
+      "from": "readonly",
+      "to": "order"
+    },
+    {
+      "id": "order-events",
+      "from": "order",
+      "to": "events"
+    },
+    {
+      "id": "events-coverage",
+      "from": "events",
+      "to": "coverage"
+    },
+    {
+      "id": "coverage-evidence",
+      "from": "coverage",
+      "to": "evidence"
+    },
+    {
+      "id": "evidence-reply",
+      "from": "evidence",
+      "to": "reply"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "相同当前值，历史不同",
+      "items": [
+        "两单快照相同；一单没有打印回执，另一单离线后重试。"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "晚到记录不等于晚发生",
+      "items": [
+        "14:00:06 的回执于 14:00:20 入库，早查时不可见。"
+      ]
+    }
+  ]
+}

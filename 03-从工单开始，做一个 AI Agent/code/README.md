@@ -1,6 +1,6 @@
 # 茶饮工单 Agent Demo
 
-当前版本对应第 06 篇：增加绑定部署提交的前后端源码检索与读取。Python 3.11+；源码实验需要 Git 和 Node.js，前文原生媒体实验另需 macOS、Swift 和 FFmpeg。
+当前版本对应第 07 篇：增加只读 SQL、阶段事件与可见性对照。Python 3.11+；源码实验需要 Git 和 Node.js，前文原生媒体实验另需 macOS、Swift 和 FFmpeg。
 
 ## 运行
 
@@ -129,3 +129,17 @@ node scripts/source_comparison.mjs
 独立对照脚本实际运行公开合成前后端函数：金额均为 3200 分、规则从 r1 变为 r2 时，v1 返回 PRICE_CHANGED，v2 返回 OK。结果在 `fixtures/source/experiment-results.json`。v2 只是对照条件，不是完整计价修复建议。静态路径与合成执行都不证明客户工单实际走过这个分支。
 
 Python 3.11.9、Git 2.55.0、Node.js 22.22.0 下累计 86 项测试通过（同时启用了前文 OCR 与飞书 SDK 测试）。缺少 OCR 路径跳过 1 项；没有 SDK 再跳过 1 项。Node.js 与 Git 是本章测试必需依赖。
+
+## 第 07 篇：只读 SQL 与事件可见性
+
+```bash
+python3 -m ticket_agent.evidence_db --db /tmp/ticket-evidence-ch07.sqlite3 --init-demo
+python3 -m ticket_agent.evidence_db --db /tmp/ticket-evidence-ch07.sqlite3 --reference P1002 --as-of 2026-09-18T14:00:15+08:00
+python3 -m ticket_agent.evidence_db --db /tmp/ticket-evidence-ch07.sqlite3 --reference P1002 --as-of 2026-09-18T14:00:30+08:00
+```
+
+首次初始化只写空路径，后续不再带 `--init-demo`。数据库放仓库外。输入在 `fixtures/database.json`，实际本地查询摘要在 `fixtures/database-results.json`。相同快照的两单有不同事件历史；14:00:06 的打印确认于 14:00:20 入库，早查不可见。用字段过滤模拟延迟，没有运行真实复制服务。
+
+`SqlOrderReader.lookup` 保持原 Reader 接口，复用执行器；未接到飞书命令或真实数据库。模板 SQL 绑定品牌、门店、对象和时间，`mode=ro`、`query_only`、字段授权回调共同约束。每次最多 10 条事件、窗口最多 20 分钟；锁等待 0.1 秒、默认 VM 进度预算 0.2 秒，不是硬 I/O 截止。
+
+累计 100 项测试通过（启用前文 SDK 和原生 OCR）。没有自由 SQL、自动重试、生产压测或历史快照重建；未查到回执、被截断与查询不可用均不证明现场没有打印。设备确认也不等于饮品交付。

@@ -1,0 +1,132 @@
+{
+  "synthetic": true,
+  "orders": [
+    {
+      "brand": "demo-brand",
+      "store": "store-001",
+      "order_id": "O1001",
+      "payment_id": "P1001",
+      "payment": "paid",
+      "dispatch": "sent",
+      "updated_at": "2026-09-18T14:00:10+08:00",
+      "customer_phone": "synthetic-private-field"
+    },
+    {
+      "brand": "demo-brand",
+      "store": "store-001",
+      "order_id": "O1002",
+      "payment_id": "P1002",
+      "payment": "paid",
+      "dispatch": "sent",
+      "updated_at": "2026-09-18T14:00:10+08:00",
+      "customer_phone": "synthetic-private-field"
+    },
+    {
+      "brand": "other-brand",
+      "store": "store-001",
+      "order_id": "O2001",
+      "payment_id": "P2001",
+      "payment": "paid",
+      "dispatch": "sent",
+      "updated_at": "2026-09-18T14:00:10+08:00",
+      "customer_phone": "synthetic-private-field"
+    }
+  ],
+  "events": [
+    {
+      "brand": "demo-brand",
+      "store": "store-001",
+      "order_id": "O1001",
+      "event_id": "O1001-E1",
+      "kind": "PAYMENT_ACCEPTED",
+      "trace_id": "trace-O1001",
+      "attempt": 1,
+      "event_at": "2026-09-18T14:00:01+08:00",
+      "ingested_at": "2026-09-18T14:00:02+08:00"
+    },
+    {
+      "brand": "demo-brand",
+      "store": "store-001",
+      "order_id": "O1001",
+      "event_id": "O1001-E2",
+      "kind": "ORDER_CREATED",
+      "trace_id": "trace-O1001",
+      "attempt": 1,
+      "event_at": "2026-09-18T14:00:02+08:00",
+      "ingested_at": "2026-09-18T14:00:03+08:00"
+    },
+    {
+      "brand": "demo-brand",
+      "store": "store-001",
+      "order_id": "O1002",
+      "event_id": "O1002-E1",
+      "kind": "PAYMENT_ACCEPTED",
+      "trace_id": "trace-O1002",
+      "attempt": 1,
+      "event_at": "2026-09-18T14:00:01+08:00",
+      "ingested_at": "2026-09-18T14:00:02+08:00"
+    },
+    {
+      "brand": "demo-brand",
+      "store": "store-001",
+      "order_id": "O1002",
+      "event_id": "O1002-E2",
+      "kind": "ORDER_CREATED",
+      "trace_id": "trace-O1002",
+      "attempt": 1,
+      "event_at": "2026-09-18T14:00:02+08:00",
+      "ingested_at": "2026-09-18T14:00:03+08:00"
+    },
+    {
+      "brand": "demo-brand",
+      "store": "store-001",
+      "order_id": "O1001",
+      "event_id": "O1001-E3",
+      "kind": "DISPATCH_SENT",
+      "trace_id": "trace-O1001",
+      "attempt": 1,
+      "event_at": "2026-09-18T14:00:03+08:00",
+      "ingested_at": "2026-09-18T14:00:04+08:00"
+    },
+    {
+      "brand": "demo-brand",
+      "store": "store-001",
+      "order_id": "O1002",
+      "event_id": "O1002-E3",
+      "kind": "DEVICE_OFFLINE",
+      "trace_id": "trace-O1002",
+      "attempt": 1,
+      "event_at": "2026-09-18T14:00:03+08:00",
+      "ingested_at": "2026-09-18T14:00:04+08:00"
+    },
+    {
+      "brand": "demo-brand",
+      "store": "store-001",
+      "order_id": "O1002",
+      "event_id": "O1002-E4",
+      "kind": "DISPATCH_SENT",
+      "trace_id": "trace-O1002",
+      "attempt": 2,
+      "event_at": "2026-09-18T14:00:05+08:00",
+      "ingested_at": "2026-09-18T14:00:06+08:00"
+    },
+    {
+      "brand": "demo-brand",
+      "store": "store-001",
+      "order_id": "O1002",
+      "event_id": "O1002-E5",
+      "kind": "PRINT_ACK",
+      "trace_id": "trace-O1002",
+      "attempt": 2,
+      "event_at": "2026-09-18T14:00:06+08:00",
+      "ingested_at": "2026-09-18T14:00:20+08:00"
+    }
+  ],
+  "watermarks": [
+    {
+      "brand": "demo-brand",
+      "store": "store-001",
+      "through": "2026-09-18T14:00:10+08:00"
+    }
+  ]
+}

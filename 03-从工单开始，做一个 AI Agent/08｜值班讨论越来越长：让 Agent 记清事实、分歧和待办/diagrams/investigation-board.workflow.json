@@ -1,0 +1,177 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "工单交接：保留更正、依赖和人员认领",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "backend": {
+          "label": "处理逻辑"
+        },
+        "database": {
+          "label": "数据与证据"
+        },
+        "security": {
+          "label": "范围与检查"
+        },
+        "frontend": {
+          "label": "人员交互"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "l0",
+      "label": "来源与版本"
+    },
+    {
+      "id": "l1",
+      "label": "调查记录"
+    },
+    {
+      "id": "l2",
+      "label": "纠正与交接"
+    }
+  ],
+  "mainPath": [
+    "messages",
+    "versions",
+    "operator",
+    "items",
+    "links",
+    "correct",
+    "snapshot",
+    "handoff"
+  ],
+  "nodes": [
+    {
+      "id": "messages",
+      "lane": "l0",
+      "col": 0,
+      "type": "database",
+      "label": "保存原始消息",
+      "sublabel": "沿用话题 Inbox",
+      "width": 164
+    },
+    {
+      "id": "versions",
+      "lane": "l0",
+      "col": 1,
+      "type": "security",
+      "label": "检查两个版本",
+      "sublabel": "话题输入 · 记录修订",
+      "width": 164
+    },
+    {
+      "id": "operator",
+      "lane": "l0",
+      "col": 2,
+      "type": "security",
+      "label": "确认操作身份",
+      "sublabel": "人工确认变更",
+      "width": 164
+    },
+    {
+      "id": "items",
+      "lane": "l1",
+      "col": 2,
+      "type": "backend",
+      "label": "分别记录内容",
+      "sublabel": "人员报告 · 假设 · 待办",
+      "width": 164
+    },
+    {
+      "id": "links",
+      "lane": "l1",
+      "col": 3,
+      "type": "database",
+      "label": "建立来源与依赖",
+      "sublabel": "原文引用 · 影响关系",
+      "width": 164
+    },
+    {
+      "id": "correct",
+      "lane": "l2",
+      "col": 3,
+      "type": "backend",
+      "label": "处理更正影响",
+      "sublabel": "旧报告过期 · 依赖待复核",
+      "width": 164
+    },
+    {
+      "id": "snapshot",
+      "lane": "l2",
+      "col": 4,
+      "type": "database",
+      "label": "生成当前记录",
+      "sublabel": "保留认领与未完成项",
+      "width": 164
+    },
+    {
+      "id": "handoff",
+      "lane": "l2",
+      "col": 5,
+      "type": "frontend",
+      "label": "接班继续调查",
+      "sublabel": "超预算明确要求选择",
+      "width": 164
+    }
+  ],
+  "edges": [
+    {
+      "id": "messages-versions",
+      "from": "messages",
+      "to": "versions"
+    },
+    {
+      "id": "versions-operator",
+      "from": "versions",
+      "to": "operator"
+    },
+    {
+      "id": "operator-items",
+      "from": "operator",
+      "to": "items"
+    },
+    {
+      "id": "items-links",
+      "from": "items",
+      "to": "links"
+    },
+    {
+      "id": "links-correct",
+      "from": "links",
+      "to": "correct"
+    },
+    {
+      "id": "correct-snapshot",
+      "from": "correct",
+      "to": "snapshot"
+    },
+    {
+      "id": "snapshot-handoff",
+      "from": "snapshot",
+      "to": "handoff"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "认领不等于完成",
+      "items": [
+        "我来查修改记录，只能得到 claimed 状态。"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "更正会影响后续判断",
+      "items": [
+        "数量报告被更正，依赖它的缓存假设标记 stale。"
+      ]
+    }
+  ]
+}

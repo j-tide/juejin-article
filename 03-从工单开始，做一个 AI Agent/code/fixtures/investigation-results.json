@@ -1,0 +1,64 @@
+{
+  "mode": "explicit_operator_replay",
+  "snapshot": {
+    "status": "ready",
+    "topic_version": 4,
+    "basis_topic_version": 4,
+    "board_revision": 6,
+    "reported": [
+      {
+        "id": "count-v2",
+        "kind": "reported",
+        "issue": "quantity",
+        "text": "更正：数量没少，两杯口味不对，按清单 v2 核对。",
+        "source_id": "group-message-4",
+        "depends_on": [],
+        "validity": "active",
+        "task_status": null,
+        "owner": null,
+        "result_source": null
+      },
+      {
+        "id": "flavor",
+        "kind": "reported",
+        "issue": "flavor",
+        "text": "两杯口味不对",
+        "source_id": "group-message-4",
+        "depends_on": [],
+        "validity": "active",
+        "task_status": null,
+        "owner": null,
+        "result_source": null
+      }
+    ],
+    "hypotheses": [],
+    "tasks": [
+      {
+        "id": "changes",
+        "kind": "todo",
+        "issue": "flavor",
+        "text": "我来查修改记录。",
+        "source_id": "group-message-3",
+        "depends_on": [],
+        "validity": "active",
+        "task_status": "claimed",
+        "owner": "backend",
+        "result_source": null
+      }
+    ],
+    "invalidated": [
+      {
+        "id": "count-v1",
+        "validity": "superseded"
+      },
+      {
+        "id": "cache",
+        "validity": "stale"
+      }
+    ]
+  },
+  "source_example": {
+    "text": "更正：数量没少，两杯口味不对，按清单 v2 核对。",
+    "sender": "customer"
+  }
+}

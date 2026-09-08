@@ -1,6 +1,6 @@
 # 茶饮工单 Agent Demo
 
-当前版本对应第 07 篇：增加只读 SQL、阶段事件与可见性对照。Python 3.11+；源码实验需要 Git 和 Node.js，前文原生媒体实验另需 macOS、Swift 和 FFmpeg。
+当前版本对应第 08 篇：增加有来源、可更正的调查与交接记录。Python 3.11+；源码实验需要 Git 和 Node.js，前文原生媒体实验另需 macOS、Swift 和 FFmpeg。
 
 ## 运行
 
@@ -143,3 +143,15 @@ python3 -m ticket_agent.evidence_db --db /tmp/ticket-evidence-ch07.sqlite3 --ref
 `SqlOrderReader.lookup` 保持原 Reader 接口，复用执行器；未接到飞书命令或真实数据库。模板 SQL 绑定品牌、门店、对象和时间，`mode=ro`、`query_only`、字段授权回调共同约束。每次最多 10 条事件、窗口最多 20 分钟；锁等待 0.1 秒、默认 VM 进度预算 0.2 秒，不是硬 I/O 截止。
 
 累计 100 项测试通过（启用前文 SDK 和原生 OCR）。没有自由 SQL、自动重试、生产压测或历史快照重建；未查到回执、被截断与查询不可用均不证明现场没有打印。设备确认也不等于饮品交付。
+
+## 第 08 篇：调查记录与更正依赖
+
+```bash
+python3 -m ticket_agent.investigation --db /tmp/ticket-board-ch08.sqlite3
+```
+
+复用 ConversationInbox 的消息与话题版本，新增调查视图和操作记录表。合成团餐回放的六次变更由显式操作者确认，重复运行幂等；结果在 `fixtures/investigation-results.json`。未调用模型提取事实或压缩聊天。
+
+内容分 reported / hypothesis / todo，来源必须是绑定话题中可回查的原文。更正使旧报告与依赖项失效；认领不等于完成。两个版本检查、操作 ID 去重与原子更新保护状态。新话题输入让未更新视图返回 needs_update。超过 6000 字符预算返回 needs_selection，不静默截断。
+
+`BOARD_TOOL` / `board_handler` 可向执行器提供只读上下文；没有给模型开放变更权限，尚未自动接入飞书回复路由或所有工具证据。完成表示人员确认一项检查完成，不是机器证实业务解决。累计 117 项测试通过；没有通用事件重建、自动转交或消息撤回同步。

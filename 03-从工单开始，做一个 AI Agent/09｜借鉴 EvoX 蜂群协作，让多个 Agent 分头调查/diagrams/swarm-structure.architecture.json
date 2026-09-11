@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "受限协作：独立检查并行，依赖检查等待",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "backend": {
+          "label": "独立执行者"
+        },
+        "database": {
+          "label": "任务结果"
+        },
+        "security": {
+          "label": "调度与验证"
+        },
+        "external": {
+          "label": "绑定输入"
+        },
+        "frontend": {
+          "label": "人员复核"
+        }
+      }
+    }
+  },
+  "components": [
+    {
+      "id": "context",
+      "type": "external",
+      "label": "绑定调查输入",
+      "sublabel": "门店 · 活动 · 版本",
+      "pos": [
+        26,
+        350
+      ],
+      "size": [
+        150,
+        80
+      ]
+    },
+    {
+      "id": "planner",
+      "type": "security",
+      "label": "分解与预算检查",
+      "sublabel": "固定任务 ID · 依赖",
+      "pos": [
+        230,
+        350
+      ],
+      "size": [
+        150,
+        80
+      ]
+    },
+    {
+      "id": "front",
+      "type": "backend",
+      "label": "前端检查",
+      "sublabel": "提示与请求路径",
+      "pos": [
+        461,
+        130
+      ],
+      "size": [
+        150,
+        80
+      ]
+    },
+    {
+      "id": "rules",
+      "type": "backend",
+      "label": "规则检查",
+      "sublabel": "适用条件与来源",
+      "pos": [
+        461,
+        570
+      ],
+      "size": [
+        150,
+        80
+      ]
+    },
+    {
+      "id": "back",
+      "type": "backend",
+      "label": "后端检查",
+      "sublabel": "等待前端路径",
+      "pos": [
+        678,
+        130
+      ],
+      "size": [
+        150,
+        80
+      ]
+    },
+    {
+      "id": "results",
+      "type": "database",
+      "label": "按任务保存结果",
+      "sublabel": "证据原文与失败状态",
+      "pos": [
+        896,
+        350
+      ],
+      "size": [
+        150,
+        80
+      ]
+    },
+    {
+      "id": "verify",
+      "type": "security",
+      "label": "核对覆盖与冲突",
+      "sublabel": "不按多数票判断",
+      "pos": [
+        1107,
+        350
+      ],
+      "size": [
+        150,
+        80
+      ]
+    },
+    {
+      "id": "human",
+      "type": "frontend",
+      "label": "人工复核",
+      "sublabel": "未完成项保持可见",
+      "pos": [
+        1107,
+        620
+      ],
+      "size": [
+        150,
+        80
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "from": "context",
+      "to": "planner"
+    },
+    {
+      "from": "planner",
+      "to": "front",
+      "label": "代码分支"
+    },
+    {
+      "from": "planner",
+      "to": "rules",
+      "label": "规则分支"
+    },
+    {
+      "from": "front",
+      "to": "back",
+      "label": "接口路径"
+    },
+    {
+      "from": "back",
+      "to": "results",
+      "label": "源码证据"
+    },
+    {
+      "from": "rules",
+      "to": "results",
+      "label": "规则证据"
+    },
+    {
+      "from": "results",
+      "to": "verify"
+    },
+    {
+      "from": "verify",
+      "to": "human"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "拆分的是检查任务",
+      "items": [
+        "默认执行本地固定检查，不把线程并发描述成模型自主协作。"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "汇总保留缺口",
+      "items": [
+        "失败、依赖阻塞和输入版本变化都进入结果；不重写证据原文。"
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # 茶饮工单 Agent Demo
 
-当前版本对应第 08 篇：增加有来源、可更正的调查与交接记录。Python 3.11+；源码实验需要 Git 和 Node.js，前文原生媒体实验另需 macOS、Swift 和 FFmpeg。
+当前版本对应第 09 篇：增加分支依赖、角色工具预算和程序汇总。Python 3.11+；源码实验需要 Git 和 Node.js，前文原生媒体实验另需 macOS、Swift 和 FFmpeg。
 
 ## 运行
 
@@ -155,3 +155,16 @@ python3 -m ticket_agent.investigation --db /tmp/ticket-board-ch08.sqlite3
 内容分 reported / hypothesis / todo，来源必须是绑定话题中可回查的原文。更正使旧报告与依赖项失效；认领不等于完成。两个版本检查、操作 ID 去重与原子更新保护状态。新话题输入让未更新视图返回 needs_update。超过 6000 字符预算返回 needs_selection，不静默截断。
 
 `BOARD_TOOL` / `board_handler` 可向执行器提供只读上下文；没有给模型开放变更权限，尚未自动接入飞书回复路由或所有工具证据。完成表示人员确认一项检查完成，不是机器证实业务解决。累计 117 项测试通过；没有通用事件重建、自动转交或消息撤回同步。
+
+## 第 09 篇：受限分支协作
+
+```bash
+python3 -m ticket_agent.swarm --workspace /tmp/ticket-swarm-ch09 --workers 1
+python3 -m ticket_agent.swarm --workspace /tmp/ticket-swarm-ch09 --workers 2
+```
+
+规则与前端检查可并行，后端等待前端接口路径；共 3 个固定任务、最多 2 个工作者、总工具预算 5 次。每项包含 ID、角色、依赖和必要源码文件，结果按任务核对，证据不经另一个模型改写。复用第 04 和 06 篇 Reader；没有安装或调用 EvoX。
+
+默认本地固定检查，不是模型协作实验。一次实际对照分别 157/154 ms，均为 5 次工具调用、6 条证据；差异不支持稳定加速结论。结果在 `fixtures/swarm-results.json`。`--live` 才通过独立模型上下文执行，需 Key，未实测；脚本化 Provider 只验证接线。
+
+30 秒是派发期限，不会强杀正在运行的线程；依赖底层工具超时。结果表仅在本次内存中，尚无进程级恢复。`current_versions` 可检查话题与调查修订；CLI 静态示例未接飞书消息变化。结构冲突保留双方，没有通用语义矛盾识别或自主任务拆分。累计 134 项测试通过。

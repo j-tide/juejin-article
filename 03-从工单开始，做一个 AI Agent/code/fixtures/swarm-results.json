@@ -1,0 +1,32 @@
+{
+  "execution": "local_scripted_workers",
+  "model_api_called": false,
+  "same_evidence": true,
+  "runs": [
+    {
+      "workers": 1,
+      "parts": {
+        "frontend": "ok",
+        "backend": "ok",
+        "rules": "ok"
+      },
+      "tool_calls": 5,
+      "evidence_count": 6,
+      "elapsed_ms": 157,
+      "coverage_complete": true
+    },
+    {
+      "workers": 2,
+      "parts": {
+        "rules": "ok",
+        "frontend": "ok",
+        "backend": "ok"
+      },
+      "tool_calls": 5,
+      "evidence_count": 6,
+      "elapsed_ms": 154,
+      "coverage_complete": true
+    }
+  ],
+  "limitation": "单次本地固定检查对照，不代表模型准确率、线上吞吐或稳定加速比"
+}

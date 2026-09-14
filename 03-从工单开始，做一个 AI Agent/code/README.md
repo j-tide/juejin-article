@@ -1,6 +1,6 @@
 # 茶饮工单 Agent Demo
 
-当前版本对应第 09 篇：增加分支依赖、角色工具预算和程序汇总。Python 3.11+；源码实验需要 Git 和 Node.js，前文原生媒体实验另需 macOS、Swift 和 FFmpeg。
+当前版本对应第 10 篇：增加持久化排队、事故候选与运行记录。Python 3.11+；源码实验需要 Git 和 Node.js，前文原生媒体实验另需 macOS、Swift 和 FFmpeg。
 
 ## 运行
 
@@ -168,3 +168,17 @@ python3 -m ticket_agent.swarm --workspace /tmp/ticket-swarm-ch09 --workers 2
 默认本地固定检查，不是模型协作实验。一次实际对照分别 157/154 ms，均为 5 次工具调用、6 条证据；差异不支持稳定加速结论。结果在 `fixtures/swarm-results.json`。`--live` 才通过独立模型上下文执行，需 Key，未实测；脚本化 Provider 只验证接线。
 
 30 秒是派发期限，不会强杀正在运行的线程；依赖底层工具超时。结果表仅在本次内存中，尚无进程级恢复。`current_versions` 可检查话题与调查修订；CLI 静态示例未接飞书消息变化。结构冲突保留双方，没有通用语义矛盾识别或自主任务拆分。累计 134 项测试通过。
+
+## 第 10 篇：持久化队列
+
+```bash
+DEMO_DIR=$(mktemp -d)
+python3 -m ticket_agent.work_queue --db "$DEMO_DIR/queue.sqlite3"
+python3 -m ticket_agent.queue_experiment
+```
+
+`WorkQueue` 保存输入版本、任务与领取代次，默认容量 100、全局同时执行 2 张、每租户 1 张，基础优先级 0—30，每分钟等待加 1。租约到期为 uncertain，继续占名额；需受信任执行层确认旧工作者停止后重试，最多三代。无续租、进程终止、供应商全局配额或飞书自动接入。默认 30 秒租约用于本章短任务，长模型任务需要调整执行与租约策略。
+
+事故分组只生成同租户同品牌的候选，保留业务阶段、版本与五分钟时间桶，未核验共同根因。`snapshot()` 是本地管理检查入口，不能直接对门店暴露。执行 done 不等于业务解决；旧输入结果标为 stale_input，发送时还需检查话题原始存储版本。
+
+`queue_experiment` 分开运行逻辑时钟调度和真实本地工具循环，结果样本在 `fixtures/queue-results.json`。固定 Replay 不是模型调用，Token 未知保留 null，没有性能或成本结论。队列函数可接已有 Agent 工作者，尚未替换飞书工作者。累计 155 项测试通过。

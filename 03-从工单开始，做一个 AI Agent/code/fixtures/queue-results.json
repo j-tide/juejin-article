@@ -1,0 +1,74 @@
+{
+  "synthetic": true,
+  "scheduling": {
+    "mode": "logical_clock_queue_replay",
+    "clock_is_simulated": true,
+    "dispatch_order": [
+      "group-order",
+      "ordinary-a",
+      "ordinary-b",
+      "not-paid"
+    ],
+    "candidate_groups": [
+      {
+        "candidate": "5c68bf7f612c92ef068d",
+        "members": [
+          {
+            "incident": "5c68bf7f612c92ef068d",
+            "topic": "group-order",
+            "store": "store-003",
+            "version": 1
+          },
+          {
+            "incident": "5c68bf7f612c92ef068d",
+            "topic": "ordinary-a",
+            "store": "store-001",
+            "version": 1
+          },
+          {
+            "incident": "5c68bf7f612c92ef068d",
+            "topic": "ordinary-b",
+            "store": "store-002",
+            "version": 1
+          }
+        ],
+        "confirmed_incident": false
+      }
+    ],
+    "queue_wait_ms": [
+      5000,
+      8000,
+      11000,
+      14000
+    ]
+  },
+  "actual_worker": {
+    "mode": "scripted_replay_real_execution",
+    "disposition": "done",
+    "status": "needs_human",
+    "evidence_count": 4,
+    "trace": [
+      {
+        "event": "model_returned",
+        "round": 1,
+        "elapsed_ms": 0
+      },
+      {
+        "event": "tool_returned",
+        "status": "found",
+        "elapsed_ms": 0
+      },
+      {
+        "event": "model_returned",
+        "round": 2,
+        "elapsed_ms": 0
+      }
+    ],
+    "usage": null,
+    "queue_worker_elapsed_ms": 1
+  },
+  "limitations": [
+    "调度实验使用逻辑时钟，不是负载基准",
+    "实际工作者调用固定 Replay 和本地订单工具，不调用模型或飞书"
+  ]
+}

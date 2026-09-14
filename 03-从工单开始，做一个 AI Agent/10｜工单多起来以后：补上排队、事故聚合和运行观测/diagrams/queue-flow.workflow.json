@@ -1,0 +1,177 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "工单排队：限制并发，保留输入版本和执行记录",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "backend": {
+          "label": "处理逻辑"
+        },
+        "database": {
+          "label": "数据与证据"
+        },
+        "security": {
+          "label": "范围与检查"
+        },
+        "frontend": {
+          "label": "人员交互"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "l0",
+      "label": "接收与保存"
+    },
+    {
+      "id": "l1",
+      "label": "调度与执行"
+    },
+    {
+      "id": "l2",
+      "label": "核对与交付"
+    }
+  ],
+  "mainPath": [
+    "input",
+    "persist",
+    "rank",
+    "slots",
+    "claim",
+    "worker",
+    "fence",
+    "result"
+  ],
+  "nodes": [
+    {
+      "id": "input",
+      "lane": "l0",
+      "col": 0,
+      "type": "security",
+      "label": "检查工单版本",
+      "sublabel": "同一输入幂等入队",
+      "width": 164
+    },
+    {
+      "id": "persist",
+      "lane": "l0",
+      "col": 1,
+      "type": "database",
+      "label": "持久保存任务",
+      "sublabel": "队列容量与旧版替换",
+      "width": 164
+    },
+    {
+      "id": "rank",
+      "lane": "l0",
+      "col": 2,
+      "type": "backend",
+      "label": "计算处理顺序",
+      "sublabel": "业务优先级 · 等待时间",
+      "width": 164
+    },
+    {
+      "id": "slots",
+      "lane": "l1",
+      "col": 2,
+      "type": "security",
+      "label": "检查可用名额",
+      "sublabel": "全局和租户同时限制",
+      "width": 164
+    },
+    {
+      "id": "claim",
+      "lane": "l1",
+      "col": 3,
+      "type": "database",
+      "label": "原子领取任务",
+      "sublabel": "工作者 · 租约 · 代次",
+      "width": 164
+    },
+    {
+      "id": "worker",
+      "lane": "l2",
+      "col": 3,
+      "type": "backend",
+      "label": "执行调查函数",
+      "sublabel": "记录实际运行耗时",
+      "width": 164
+    },
+    {
+      "id": "fence",
+      "lane": "l2",
+      "col": 4,
+      "type": "security",
+      "label": "核对代次和输入",
+      "sublabel": "过期结果不写入当前结论",
+      "width": 164
+    },
+    {
+      "id": "result",
+      "lane": "l2",
+      "col": 5,
+      "type": "database",
+      "label": "保存结果与事件",
+      "sublabel": "是否发送仍需单独核对",
+      "width": 164
+    }
+  ],
+  "edges": [
+    {
+      "id": "input-persist",
+      "from": "input",
+      "to": "persist"
+    },
+    {
+      "id": "persist-rank",
+      "from": "persist",
+      "to": "rank"
+    },
+    {
+      "id": "rank-slots",
+      "from": "rank",
+      "to": "slots"
+    },
+    {
+      "id": "slots-claim",
+      "from": "slots",
+      "to": "claim"
+    },
+    {
+      "id": "claim-worker",
+      "from": "claim",
+      "to": "worker"
+    },
+    {
+      "id": "worker-fence",
+      "from": "worker",
+      "to": "fence"
+    },
+    {
+      "id": "fence-result",
+      "from": "fence",
+      "to": "result"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "租约到期，不立即重跑",
+      "items": [
+        "转为 uncertain 并占用名额，确认旧工作者停止后才能重试。"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "同类反馈只是事故候选",
+      "items": [
+        "按租户、阶段和版本分组，不自动共享根因或关闭工单。"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "mode": "deterministic_reviewed_memory_with_local_tools",
+  "synthetic": true,
+  "matching_context": {
+    "status": "needs_review",
+    "memory_id": "c0f131228e453c2582aa041c7248157c9b8620ce092412c09f631e701d34c777",
+    "evidence": [
+      {
+        "id": "doc:rule-a@1",
+        "source": "fixture://knowledge/rule-a",
+        "observed_at": "2026-09-18T15:00:00+08:00",
+        "event_at": "2026-09-01T00:00:00+08:00",
+        "quote": "规则资料《优惠券无法使用的适用条件》v1：优惠券仅适用于小程序奶茶商品，实付前活动商品金额满 30 元可用；水果茶不参加。；条件对比=match",
+        "conditions": {
+          "status": "match",
+          "mismatches": [],
+          "unknown": []
+        },
+        "kind": "rule",
+        "conflict": false,
+        "content_sha256": "cdc9b64e593ff155ec8906ff80d95b5b5c2b94e20b3db13647604a5c18b1168a"
+      },
+      {
+        "id": "doc:case-a@1",
+        "source": "fixture://knowledge/case-a",
+        "observed_at": "2026-09-18T15:00:00+08:00",
+        "event_at": "2026-09-01T00:00:00+08:00",
+        "quote": "历史案例，仅作排查线索《门店优惠券无法使用的历史排查》v1：曾有两杯水果茶不能使用优惠券，核对活动商品清单后确认商品未参加；该原因仅在当时工单得到确认。；条件对比=match",
+        "conditions": {
+          "status": "match",
+          "mismatches": [],
+          "unknown": []
+        },
+        "kind": "case",
+        "conflict": false,
+        "content_sha256": "6101e864ddfa61fade53ca39303007cd07893af5ce1efa9f47ff14df732c4615"
+      }
+    ],
+    "note": "复用的是检查步骤，当前根因仍需核验"
+  },
+  "changed_deployment": {
+    "status": "fallback",
+    "reason": "memory_unavailable",
+    "evidence": []
+  },
+  "missing_conditions": {
+    "status": "fallback",
+    "reason": "fresh_evidence_incomplete",
+    "evidence": [
+      {
+        "id": "doc:rule-a@1",
+        "source": "fixture://knowledge/rule-a",
+        "observed_at": "2026-09-18T15:00:00+08:00",
+        "event_at": "2026-09-01T00:00:00+08:00",
+        "quote": "规则资料《优惠券无法使用的适用条件》v1：优惠券仅适用于小程序奶茶商品，实付前活动商品金额满 30 元可用；水果茶不参加。；条件对比=unknown，待补充=channel,product,basket_cents",
+        "conditions": {
+          "status": "unknown",
+          "mismatches": [],
+          "unknown": [
+            "channel",
+            "product",
+            "basket_cents"
+          ]
+        },
+        "kind": "rule",
+        "conflict": false,
+        "content_sha256": "cdc9b64e593ff155ec8906ff80d95b5b5c2b94e20b3db13647604a5c18b1168a"
+      },
+      {
+        "id": "doc:case-a@1",
+        "source": "fixture://knowledge/case-a",
+        "observed_at": "2026-09-18T15:00:00+08:00",
+        "event_at": "2026-09-01T00:00:00+08:00",
+        "quote": "历史案例，仅作排查线索《门店优惠券无法使用的历史排查》v1：曾有两杯水果茶不能使用优惠券，核对活动商品清单后确认商品未参加；该原因仅在当时工单得到确认。；条件对比=unknown，待补充=channel,product,basket_cents",
+        "conditions": {
+          "status": "unknown",
+          "mismatches": [],
+          "unknown": [
+            "channel",
+            "product",
+            "basket_cents"
+          ]
+        },
+        "kind": "case",
+        "conflict": false,
+        "content_sha256": "6101e864ddfa61fade53ca39303007cd07893af5ce1efa9f47ff14df732c4615"
+      }
+    ]
+  },
+  "revocation": {
+    "affected_memories": [
+      "3f295601716df0a0372ae9256bf514ab54b0d52804e9905bd062fcb78f42be9d",
+      "c0f131228e453c2582aa041c7248157c9b8620ce092412c09f631e701d34c777"
+    ],
+    "review_runs": [
+      "run-match",
+      "run-unknown"
+    ]
+  },
+  "after_revocation": {
+    "status": "fallback",
+    "reason": "memory_unavailable",
+    "evidence": []
+  },
+  "limitation": "不含模型调用、自动经验提炼或根因效果评测"
+}

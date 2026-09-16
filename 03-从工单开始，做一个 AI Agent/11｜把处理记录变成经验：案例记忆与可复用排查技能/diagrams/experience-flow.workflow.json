@@ -1,0 +1,177 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "经验复用：先审查来源，再核对本次条件",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "backend": {
+          "label": "处理逻辑"
+        },
+        "database": {
+          "label": "数据与证据"
+        },
+        "security": {
+          "label": "范围与检查"
+        },
+        "frontend": {
+          "label": "人员交互"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "l0",
+      "label": "整理与审查"
+    },
+    {
+      "id": "l1",
+      "label": "案例与技能"
+    },
+    {
+      "id": "l2",
+      "label": "复用与撤销"
+    }
+  ],
+  "mainPath": [
+    "record",
+    "candidate",
+    "review",
+    "cases",
+    "skill",
+    "context",
+    "fresh",
+    "uses"
+  ],
+  "nodes": [
+    {
+      "id": "record",
+      "lane": "l0",
+      "col": 0,
+      "type": "database",
+      "label": "整理处理记录",
+      "sublabel": "现象 · 反证 · 恢复反馈",
+      "width": 164
+    },
+    {
+      "id": "candidate",
+      "lane": "l0",
+      "col": 1,
+      "type": "backend",
+      "label": "创建经验候选",
+      "sublabel": "内容哈希 · 来源摘录",
+      "width": 164
+    },
+    {
+      "id": "review",
+      "lane": "l0",
+      "col": 2,
+      "type": "security",
+      "label": "人工审查原因",
+      "sublabel": "恢复反馈不能单独定因",
+      "width": 164
+    },
+    {
+      "id": "cases",
+      "lane": "l1",
+      "col": 2,
+      "type": "database",
+      "label": "保存批准案例",
+      "sublabel": "明确范围与有效期",
+      "width": 164
+    },
+    {
+      "id": "skill",
+      "lane": "l1",
+      "col": 3,
+      "type": "backend",
+      "label": "审查只读技能",
+      "sublabel": "依赖不同事故的案例",
+      "width": 164
+    },
+    {
+      "id": "context",
+      "lane": "l2",
+      "col": 3,
+      "type": "security",
+      "label": "核对本次条件",
+      "sublabel": "门店 · 活动 · 部署版本",
+      "width": 164
+    },
+    {
+      "id": "fresh",
+      "lane": "l2",
+      "col": 4,
+      "type": "backend",
+      "label": "重新执行检查",
+      "sublabel": "缺证据就回到常规调查",
+      "width": 164
+    },
+    {
+      "id": "uses",
+      "lane": "l2",
+      "col": 5,
+      "type": "database",
+      "label": "记录经验引用",
+      "sublabel": "撤销来源后追查受影响运行",
+      "width": 164
+    }
+  ],
+  "edges": [
+    {
+      "id": "record-candidate",
+      "from": "record",
+      "to": "candidate"
+    },
+    {
+      "id": "candidate-review",
+      "from": "candidate",
+      "to": "review"
+    },
+    {
+      "id": "review-cases",
+      "from": "review",
+      "to": "cases"
+    },
+    {
+      "id": "cases-skill",
+      "from": "cases",
+      "to": "skill"
+    },
+    {
+      "id": "skill-context",
+      "from": "skill",
+      "to": "context"
+    },
+    {
+      "id": "context-fresh",
+      "from": "context",
+      "to": "fresh"
+    },
+    {
+      "id": "fresh-uses",
+      "from": "fresh",
+      "to": "uses"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "检查步骤可以复用，结论不能照搬",
+      "items": [
+        "调用现有知识库工具，条件缺失或冲突时停止技能路径。"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "撤销会影响依赖它的技能",
+      "items": [
+        "下一次读取拒绝复用；历史输出仍需人工复核和更正。"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "synthetic": true,
+  "note": "人工整理的教学候选，来源摘录保存在本文件，不对应生产消息或自动抽取结果",
+  "cases": [
+    {
+      "title": "活动范围核对记录 1",
+      "conditions": {
+        "tenant": "tenant-demo",
+        "brand": "demo-brand",
+        "store": "store-001",
+        "campaign": "campaign-a",
+        "deployment": "release-1"
+      },
+      "valid_from": "2026-09-01T00:00:00+08:00",
+      "valid_to": "2026-10-01T00:00:00+08:00",
+      "observations": "客户报告活动优惠券不可用",
+      "diagnosis": "人工核对活动参与范围后记录范围遗漏；仅适用于该历史工单",
+      "counterevidence": "客户刷新后仍失败，未支持先前缓存假设",
+      "outcome": "运营补充范围后客户报告恢复；恢复反馈不单独证明原因",
+      "sources": [
+        {
+          "id": "fixture://reviewed-history/1/config",
+          "quote": "人工核对的配置快照未包含目标门店。",
+          "role": "diagnosis",
+          "verified": true
+        },
+        {
+          "id": "fixture://reviewed-history/1/retry",
+          "quote": "刷新后重复相同操作，客户仍报告失败。",
+          "role": "counterevidence",
+          "verified": true
+        },
+        {
+          "id": "fixture://reviewed-history/1/customer",
+          "quote": "现在可以下单了。",
+          "role": "outcome",
+          "verified": false
+        }
+      ],
+      "incident": "incident-1",
+      "parents": [],
+      "steps": []
+    },
+    {
+      "title": "活动范围核对记录 2",
+      "conditions": {
+        "tenant": "tenant-demo",
+        "brand": "demo-brand",
+        "store": "store-001",
+        "campaign": "campaign-a",
+        "deployment": "release-1"
+      },
+      "valid_from": "2026-09-01T00:00:00+08:00",
+      "valid_to": "2026-10-01T00:00:00+08:00",
+      "observations": "客户报告活动优惠券不可用",
+      "diagnosis": "人工核对活动参与范围后记录范围遗漏；仅适用于该历史工单",
+      "counterevidence": "客户刷新后仍失败，未支持先前缓存假设",
+      "outcome": "运营补充范围后客户报告恢复；恢复反馈不单独证明原因",
+      "sources": [
+        {
+          "id": "fixture://reviewed-history/2/config",
+          "quote": "人工核对的配置快照未包含目标门店。",
+          "role": "diagnosis",
+          "verified": true
+        },
+        {
+          "id": "fixture://reviewed-history/2/retry",
+          "quote": "刷新后重复相同操作，客户仍报告失败。",
+          "role": "counterevidence",
+          "verified": true
+        },
+        {
+          "id": "fixture://reviewed-history/2/customer",
+          "quote": "现在可以下单了。",
+          "role": "outcome",
+          "verified": false
+        }
+      ],
+      "incident": "incident-2",
+      "parents": [],
+      "steps": []
+    }
+  ]
+}

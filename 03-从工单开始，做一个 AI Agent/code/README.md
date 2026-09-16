@@ -1,6 +1,6 @@
 # 茶饮工单 Agent Demo
 
-当前版本对应第 10 篇：增加持久化排队、事故候选与运行记录。Python 3.11+；源码实验需要 Git 和 Node.js，前文原生媒体实验另需 macOS、Swift 和 FFmpeg。
+当前版本对应第 11 篇：增加受审查的案例记忆、只读技能与撤销追查。Python 3.11+；源码实验需要 Git 和 Node.js，前文原生媒体实验另需 macOS、Swift 和 FFmpeg。
 
 ## 运行
 
@@ -182,3 +182,15 @@ python3 -m ticket_agent.queue_experiment
 事故分组只生成同租户同品牌的候选，保留业务阶段、版本与五分钟时间桶，未核验共同根因。`snapshot()` 是本地管理检查入口，不能直接对门店暴露。执行 done 不等于业务解决；旧输入结果标为 stale_input，发送时还需检查话题原始存储版本。
 
 `queue_experiment` 分开运行逻辑时钟调度和真实本地工具循环，结果样本在 `fixtures/queue-results.json`。固定 Replay 不是模型调用，Token 未知保留 null，没有性能或成本结论。队列函数可接已有 Agent 工作者，尚未替换飞书工作者。累计 155 项测试通过。
+
+## 第 11 篇：案例与只读技能
+
+```bash
+python3 -m ticket_agent.experience_demo
+```
+
+`ExperienceStore` 用 SQLite 保存候选、批准与撤销状态、不可变内容 ID、依赖案例和引用运行。手工合成经验在 `fixtures/experience.json`，结果在 `fixtures/experience-results.json`。不是模型自动摘要，也没有读取生产工单。
+
+案例要求人工核对的诊断与反证，恢复反馈不单独用于批准。技能要求两个不同事故的已批准案例；该数量只是教学门槛，不证明统计可靠性。精确绑定租户、品牌、门店、活动和部署版本，检索先过滤再进行词法排序。只读配方最多 3 步，目前只开放 search_knowledge。当前证据缺失、条件未知或来源撤销时返回 fallback；完成仍为 needs_review。
+
+操作人员 ID 由受信任宿主认证后提供，白名单不是登录服务。来源 verified 字段代表人工核对，程序不鉴伪。撤销检查不终止已经运行的工具，不自动更正外部消息。读取时间由调用方提供，不重建历史记忆快照。没有自动接入飞书或模型经验提炼。累计 174 项测试通过。

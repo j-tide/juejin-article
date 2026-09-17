@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "工单回放评测：隔离未来信息，再逐维评分",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "database": { "label": "样本与结果" },
+        "security": { "label": "隔离与约束" },
+        "backend": { "label": "回放逻辑" },
+        "frontend": { "label": "人工复核" }
+      }
+    }
+  },
+  "lanes": [
+    { "id": "dataset", "label": "样本准备" },
+    { "id": "replay", "label": "固定条件回放" },
+    { "id": "assessment", "label": "评分与比较" }
+  ],
+  "mainPath": ["events", "split", "cutoff", "config", "run", "score", "aggregate", "review"],
+  "nodes": [
+    { "id": "events", "lane": "dataset", "col": 0, "type": "database", "label": "载入工单事件", "sublabel": "消息、可见时间与评分依据", "width": 164 },
+    { "id": "split", "lane": "dataset", "col": 1, "type": "security", "label": "按事故与时间划分", "sublabel": "同一事故不能跨集合", "width": 164 },
+    { "id": "cutoff", "lane": "dataset", "col": 2, "type": "security", "label": "截断当时可见材料", "sublabel": "后续确认只用于评分", "width": 164 },
+    { "id": "config", "lane": "replay", "col": 2, "type": "security", "label": "固定被测配置", "sublabel": "策略、工具与预算版本", "width": 164 },
+    { "id": "run", "lane": "replay", "col": 3, "type": "backend", "label": "逐消息重放", "sublabel": "记录输出、调用与耗时", "width": 164 },
+    { "id": "score", "lane": "assessment", "col": 3, "type": "backend", "label": "逐维评分", "sublabel": "事实、引用、追问与交接", "width": 164 },
+    { "id": "aggregate", "lane": "assessment", "col": 4, "type": "database", "label": "按样本类型汇总", "sublabel": "未知原因样本单列", "width": 164 },
+    { "id": "review", "lane": "assessment", "col": 5, "type": "frontend", "label": "人工复核差异", "sublabel": "定位失败类型，不宣布胜负", "width": 164 }
+  ],
+  "edges": [
+    { "id": "events-split", "from": "events", "to": "split" },
+    { "id": "split-cutoff", "from": "split", "to": "cutoff" },
+    { "id": "cutoff-config", "from": "cutoff", "to": "config" },
+    { "id": "config-run", "from": "config", "to": "run" },
+    { "id": "run-score", "from": "run", "to": "score" },
+    { "id": "score-aggregate", "from": "score", "to": "aggregate" },
+    { "id": "aggregate-review", "from": "aggregate", "to": "review" }
+  ],
+  "cards": [
+    {
+      "dot": "rose",
+      "title": "先隔离，再比较",
+      "items": ["确认原因或之后的消息不能进入早期回放输入。", "事故组只能进入开发集或保留集中的一个。"]
+    },
+    {
+      "dot": "amber",
+      "title": "评分不只看答案",
+      "items": ["原因未知时，检查是否恰当追问和交接。", "调用更少不自动等于质量更高。"]
+    }
+  ]
+}

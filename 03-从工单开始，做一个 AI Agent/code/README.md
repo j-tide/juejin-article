@@ -1,6 +1,6 @@
 # 茶饮工单 Agent Demo
 
-当前版本对应第 11 篇：增加受审查的案例记忆、只读技能与撤销追查。Python 3.11+；源码实验需要 Git 和 Node.js，前文原生媒体实验另需 macOS、Swift 和 FFmpeg。
+当前版本对应第 12 篇：增加时间与事故隔离的回放评测。Python 3.11+；源码实验需要 Git 和 Node.js，前文原生媒体实验另需 macOS、Swift 和 FFmpeg。
 
 ## 运行
 
@@ -194,3 +194,16 @@ python3 -m ticket_agent.experience_demo
 案例要求人工核对的诊断与反证，恢复反馈不单独用于批准。技能要求两个不同事故的已批准案例；该数量只是教学门槛，不证明统计可靠性。精确绑定租户、品牌、门店、活动和部署版本，检索先过滤再进行词法排序。只读配方最多 3 步，目前只开放 search_knowledge。当前证据缺失、条件未知或来源撤销时返回 fallback；完成仍为 needs_review。
 
 操作人员 ID 由受信任宿主认证后提供，白名单不是登录服务。来源 verified 字段代表人工核对，程序不鉴伪。撤销检查不终止已经运行的工具，不自动更正外部消息。读取时间由调用方提供，不重建历史记忆快照。没有自动接入飞书或模型经验提炼。累计 174 项测试通过。
+
+## 第 12 篇：时间与事故隔离的回放评测
+
+```bash
+python3 -m ticket_agent.evaluation_demo --output fixtures/evaluation-results.json
+python3 -m unittest discover -s tests -v
+```
+
+`evaluation-cases.json` 是合成评测集。每条事件区分发生与可见时间；`ReplayInput` 只含截止时已可见的 Agent 消息，标签、根因与引用目录只在评分端读取。这个 API 边界不是隔离不可信策略的安全沙箱。
+
+按事故分组后再按 `development_before` 分区。只要一个事故组有样本到达截止点后，整组都进保留集，避免同一事故拆分到两边。评分不输出总体质量分，分别记录动作、引用、必要证据、追问、无依据定因和预算，并保留未知原因与运行失败。固定配置包含策略修订、模型标识、轮数、时间和工具预算哈希。
+
+默认 `local-ticket-router` 为固定本地策略；订单样本实际走已有 `run_ticket`、Replay 和本地订单工具，其他样本是明确写死的路由分支。没有真实模型或飞书调用，Replay 的零 Token 不作为成本而保留为 null。保留集 5 个教学样本中，必要追问覆盖 1/2，`ticket-coupon-002` 的负向表述触发了错误字符串分支；这是待第 13 篇比较的回归，不是模型成绩。累计 189 项测试通过。

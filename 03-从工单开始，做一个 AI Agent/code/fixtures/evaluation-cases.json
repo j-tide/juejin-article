@@ -1,0 +1,161 @@
+{
+  "schema_version": "ticket-eval-v1",
+  "synthetic": true,
+  "development_before": "2026-09-15T00:00:00+08:00",
+  "cases": [
+    {
+      "id": "ticket-print-001",
+      "incident_id": "incident-print-ack",
+      "created_at": "2026-09-10T10:00:00+08:00",
+      "as_of": "2026-09-10T10:02:00+08:00",
+      "scope": {"tenant": "tenant-demo", "brand": "demo-brand", "store": "store-001"},
+      "events": [
+        {"id": "print-001-user", "text": "客户反馈支付流水 P1001 已付款，但门店没有小票。", "occurred_at": "2026-09-10T10:00:00+08:00", "visible_at": "2026-09-10T10:00:02+08:00", "audience": "agent"}
+      ],
+      "labels": {
+        "sample_type": "stage_evidence_unknown_cause",
+        "truth_status": "unknown",
+        "root_cause": null,
+        "allowed_actions": ["handoff"],
+        "required_questions": [],
+        "citation_catalog": [
+          {"id": "O1001:payment", "quote": "支付记录：支付渠道确认成功，金额 16.00 元"},
+          {"id": "O1001:order", "quote": "订单记录：订单已创建，门店接单状态尚未取得"},
+          {"id": "O1001:dispatch", "quote": "出单任务：出单任务已发送到设备网关，不代表纸质小票已打印"},
+          {"id": "O1001:receipt", "quote": "打印回执：未发现打印回执，不能确认是否已打印"}
+        ],
+        "required_evidence_ids": ["O1001:dispatch", "O1001:receipt"]
+      }
+    },
+    {
+      "id": "ticket-print-002",
+      "incident_id": "incident-print-ack",
+      "created_at": "2026-09-11T09:00:00+08:00",
+      "as_of": "2026-09-11T09:03:00+08:00",
+      "scope": {"tenant": "tenant-demo", "brand": "demo-brand", "store": "store-001"},
+      "events": [
+        {"id": "print-002-user", "text": "团餐订单 P1002 已付款，设备是否真的打出小票需要确认。", "occurred_at": "2026-09-11T09:00:00+08:00", "visible_at": "2026-09-11T09:00:01+08:00", "audience": "agent"}
+      ],
+      "labels": {
+        "sample_type": "stage_evidence_unknown_cause",
+        "truth_status": "unknown",
+        "root_cause": null,
+        "allowed_actions": ["handoff"],
+        "required_questions": [],
+        "citation_catalog": [
+          {"id": "O1002:payment", "quote": "支付记录：支付渠道确认成功，金额 16.00 元"},
+          {"id": "O1002:order", "quote": "订单记录：订单已创建，门店接单状态尚未取得"},
+          {"id": "O1002:dispatch", "quote": "出单任务：出单任务已发送到设备网关，不代表纸质小票已打印"},
+          {"id": "O1002:receipt", "quote": "打印回执：设备已返回打印完成回执；现场是否拿到小票仍需核对"}
+        ],
+        "required_evidence_ids": ["O1002:dispatch", "O1002:receipt"]
+      }
+    },
+    {
+      "id": "ticket-coupon-001",
+      "incident_id": "incident-coupon-scope",
+      "created_at": "2026-09-16T11:00:00+08:00",
+      "as_of": "2026-09-16T11:04:00+08:00",
+      "scope": {"tenant": "tenant-demo", "brand": "demo-brand", "store": "store-001"},
+      "events": [
+        {"id": "coupon-001-user", "text": "活动编号 campaign-a，顾客说优惠券不能用。", "occurred_at": "2026-09-16T11:00:00+08:00", "visible_at": "2026-09-16T11:00:01+08:00", "audience": "agent"},
+        {"id": "coupon-001-ops-confirmed", "text": "运营随后确认：该门店未进入活动范围。", "occurred_at": "2026-09-16T11:08:00+08:00", "visible_at": "2026-09-16T11:09:00+08:00", "audience": "agent"}
+      ],
+      "labels": {
+        "sample_type": "future_confirmation_hidden",
+        "truth_status": "confirmed",
+        "root_cause": "campaign_scope_missing",
+        "allowed_actions": ["ask"],
+        "required_questions": ["channel", "product"],
+        "citation_catalog": [],
+        "required_evidence_ids": []
+      }
+    },
+    {
+      "id": "ticket-coupon-002",
+      "incident_id": "incident-coupon-scope",
+      "created_at": "2026-09-17T10:00:00+08:00",
+      "as_of": "2026-09-17T10:03:00+08:00",
+      "scope": {"tenant": "tenant-demo", "brand": "demo-brand", "store": "store-001"},
+      "events": [
+        {"id": "coupon-002-user", "text": "店长说优惠券不能用，没有提供活动编号。", "occurred_at": "2026-09-17T10:00:00+08:00", "visible_at": "2026-09-17T10:00:01+08:00", "audience": "agent"}
+      ],
+      "labels": {
+        "sample_type": "missing_required_context",
+        "truth_status": "unknown",
+        "root_cause": null,
+        "allowed_actions": ["ask"],
+        "required_questions": ["campaign"],
+        "citation_catalog": [],
+        "required_evidence_ids": []
+      }
+    },
+    {
+      "id": "ticket-login-001",
+      "incident_id": "incident-admin-loading",
+      "created_at": "2026-09-18T09:30:00+08:00",
+      "as_of": "2026-09-18T09:32:00+08:00",
+      "scope": {"tenant": "tenant-demo", "brand": "demo-brand", "store": "store-001"},
+      "events": [
+        {"id": "login-001-user", "text": "后台登录一直转圈，客户没有截图，也没有订单号。", "occurred_at": "2026-09-18T09:30:00+08:00", "visible_at": "2026-09-18T09:30:02+08:00", "audience": "agent"}
+      ],
+      "labels": {
+        "sample_type": "unknown_cause_handoff",
+        "truth_status": "unknown",
+        "root_cause": null,
+        "allowed_actions": ["handoff"],
+        "required_questions": [],
+        "citation_catalog": [],
+        "required_evidence_ids": []
+      }
+    },
+    {
+      "id": "ticket-boundary-001",
+      "incident_id": "incident-version-boundary",
+      "created_at": "2026-09-14T16:00:00+08:00",
+      "as_of": "2026-09-14T16:02:00+08:00",
+      "scope": {"tenant": "tenant-demo", "brand": "demo-brand", "store": "store-001"},
+      "events": [
+        {"id": "boundary-001-user", "text": "客户反馈 P1001 没有小票。", "occurred_at": "2026-09-14T16:00:00+08:00", "visible_at": "2026-09-14T16:00:01+08:00", "audience": "agent"}
+      ],
+      "labels": {
+        "sample_type": "boundary_incident_holdout",
+        "truth_status": "unknown",
+        "root_cause": null,
+        "allowed_actions": ["handoff"],
+        "required_questions": [],
+        "citation_catalog": [
+          {"id": "O1001:payment", "quote": "支付记录：支付渠道确认成功，金额 16.00 元"},
+          {"id": "O1001:order", "quote": "订单记录：订单已创建，门店接单状态尚未取得"},
+          {"id": "O1001:dispatch", "quote": "出单任务：出单任务已发送到设备网关，不代表纸质小票已打印"},
+          {"id": "O1001:receipt", "quote": "打印回执：未发现打印回执，不能确认是否已打印"}
+        ],
+        "required_evidence_ids": ["O1001:dispatch"]
+      }
+    },
+    {
+      "id": "ticket-boundary-002",
+      "incident_id": "incident-version-boundary",
+      "created_at": "2026-09-16T16:00:00+08:00",
+      "as_of": "2026-09-16T16:02:00+08:00",
+      "scope": {"tenant": "tenant-demo", "brand": "demo-brand", "store": "store-001"},
+      "events": [
+        {"id": "boundary-002-user", "text": "客户反馈 P1002 状态正常但现场仍要核对小票。", "occurred_at": "2026-09-16T16:00:00+08:00", "visible_at": "2026-09-16T16:00:01+08:00", "audience": "agent"}
+      ],
+      "labels": {
+        "sample_type": "boundary_incident_holdout",
+        "truth_status": "unknown",
+        "root_cause": null,
+        "allowed_actions": ["handoff"],
+        "required_questions": [],
+        "citation_catalog": [
+          {"id": "O1002:payment", "quote": "支付记录：支付渠道确认成功，金额 16.00 元"},
+          {"id": "O1002:order", "quote": "订单记录：订单已创建，门店接单状态尚未取得"},
+          {"id": "O1002:dispatch", "quote": "出单任务：出单任务已发送到设备网关，不代表纸质小票已打印"},
+          {"id": "O1002:receipt", "quote": "打印回执：设备已返回打印完成回执；现场是否拿到小票仍需核对"}
+        ],
+        "required_evidence_ids": ["O1002:receipt"]
+      }
+    }
+  ]
+}

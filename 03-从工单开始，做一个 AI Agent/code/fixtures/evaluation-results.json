@@ -1,0 +1,285 @@
+{
+  "mode": "time_and_incident_isolated_ticket_replay",
+  "synthetic": true,
+  "suite_digest": "9fc869ec24447d3440fe0b840bc9ef6df30dd43d441fe9eaf3e570e639b88ee9",
+  "config": {
+    "policy_id": "local-ticket-router",
+    "policy_revision": "fixture-r1",
+    "model_id": null,
+    "tool_budget": 2,
+    "max_rounds": 4,
+    "seconds": 45,
+    "digest": "3068412ffd08ca6c5bd3dd371a1470f16c2fa6d7571be2c9a779dcbb48a60245"
+  },
+  "development_ticket_ids": [
+    "ticket-print-001",
+    "ticket-print-002"
+  ],
+  "holdout_ticket_ids": [
+    "ticket-boundary-001",
+    "ticket-boundary-002",
+    "ticket-coupon-001",
+    "ticket-coupon-002",
+    "ticket-login-001"
+  ],
+  "incident_allocation": {
+    "incident-print-ack": "development",
+    "incident-coupon-scope": "holdout",
+    "incident-admin-loading": "holdout",
+    "incident-version-boundary": "holdout"
+  },
+  "records": [
+    {
+      "ticket_id": "ticket-boundary-001",
+      "incident_id": "incident-version-boundary",
+      "sample_type": "boundary_incident_holdout",
+      "truth_status": "unknown",
+      "visible_event_ids": [
+        "boundary-001-user"
+      ],
+      "elapsed_ms": 0,
+      "status": "completed",
+      "error": null,
+      "output": {
+        "action": "handoff",
+        "facts": [
+          {
+            "evidence_id": "O1001:payment",
+            "quote": "支付记录：支付渠道确认成功，金额 16.00 元"
+          },
+          {
+            "evidence_id": "O1001:order",
+            "quote": "订单记录：订单已创建，门店接单状态尚未取得"
+          },
+          {
+            "evidence_id": "O1001:dispatch",
+            "quote": "出单任务：出单任务已发送到设备网关，不代表纸质小票已打印"
+          },
+          {
+            "evidence_id": "O1001:receipt",
+            "quote": "打印回执：未发现打印回执，不能确认是否已打印"
+          }
+        ],
+        "root_cause": null,
+        "questions": [],
+        "tool_calls": 1,
+        "usage": null
+      },
+      "score": {
+        "action_appropriate": true,
+        "citation_valid": true,
+        "required_evidence_covered": true,
+        "question_coverage": "not_applicable",
+        "no_unsupported_cause": true,
+        "root_cause_claim": "not_applicable",
+        "tool_budget_ok": true
+      }
+    },
+    {
+      "ticket_id": "ticket-boundary-002",
+      "incident_id": "incident-version-boundary",
+      "sample_type": "boundary_incident_holdout",
+      "truth_status": "unknown",
+      "visible_event_ids": [
+        "boundary-002-user"
+      ],
+      "elapsed_ms": 0,
+      "status": "completed",
+      "error": null,
+      "output": {
+        "action": "handoff",
+        "facts": [
+          {
+            "evidence_id": "O1002:payment",
+            "quote": "支付记录：支付渠道确认成功，金额 16.00 元"
+          },
+          {
+            "evidence_id": "O1002:order",
+            "quote": "订单记录：订单已创建，门店接单状态尚未取得"
+          },
+          {
+            "evidence_id": "O1002:dispatch",
+            "quote": "出单任务：出单任务已发送到设备网关，不代表纸质小票已打印"
+          },
+          {
+            "evidence_id": "O1002:receipt",
+            "quote": "打印回执：设备已返回打印完成回执；现场是否拿到小票仍需核对"
+          }
+        ],
+        "root_cause": null,
+        "questions": [],
+        "tool_calls": 1,
+        "usage": null
+      },
+      "score": {
+        "action_appropriate": true,
+        "citation_valid": true,
+        "required_evidence_covered": true,
+        "question_coverage": "not_applicable",
+        "no_unsupported_cause": true,
+        "root_cause_claim": "not_applicable",
+        "tool_budget_ok": true
+      }
+    },
+    {
+      "ticket_id": "ticket-coupon-001",
+      "incident_id": "incident-coupon-scope",
+      "sample_type": "future_confirmation_hidden",
+      "truth_status": "confirmed",
+      "visible_event_ids": [
+        "coupon-001-user"
+      ],
+      "elapsed_ms": 0,
+      "status": "completed",
+      "error": null,
+      "output": {
+        "action": "ask",
+        "facts": [],
+        "root_cause": null,
+        "questions": [
+          "channel",
+          "product"
+        ],
+        "tool_calls": 0,
+        "usage": null
+      },
+      "score": {
+        "action_appropriate": true,
+        "citation_valid": "not_applicable",
+        "required_evidence_covered": "not_applicable",
+        "question_coverage": true,
+        "no_unsupported_cause": true,
+        "root_cause_claim": "not_claimed",
+        "tool_budget_ok": true
+      }
+    },
+    {
+      "ticket_id": "ticket-coupon-002",
+      "incident_id": "incident-coupon-scope",
+      "sample_type": "missing_required_context",
+      "truth_status": "unknown",
+      "visible_event_ids": [
+        "coupon-002-user"
+      ],
+      "elapsed_ms": 0,
+      "status": "completed",
+      "error": null,
+      "output": {
+        "action": "ask",
+        "facts": [],
+        "root_cause": null,
+        "questions": [
+          "channel",
+          "product"
+        ],
+        "tool_calls": 0,
+        "usage": null
+      },
+      "score": {
+        "action_appropriate": true,
+        "citation_valid": "not_applicable",
+        "required_evidence_covered": "not_applicable",
+        "question_coverage": false,
+        "no_unsupported_cause": true,
+        "root_cause_claim": "not_applicable",
+        "tool_budget_ok": true
+      }
+    },
+    {
+      "ticket_id": "ticket-login-001",
+      "incident_id": "incident-admin-loading",
+      "sample_type": "unknown_cause_handoff",
+      "truth_status": "unknown",
+      "visible_event_ids": [
+        "login-001-user"
+      ],
+      "elapsed_ms": 0,
+      "status": "completed",
+      "error": null,
+      "output": {
+        "action": "handoff",
+        "facts": [],
+        "root_cause": null,
+        "questions": [],
+        "tool_calls": 0,
+        "usage": null
+      },
+      "score": {
+        "action_appropriate": true,
+        "citation_valid": "not_applicable",
+        "required_evidence_covered": "not_applicable",
+        "question_coverage": "not_applicable",
+        "no_unsupported_cause": true,
+        "root_cause_claim": "not_applicable",
+        "tool_budget_ok": true
+      }
+    }
+  ],
+  "summary": {
+    "sample_count": 5,
+    "completed": 5,
+    "invalid_or_failed": 0,
+    "by_sample_type": {
+      "boundary_incident_holdout": {
+        "n": 2,
+        "invalid_outputs": 0
+      },
+      "future_confirmation_hidden": {
+        "n": 1,
+        "invalid_outputs": 0
+      },
+      "missing_required_context": {
+        "n": 1,
+        "invalid_outputs": 0
+      },
+      "unknown_cause_handoff": {
+        "n": 1,
+        "invalid_outputs": 0
+      }
+    },
+    "dimensions": {
+      "action_appropriate": {
+        "passed": 5,
+        "eligible": 5
+      },
+      "citation_valid": {
+        "passed": 2,
+        "eligible": 2
+      },
+      "required_evidence_covered": {
+        "passed": 2,
+        "eligible": 2
+      },
+      "question_coverage": {
+        "passed": 1,
+        "eligible": 2
+      },
+      "no_unsupported_cause": {
+        "passed": 5,
+        "eligible": 5
+      },
+      "tool_budget_ok": {
+        "passed": 5,
+        "eligible": 5
+      }
+    },
+    "root_cause_claims": {
+      "confirmed_correct": 0,
+      "confirmed_incorrect": 0,
+      "confirmed_not_claimed": 1,
+      "unknown_unsupported": 0,
+      "unknown_no_claim": 4
+    },
+    "usage": {
+      "known_runs": 0,
+      "unknown_runs": 5,
+      "prompt_tokens_known_total": 0,
+      "completion_tokens_known_total": 0
+    }
+  },
+  "limitations": [
+    "策略回调是同一 Python 进程中的可信代码，不是隔离沙箱。",
+    "样本为合成回放，不能外推成线上模型成功率或成本。",
+    "没有总体质量分；各维度分母、未知原因样本和运行失败单独保留。"
+  ]
+}

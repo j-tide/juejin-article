@@ -1,0 +1,620 @@
+{
+  "mode": "synthetic_scoped_policy_update",
+  "synthetic": true,
+  "suite_digest": "169d882447a8348724bebec5f188ad34a0bdfb1821c2a5617d4a5da892d6d7df",
+  "proposal": {
+    "proposal_id": "proposal-coupon-missing-campaign-r1",
+    "source_failure_id": "ticket-coupon-002",
+    "policy_revision": "candidate-negation-campaign-r1",
+    "trigger_phrases": [
+      "没有提供活动编号",
+      "活动编号未填写"
+    ],
+    "purpose": "只在优惠券工单明确说明活动编号缺失时，优先追问活动编号，避免把否定表述误判为已给出编号。"
+  },
+  "baseline_config": {
+    "policy_id": "local-ticket-router",
+    "policy_revision": "fixture-r1",
+    "model_id": null,
+    "tool_budget": 2,
+    "max_rounds": 4,
+    "seconds": 45,
+    "digest": "3068412ffd08ca6c5bd3dd371a1470f16c2fa6d7571be2c9a779dcbb48a60245"
+  },
+  "candidate_config": {
+    "policy_id": "local-ticket-router",
+    "policy_revision": "candidate-negation-campaign-r1",
+    "model_id": null,
+    "tool_budget": 2,
+    "max_rounds": 4,
+    "seconds": 45,
+    "digest": "d9b0953a93c3e0f863524a8f368177941e2e8ab6ec4d744e918702bf682439ef"
+  },
+  "calibration": {
+    "baseline": {
+      "records": [
+        {
+          "ticket_id": "ticket-coupon-002",
+          "incident_id": "incident-coupon-source-failure",
+          "sample_type": "known_missing_campaign_failure",
+          "truth_status": "unknown",
+          "visible_event_ids": [
+            "coupon-002-user"
+          ],
+          "elapsed_ms": 0,
+          "status": "completed",
+          "error": null,
+          "output": {
+            "action": "ask",
+            "facts": [],
+            "root_cause": null,
+            "questions": [
+              "channel",
+              "product"
+            ],
+            "tool_calls": 0,
+            "usage": null
+          },
+          "score": {
+            "action_appropriate": true,
+            "citation_valid": "not_applicable",
+            "required_evidence_covered": "not_applicable",
+            "question_coverage": false,
+            "no_unsupported_cause": true,
+            "root_cause_claim": "not_applicable",
+            "tool_budget_ok": true
+          }
+        },
+        {
+          "ticket_id": "calibration-coupon-known-campaign",
+          "incident_id": "incident-coupon-known-campaign",
+          "sample_type": "known_campaign_control",
+          "truth_status": "unknown",
+          "visible_event_ids": [
+            "calibration-known-user"
+          ],
+          "elapsed_ms": 0,
+          "status": "completed",
+          "error": null,
+          "output": {
+            "action": "ask",
+            "facts": [],
+            "root_cause": null,
+            "questions": [
+              "channel",
+              "product"
+            ],
+            "tool_calls": 0,
+            "usage": null
+          },
+          "score": {
+            "action_appropriate": true,
+            "citation_valid": "not_applicable",
+            "required_evidence_covered": "not_applicable",
+            "question_coverage": true,
+            "no_unsupported_cause": true,
+            "root_cause_claim": "not_applicable",
+            "tool_budget_ok": true
+          }
+        }
+      ],
+      "summary": {
+        "sample_count": 2,
+        "completed": 2,
+        "invalid_or_failed": 0,
+        "by_sample_type": {
+          "known_missing_campaign_failure": {
+            "n": 1,
+            "invalid_outputs": 0
+          },
+          "known_campaign_control": {
+            "n": 1,
+            "invalid_outputs": 0
+          }
+        },
+        "dimensions": {
+          "action_appropriate": {
+            "passed": 2,
+            "eligible": 2
+          },
+          "citation_valid": {
+            "passed": 0,
+            "eligible": 0
+          },
+          "required_evidence_covered": {
+            "passed": 0,
+            "eligible": 0
+          },
+          "question_coverage": {
+            "passed": 1,
+            "eligible": 2
+          },
+          "no_unsupported_cause": {
+            "passed": 2,
+            "eligible": 2
+          },
+          "tool_budget_ok": {
+            "passed": 2,
+            "eligible": 2
+          }
+        },
+        "root_cause_claims": {
+          "confirmed_correct": 0,
+          "confirmed_incorrect": 0,
+          "confirmed_not_claimed": 0,
+          "unknown_unsupported": 0,
+          "unknown_no_claim": 2
+        },
+        "usage": {
+          "known_runs": 0,
+          "unknown_runs": 2,
+          "prompt_tokens_known_total": 0,
+          "completion_tokens_known_total": 0
+        }
+      }
+    },
+    "candidate": {
+      "records": [
+        {
+          "ticket_id": "ticket-coupon-002",
+          "incident_id": "incident-coupon-source-failure",
+          "sample_type": "known_missing_campaign_failure",
+          "truth_status": "unknown",
+          "visible_event_ids": [
+            "coupon-002-user"
+          ],
+          "elapsed_ms": 0,
+          "status": "completed",
+          "error": null,
+          "output": {
+            "action": "ask",
+            "facts": [],
+            "root_cause": null,
+            "questions": [
+              "campaign"
+            ],
+            "tool_calls": 0,
+            "usage": null
+          },
+          "score": {
+            "action_appropriate": true,
+            "citation_valid": "not_applicable",
+            "required_evidence_covered": "not_applicable",
+            "question_coverage": true,
+            "no_unsupported_cause": true,
+            "root_cause_claim": "not_applicable",
+            "tool_budget_ok": true
+          }
+        },
+        {
+          "ticket_id": "calibration-coupon-known-campaign",
+          "incident_id": "incident-coupon-known-campaign",
+          "sample_type": "known_campaign_control",
+          "truth_status": "unknown",
+          "visible_event_ids": [
+            "calibration-known-user"
+          ],
+          "elapsed_ms": 0,
+          "status": "completed",
+          "error": null,
+          "output": {
+            "action": "ask",
+            "facts": [],
+            "root_cause": null,
+            "questions": [
+              "channel",
+              "product"
+            ],
+            "tool_calls": 0,
+            "usage": null
+          },
+          "score": {
+            "action_appropriate": true,
+            "citation_valid": "not_applicable",
+            "required_evidence_covered": "not_applicable",
+            "question_coverage": true,
+            "no_unsupported_cause": true,
+            "root_cause_claim": "not_applicable",
+            "tool_budget_ok": true
+          }
+        }
+      ],
+      "summary": {
+        "sample_count": 2,
+        "completed": 2,
+        "invalid_or_failed": 0,
+        "by_sample_type": {
+          "known_missing_campaign_failure": {
+            "n": 1,
+            "invalid_outputs": 0
+          },
+          "known_campaign_control": {
+            "n": 1,
+            "invalid_outputs": 0
+          }
+        },
+        "dimensions": {
+          "action_appropriate": {
+            "passed": 2,
+            "eligible": 2
+          },
+          "citation_valid": {
+            "passed": 0,
+            "eligible": 0
+          },
+          "required_evidence_covered": {
+            "passed": 0,
+            "eligible": 0
+          },
+          "question_coverage": {
+            "passed": 2,
+            "eligible": 2
+          },
+          "no_unsupported_cause": {
+            "passed": 2,
+            "eligible": 2
+          },
+          "tool_budget_ok": {
+            "passed": 2,
+            "eligible": 2
+          }
+        },
+        "root_cause_claims": {
+          "confirmed_correct": 0,
+          "confirmed_incorrect": 0,
+          "confirmed_not_claimed": 0,
+          "unknown_unsupported": 0,
+          "unknown_no_claim": 2
+        },
+        "usage": {
+          "known_runs": 0,
+          "unknown_runs": 2,
+          "prompt_tokens_known_total": 0,
+          "completion_tokens_known_total": 0
+        }
+      }
+    },
+    "changed_ticket_ids": [
+      "ticket-coupon-002"
+    ],
+    "unchanged_outside_scope": true
+  },
+  "gate": {
+    "baseline": {
+      "records": [
+        {
+          "ticket_id": "gate-coupon-missing-campaign",
+          "incident_id": "incident-gate-coupon-missing-campaign",
+          "sample_type": "unseen_missing_campaign_wording",
+          "truth_status": "unknown",
+          "visible_event_ids": [
+            "gate-campaign-user"
+          ],
+          "elapsed_ms": 0,
+          "status": "completed",
+          "error": null,
+          "output": {
+            "action": "ask",
+            "facts": [],
+            "root_cause": null,
+            "questions": [
+              "channel",
+              "product"
+            ],
+            "tool_calls": 0,
+            "usage": null
+          },
+          "score": {
+            "action_appropriate": true,
+            "citation_valid": "not_applicable",
+            "required_evidence_covered": "not_applicable",
+            "question_coverage": false,
+            "no_unsupported_cause": true,
+            "root_cause_claim": "not_applicable",
+            "tool_budget_ok": true
+          }
+        },
+        {
+          "ticket_id": "gate-coupon-known-campaign",
+          "incident_id": "incident-gate-coupon-known-campaign",
+          "sample_type": "unseen_known_campaign_control",
+          "truth_status": "unknown",
+          "visible_event_ids": [
+            "gate-known-user"
+          ],
+          "elapsed_ms": 0,
+          "status": "completed",
+          "error": null,
+          "output": {
+            "action": "ask",
+            "facts": [],
+            "root_cause": null,
+            "questions": [
+              "channel",
+              "product"
+            ],
+            "tool_calls": 0,
+            "usage": null
+          },
+          "score": {
+            "action_appropriate": true,
+            "citation_valid": "not_applicable",
+            "required_evidence_covered": "not_applicable",
+            "question_coverage": true,
+            "no_unsupported_cause": true,
+            "root_cause_claim": "not_applicable",
+            "tool_budget_ok": true
+          }
+        },
+        {
+          "ticket_id": "gate-login-control",
+          "incident_id": "incident-gate-login-control",
+          "sample_type": "unrelated_handoff_control",
+          "truth_status": "unknown",
+          "visible_event_ids": [
+            "gate-login-user"
+          ],
+          "elapsed_ms": 0,
+          "status": "completed",
+          "error": null,
+          "output": {
+            "action": "handoff",
+            "facts": [],
+            "root_cause": null,
+            "questions": [],
+            "tool_calls": 0,
+            "usage": null
+          },
+          "score": {
+            "action_appropriate": true,
+            "citation_valid": "not_applicable",
+            "required_evidence_covered": "not_applicable",
+            "question_coverage": "not_applicable",
+            "no_unsupported_cause": true,
+            "root_cause_claim": "not_applicable",
+            "tool_budget_ok": true
+          }
+        }
+      ],
+      "summary": {
+        "sample_count": 3,
+        "completed": 3,
+        "invalid_or_failed": 0,
+        "by_sample_type": {
+          "unseen_missing_campaign_wording": {
+            "n": 1,
+            "invalid_outputs": 0
+          },
+          "unseen_known_campaign_control": {
+            "n": 1,
+            "invalid_outputs": 0
+          },
+          "unrelated_handoff_control": {
+            "n": 1,
+            "invalid_outputs": 0
+          }
+        },
+        "dimensions": {
+          "action_appropriate": {
+            "passed": 3,
+            "eligible": 3
+          },
+          "citation_valid": {
+            "passed": 0,
+            "eligible": 0
+          },
+          "required_evidence_covered": {
+            "passed": 0,
+            "eligible": 0
+          },
+          "question_coverage": {
+            "passed": 1,
+            "eligible": 2
+          },
+          "no_unsupported_cause": {
+            "passed": 3,
+            "eligible": 3
+          },
+          "tool_budget_ok": {
+            "passed": 3,
+            "eligible": 3
+          }
+        },
+        "root_cause_claims": {
+          "confirmed_correct": 0,
+          "confirmed_incorrect": 0,
+          "confirmed_not_claimed": 0,
+          "unknown_unsupported": 0,
+          "unknown_no_claim": 3
+        },
+        "usage": {
+          "known_runs": 0,
+          "unknown_runs": 3,
+          "prompt_tokens_known_total": 0,
+          "completion_tokens_known_total": 0
+        }
+      }
+    },
+    "candidate": {
+      "records": [
+        {
+          "ticket_id": "gate-coupon-missing-campaign",
+          "incident_id": "incident-gate-coupon-missing-campaign",
+          "sample_type": "unseen_missing_campaign_wording",
+          "truth_status": "unknown",
+          "visible_event_ids": [
+            "gate-campaign-user"
+          ],
+          "elapsed_ms": 0,
+          "status": "completed",
+          "error": null,
+          "output": {
+            "action": "ask",
+            "facts": [],
+            "root_cause": null,
+            "questions": [
+              "campaign"
+            ],
+            "tool_calls": 0,
+            "usage": null
+          },
+          "score": {
+            "action_appropriate": true,
+            "citation_valid": "not_applicable",
+            "required_evidence_covered": "not_applicable",
+            "question_coverage": true,
+            "no_unsupported_cause": true,
+            "root_cause_claim": "not_applicable",
+            "tool_budget_ok": true
+          }
+        },
+        {
+          "ticket_id": "gate-coupon-known-campaign",
+          "incident_id": "incident-gate-coupon-known-campaign",
+          "sample_type": "unseen_known_campaign_control",
+          "truth_status": "unknown",
+          "visible_event_ids": [
+            "gate-known-user"
+          ],
+          "elapsed_ms": 0,
+          "status": "completed",
+          "error": null,
+          "output": {
+            "action": "ask",
+            "facts": [],
+            "root_cause": null,
+            "questions": [
+              "channel",
+              "product"
+            ],
+            "tool_calls": 0,
+            "usage": null
+          },
+          "score": {
+            "action_appropriate": true,
+            "citation_valid": "not_applicable",
+            "required_evidence_covered": "not_applicable",
+            "question_coverage": true,
+            "no_unsupported_cause": true,
+            "root_cause_claim": "not_applicable",
+            "tool_budget_ok": true
+          }
+        },
+        {
+          "ticket_id": "gate-login-control",
+          "incident_id": "incident-gate-login-control",
+          "sample_type": "unrelated_handoff_control",
+          "truth_status": "unknown",
+          "visible_event_ids": [
+            "gate-login-user"
+          ],
+          "elapsed_ms": 0,
+          "status": "completed",
+          "error": null,
+          "output": {
+            "action": "handoff",
+            "facts": [],
+            "root_cause": null,
+            "questions": [],
+            "tool_calls": 0,
+            "usage": null
+          },
+          "score": {
+            "action_appropriate": true,
+            "citation_valid": "not_applicable",
+            "required_evidence_covered": "not_applicable",
+            "question_coverage": "not_applicable",
+            "no_unsupported_cause": true,
+            "root_cause_claim": "not_applicable",
+            "tool_budget_ok": true
+          }
+        }
+      ],
+      "summary": {
+        "sample_count": 3,
+        "completed": 3,
+        "invalid_or_failed": 0,
+        "by_sample_type": {
+          "unseen_missing_campaign_wording": {
+            "n": 1,
+            "invalid_outputs": 0
+          },
+          "unseen_known_campaign_control": {
+            "n": 1,
+            "invalid_outputs": 0
+          },
+          "unrelated_handoff_control": {
+            "n": 1,
+            "invalid_outputs": 0
+          }
+        },
+        "dimensions": {
+          "action_appropriate": {
+            "passed": 3,
+            "eligible": 3
+          },
+          "citation_valid": {
+            "passed": 0,
+            "eligible": 0
+          },
+          "required_evidence_covered": {
+            "passed": 0,
+            "eligible": 0
+          },
+          "question_coverage": {
+            "passed": 2,
+            "eligible": 2
+          },
+          "no_unsupported_cause": {
+            "passed": 3,
+            "eligible": 3
+          },
+          "tool_budget_ok": {
+            "passed": 3,
+            "eligible": 3
+          }
+        },
+        "root_cause_claims": {
+          "confirmed_correct": 0,
+          "confirmed_incorrect": 0,
+          "confirmed_not_claimed": 0,
+          "unknown_unsupported": 0,
+          "unknown_no_claim": 3
+        },
+        "usage": {
+          "known_runs": 0,
+          "unknown_runs": 3,
+          "prompt_tokens_known_total": 0,
+          "completion_tokens_known_total": 0
+        }
+      }
+    },
+    "changed_ticket_ids": [
+      "gate-coupon-missing-campaign"
+    ],
+    "unchanged_outside_scope": true,
+    "dimension_not_worse": {
+      "action_appropriate": true,
+      "citation_valid": true,
+      "required_evidence_covered": true,
+      "question_coverage": true,
+      "no_unsupported_cause": true,
+      "tool_budget_ok": true
+    },
+    "baseline_tool_calls": 0,
+    "candidate_tool_calls": 0
+  },
+  "promotion_gates": {
+    "source_failure_fixed_in_calibration": true,
+    "calibration_scope_respected": true,
+    "gate_scope_respected": true,
+    "gate_dimensions_not_worse": true,
+    "gate_tool_calls_not_higher": true
+  },
+  "decision": "eligible_for_shadow",
+  "limitations": [
+    "候选来自一个已知失败，校准集只能证明它修复了该失败，不能证明泛化。",
+    "promotion gate 为独立合成样本；没有真实模型、飞书或生产活动配置。",
+    "eligible_for_shadow 不是线上批准；小范围启用仍需独立版本、范围和人工审核。"
+  ]
+}

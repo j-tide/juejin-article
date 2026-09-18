@@ -1,0 +1,120 @@
+{
+  "schema_version": "policy-update-v1",
+  "synthetic": true,
+  "proposal": {
+    "id": "proposal-coupon-missing-campaign-r1",
+    "source_failure_id": "ticket-coupon-002",
+    "policy_revision": "candidate-negation-campaign-r1",
+    "trigger_phrases": ["没有提供活动编号", "活动编号未填写"],
+    "purpose": "只在优惠券工单明确说明活动编号缺失时，优先追问活动编号，避免把否定表述误判为已给出编号。"
+  },
+  "calibration": {
+    "schema_version": "ticket-eval-v1",
+    "synthetic": true,
+    "development_before": "2026-09-18T00:00:00+08:00",
+    "cases": [
+      {
+        "id": "ticket-coupon-002",
+        "incident_id": "incident-coupon-source-failure",
+        "created_at": "2026-09-17T10:00:00+08:00",
+        "as_of": "2026-09-17T10:03:00+08:00",
+        "scope": {"tenant": "tenant-demo", "brand": "demo-brand", "store": "store-001"},
+        "events": [
+          {"id": "coupon-002-user", "text": "店长说优惠券不能用，没有提供活动编号。", "occurred_at": "2026-09-17T10:00:00+08:00", "visible_at": "2026-09-17T10:00:01+08:00", "audience": "agent"}
+        ],
+        "labels": {
+          "sample_type": "known_missing_campaign_failure",
+          "truth_status": "unknown",
+          "root_cause": null,
+          "allowed_actions": ["ask"],
+          "required_questions": ["campaign"],
+          "citation_catalog": [],
+          "required_evidence_ids": []
+        }
+      },
+      {
+        "id": "calibration-coupon-known-campaign",
+        "incident_id": "incident-coupon-known-campaign",
+        "created_at": "2026-09-17T11:00:00+08:00",
+        "as_of": "2026-09-17T11:02:00+08:00",
+        "scope": {"tenant": "tenant-demo", "brand": "demo-brand", "store": "store-001"},
+        "events": [
+          {"id": "calibration-known-user", "text": "活动编号 campaign-a，顾客说优惠券不能用。", "occurred_at": "2026-09-17T11:00:00+08:00", "visible_at": "2026-09-17T11:00:02+08:00", "audience": "agent"}
+        ],
+        "labels": {
+          "sample_type": "known_campaign_control",
+          "truth_status": "unknown",
+          "root_cause": null,
+          "allowed_actions": ["ask"],
+          "required_questions": ["channel", "product"],
+          "citation_catalog": [],
+          "required_evidence_ids": []
+        }
+      }
+    ]
+  },
+  "gate": {
+    "schema_version": "ticket-eval-v1",
+    "synthetic": true,
+    "development_before": "2026-09-18T00:00:00+08:00",
+    "cases": [
+      {
+        "id": "gate-coupon-missing-campaign",
+        "incident_id": "incident-gate-coupon-missing-campaign",
+        "created_at": "2026-09-18T09:00:00+08:00",
+        "as_of": "2026-09-18T09:04:00+08:00",
+        "scope": {"tenant": "tenant-demo", "brand": "demo-brand", "store": "store-002"},
+        "events": [
+          {"id": "gate-campaign-user", "text": "门店没有提供活动编号，优惠券无法使用。", "occurred_at": "2026-09-18T09:00:00+08:00", "visible_at": "2026-09-18T09:00:02+08:00", "audience": "agent"}
+        ],
+        "labels": {
+          "sample_type": "unseen_missing_campaign_wording",
+          "truth_status": "unknown",
+          "root_cause": null,
+          "allowed_actions": ["ask"],
+          "required_questions": ["campaign"],
+          "citation_catalog": [],
+          "required_evidence_ids": []
+        }
+      },
+      {
+        "id": "gate-coupon-known-campaign",
+        "incident_id": "incident-gate-coupon-known-campaign",
+        "created_at": "2026-09-18T10:00:00+08:00",
+        "as_of": "2026-09-18T10:04:00+08:00",
+        "scope": {"tenant": "tenant-demo", "brand": "demo-brand", "store": "store-002"},
+        "events": [
+          {"id": "gate-known-user", "text": "活动编号 campaign-b，顾客说优惠券不能用。", "occurred_at": "2026-09-18T10:00:00+08:00", "visible_at": "2026-09-18T10:00:02+08:00", "audience": "agent"}
+        ],
+        "labels": {
+          "sample_type": "unseen_known_campaign_control",
+          "truth_status": "unknown",
+          "root_cause": null,
+          "allowed_actions": ["ask"],
+          "required_questions": ["channel", "product"],
+          "citation_catalog": [],
+          "required_evidence_ids": []
+        }
+      },
+      {
+        "id": "gate-login-control",
+        "incident_id": "incident-gate-login-control",
+        "created_at": "2026-09-18T10:30:00+08:00",
+        "as_of": "2026-09-18T10:32:00+08:00",
+        "scope": {"tenant": "tenant-demo", "brand": "demo-brand", "store": "store-002"},
+        "events": [
+          {"id": "gate-login-user", "text": "后台登录一直转圈，客户没有截图，也没有订单号。", "occurred_at": "2026-09-18T10:30:00+08:00", "visible_at": "2026-09-18T10:30:02+08:00", "audience": "agent"}
+        ],
+        "labels": {
+          "sample_type": "unrelated_handoff_control",
+          "truth_status": "unknown",
+          "root_cause": null,
+          "allowed_actions": ["handoff"],
+          "required_questions": [],
+          "citation_catalog": [],
+          "required_evidence_ids": []
+        }
+      }
+    ]
+  }
+}

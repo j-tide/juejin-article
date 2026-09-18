@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "从失败记录到影子候选：一次只改变一个可验证行为",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "database": { "label": "记录与样本" },
+        "security": { "label": "边界与准入" },
+        "backend": { "label": "策略与比较" },
+        "frontend": { "label": "人工审核" }
+      }
+    }
+  },
+  "lanes": [
+    { "id": "evidence", "label": "失败来源与作用范围" },
+    { "id": "comparison", "label": "隔离比较" },
+    { "id": "decision", "label": "准入结果" }
+  ],
+  "mainPath": ["failure", "scope", "candidate", "calibration", "gate", "review", "shadow"],
+  "nodes": [
+    { "id": "failure", "lane": "evidence", "col": 0, "type": "database", "label": "保留失败记录", "sublabel": "漏问活动编号，不定为根因", "width": 164 },
+    { "id": "scope", "lane": "evidence", "col": 1, "type": "security", "label": "写明改动范围", "sublabel": "仅优惠券 + 缺失编号表述", "width": 164 },
+    { "id": "candidate", "lane": "comparison", "col": 2, "type": "backend", "label": "生成候选版本", "sublabel": "显式短语守卫，不训练模型", "width": 164 },
+    { "id": "calibration", "lane": "comparison", "col": 3, "type": "backend", "label": "校准已知失败", "sublabel": "确认修复，不当作泛化证明", "width": 164 },
+    { "id": "gate", "lane": "comparison", "col": 4, "type": "security", "label": "独立 Gate 对照", "sublabel": "事故与工单均不复用", "width": 164 },
+    { "id": "review", "lane": "decision", "col": 4, "type": "frontend", "label": "核对准入条件", "sublabel": "范围、维度、调用预算", "width": 164 },
+    { "id": "shadow", "lane": "decision", "col": 5, "type": "database", "label": "仅获得影子资格", "sublabel": "不是直接启用或发布", "width": 164 }
+  ],
+  "edges": [
+    { "id": "failure-scope", "from": "failure", "to": "scope" },
+    { "id": "scope-candidate", "from": "scope", "to": "candidate" },
+    { "id": "candidate-calibration", "from": "candidate", "to": "calibration" },
+    { "id": "calibration-gate", "from": "calibration", "to": "gate" },
+    { "id": "gate-review", "from": "gate", "to": "review" },
+    { "id": "review-shadow", "from": "review", "to": "shadow" }
+  ],
+  "cards": [
+    {
+      "dot": "rose",
+      "title": "知道失败，不等于证明修好了",
+      "items": ["已知失败用于提出候选和校准。", "Gate 要用没有复用工单和事故的新样本。"]
+    },
+    {
+      "dot": "emerald",
+      "title": "先缩小改动，再比较",
+      "items": ["候选只在两个明确短语下改追问字段。", "范围外输出、预算和其他评分维度不能退步。"]
+    }
+  ]
+}

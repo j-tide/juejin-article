@@ -1,6 +1,6 @@
 # 茶饮工单 Agent Demo
 
-当前版本对应第 12 篇：增加时间与事故隔离的回放评测。Python 3.11+；源码实验需要 Git 和 Node.js，前文原生媒体实验另需 macOS、Swift 和 FFmpeg。
+当前版本对应第 13 篇：从已知失败提出受限候选策略，并以独立 Gate 比较后决定是否进入影子运行。Python 3.11+；源码实验需要 Git 和 Node.js，前文原生媒体实验另需 macOS、Swift 和 FFmpeg。
 
 ## 运行
 
@@ -207,3 +207,15 @@ python3 -m unittest discover -s tests -v
 按事故分组后再按 `development_before` 分区。只要一个事故组有样本到达截止点后，整组都进保留集，避免同一事故拆分到两边。评分不输出总体质量分，分别记录动作、引用、必要证据、追问、无依据定因和预算，并保留未知原因与运行失败。固定配置包含策略修订、模型标识、轮数、时间和工具预算哈希。
 
 默认 `local-ticket-router` 为固定本地策略；订单样本实际走已有 `run_ticket`、Replay 和本地订单工具，其他样本是明确写死的路由分支。没有真实模型或飞书调用，Replay 的零 Token 不作为成本而保留为 null。保留集 5 个教学样本中，必要追问覆盖 1/2，`ticket-coupon-002` 的负向表述触发了错误字符串分支；这是待第 13 篇比较的回归，不是模型成绩。累计 189 项测试通过。
+
+## 第 13 篇：受限候选策略比较
+
+```bash
+python3 -m ticket_agent.policy_update_demo \
+  --output fixtures/policy-update-results.json
+python3 -m unittest discover -s tests -v
+```
+
+`policy-update-cases.json` 分成校准集与 Gate 集。两边不得共用工单 ID 或事故 ID；策略调用仅拿到回放时可见的消息，评分标签留在评测端。候选版本只在“优惠券”同时出现“没有提供活动编号”或“活动编号未填写”时改为追问活动编号，其余输入回落到第 12 篇固定路由器。
+
+实际本地比较保存在 `fixtures/policy-update-results.json`：校准集与 Gate 中的必要追问覆盖分别由 1/2 变为 2/2；Gate 其余适用维度和工具调用数未退步。因此结果为 `eligible_for_shadow`，只表示可进入后续影子对照，不是自动发布或真实线上结果。没有调用模型、飞书、订单系统或活动配置。累计 195 项测试通过。

@@ -1,0 +1,382 @@
+{
+  "mode": "synthetic_local_policy_rollout",
+  "synthetic": true,
+  "rollout": {
+    "rollout_id": "rollout-coupon-r2",
+    "phase": "shadow",
+    "baseline_bundle_id": "bundle-r1",
+    "candidate_bundle_id": "bundle-r2",
+    "scope": {
+      "brand": "demo-brand",
+      "store": "store-002",
+      "tenant": "demo-tenant"
+    },
+    "shadow_limit": 1
+  },
+  "shadow": {
+    "assignment": {
+      "ticket_id": "topic-shadow-001",
+      "rollout_id": "rollout-coupon-r2",
+      "bundle_id": "bundle-r1",
+      "shadow_bundle_id": "bundle-r2",
+      "mode": "shadow",
+      "scope": {
+        "brand": "demo-brand",
+        "store": "store-002",
+        "tenant": "demo-tenant"
+      },
+      "assigned_at": "2026-09-19T10:02:00+08:00",
+      "delivered_at": null,
+      "reused_assignment": false
+    },
+    "delivery": {
+      "ticket_id": "topic-shadow-001",
+      "delivered_bundle_id": "bundle-r1",
+      "mode": "shadow",
+      "delivered_at": "2026-09-19T10:02:01+08:00"
+    },
+    "trace": {
+      "assignment": {
+        "ticket_id": "topic-shadow-001",
+        "rollout_id": "rollout-coupon-r2",
+        "bundle_id": "bundle-r1",
+        "shadow_bundle_id": "bundle-r2",
+        "mode": "shadow",
+        "scope": {
+          "brand": "demo-brand",
+          "store": "store-002",
+          "tenant": "demo-tenant"
+        },
+        "assigned_at": "2026-09-19T10:02:00+08:00",
+        "delivered_at": "2026-09-19T10:02:01+08:00"
+      },
+      "rollout": {
+        "rollout_id": "rollout-coupon-r2",
+        "phase": "rolled_back",
+        "baseline_bundle_id": "bundle-r1",
+        "candidate_bundle_id": "bundle-r2",
+        "scope": {
+          "brand": "demo-brand",
+          "store": "store-002",
+          "tenant": "demo-tenant"
+        },
+        "evaluation_reference": "policy-update-fixture-r1",
+        "approved_by": "ops-zhou",
+        "stopped_at": "2026-09-19T10:06:01+08:00"
+      },
+      "shadow": {
+        "baseline_result": {
+          "action": "ask",
+          "note": "旧规则仍把‘没有提供活动编号’当作已有编号。",
+          "questions": [
+            "channel",
+            "product"
+          ]
+        },
+        "candidate_result": {
+          "action": "ask",
+          "note": "候选规则要求补充活动编号。",
+          "questions": [
+            "campaign"
+          ]
+        },
+        "recorded_at": "2026-09-19T10:02:02+08:00"
+      },
+      "feedback": [],
+      "events": [
+        {
+          "action": "shadow_started",
+          "actor": "ops-zhou",
+          "at": "2026-09-19T10:01:00+08:00",
+          "detail": {
+            "baseline_bundle_id": "bundle-r1",
+            "candidate_bundle_id": "bundle-r2",
+            "scope": {
+              "brand": "demo-brand",
+              "store": "store-002",
+              "tenant": "demo-tenant"
+            }
+          }
+        },
+        {
+          "action": "shadow_recorded",
+          "actor": "system",
+          "at": "2026-09-19T10:02:02+08:00",
+          "detail": {
+            "candidate_bundle_id": "bundle-r2",
+            "delivered_bundle_id": "bundle-r1",
+            "ticket_id": "topic-shadow-001"
+          }
+        },
+        {
+          "action": "canary_approved",
+          "actor": "ops-zhou",
+          "at": "2026-09-19T10:03:00+08:00",
+          "detail": {
+            "canary_limit": 1,
+            "reason": "已核对影子记录，限制为一个门店的一张新话题。",
+            "shadow_records": 1
+          }
+        },
+        {
+          "action": "feedback_recorded",
+          "actor": "support-lin",
+          "at": "2026-09-19T10:05:00+08:00",
+          "detail": {
+            "classification": "reported_issue",
+            "feedback_id": "feedback-client-version-report",
+            "ticket_id": "topic-canary-001"
+          }
+        },
+        {
+          "action": "feedback_recorded",
+          "actor": "ops-zhou",
+          "at": "2026-09-19T10:06:00+08:00",
+          "detail": {
+            "classification": "verified_regression",
+            "feedback_id": "feedback-client-version-verified",
+            "ticket_id": "topic-canary-001"
+          }
+        },
+        {
+          "action": "rolled_back",
+          "actor": "ops-zhou",
+          "at": "2026-09-19T10:06:01+08:00",
+          "detail": {
+            "baseline_bundle_id": "bundle-r1",
+            "candidate_components_needing_review": [
+              [
+                "experience",
+                "experience-coupon-missing-campaign-r1"
+              ],
+              [
+                "skill",
+                "skill-coupon-intake-r1"
+              ]
+            ],
+            "feedback_id": "feedback-client-version-verified",
+            "reason": "停止候选策略；配置版本差异交由人工沿当前证据继续调查。"
+          }
+        }
+      ]
+    }
+  },
+  "canary": {
+    "assignment": {
+      "ticket_id": "topic-canary-001",
+      "rollout_id": "rollout-coupon-r2",
+      "bundle_id": "bundle-r2",
+      "shadow_bundle_id": null,
+      "mode": "canary",
+      "scope": {
+        "brand": "demo-brand",
+        "store": "store-002",
+        "tenant": "demo-tenant"
+      },
+      "assigned_at": "2026-09-19T10:04:00+08:00",
+      "delivered_at": null,
+      "reused_assignment": false
+    },
+    "delivery": {
+      "ticket_id": "topic-canary-001",
+      "delivered_bundle_id": "bundle-r2",
+      "mode": "canary",
+      "delivered_at": "2026-09-19T10:04:01+08:00"
+    },
+    "trace": {
+      "assignment": {
+        "ticket_id": "topic-canary-001",
+        "rollout_id": "rollout-coupon-r2",
+        "bundle_id": "bundle-r2",
+        "shadow_bundle_id": null,
+        "mode": "canary",
+        "scope": {
+          "brand": "demo-brand",
+          "store": "store-002",
+          "tenant": "demo-tenant"
+        },
+        "assigned_at": "2026-09-19T10:04:00+08:00",
+        "delivered_at": "2026-09-19T10:04:01+08:00"
+      },
+      "rollout": {
+        "rollout_id": "rollout-coupon-r2",
+        "phase": "rolled_back",
+        "baseline_bundle_id": "bundle-r1",
+        "candidate_bundle_id": "bundle-r2",
+        "scope": {
+          "brand": "demo-brand",
+          "store": "store-002",
+          "tenant": "demo-tenant"
+        },
+        "evaluation_reference": "policy-update-fixture-r1",
+        "approved_by": "ops-zhou",
+        "stopped_at": "2026-09-19T10:06:01+08:00"
+      },
+      "shadow": null,
+      "feedback": [
+        {
+          "feedback_id": "feedback-client-version-report",
+          "classification": "reported_issue",
+          "actor": "support-lin",
+          "note": "门店补充：客户端版本和活动配置刚刚切换，旧经验可能不再适用。",
+          "created_at": "2026-09-19T10:05:00+08:00"
+        },
+        {
+          "feedback_id": "feedback-client-version-verified",
+          "classification": "verified_regression",
+          "actor": "ops-zhou",
+          "note": "值班人员核对配置版本后确认：候选经验的适用条件已失效。",
+          "created_at": "2026-09-19T10:06:00+08:00"
+        }
+      ],
+      "events": [
+        {
+          "action": "shadow_started",
+          "actor": "ops-zhou",
+          "at": "2026-09-19T10:01:00+08:00",
+          "detail": {
+            "baseline_bundle_id": "bundle-r1",
+            "candidate_bundle_id": "bundle-r2",
+            "scope": {
+              "brand": "demo-brand",
+              "store": "store-002",
+              "tenant": "demo-tenant"
+            }
+          }
+        },
+        {
+          "action": "shadow_recorded",
+          "actor": "system",
+          "at": "2026-09-19T10:02:02+08:00",
+          "detail": {
+            "candidate_bundle_id": "bundle-r2",
+            "delivered_bundle_id": "bundle-r1",
+            "ticket_id": "topic-shadow-001"
+          }
+        },
+        {
+          "action": "canary_approved",
+          "actor": "ops-zhou",
+          "at": "2026-09-19T10:03:00+08:00",
+          "detail": {
+            "canary_limit": 1,
+            "reason": "已核对影子记录，限制为一个门店的一张新话题。",
+            "shadow_records": 1
+          }
+        },
+        {
+          "action": "feedback_recorded",
+          "actor": "support-lin",
+          "at": "2026-09-19T10:05:00+08:00",
+          "detail": {
+            "classification": "reported_issue",
+            "feedback_id": "feedback-client-version-report",
+            "ticket_id": "topic-canary-001"
+          }
+        },
+        {
+          "action": "feedback_recorded",
+          "actor": "ops-zhou",
+          "at": "2026-09-19T10:06:00+08:00",
+          "detail": {
+            "classification": "verified_regression",
+            "feedback_id": "feedback-client-version-verified",
+            "ticket_id": "topic-canary-001"
+          }
+        },
+        {
+          "action": "rolled_back",
+          "actor": "ops-zhou",
+          "at": "2026-09-19T10:06:01+08:00",
+          "detail": {
+            "baseline_bundle_id": "bundle-r1",
+            "candidate_components_needing_review": [
+              [
+                "experience",
+                "experience-coupon-missing-campaign-r1"
+              ],
+              [
+                "skill",
+                "skill-coupon-intake-r1"
+              ]
+            ],
+            "feedback_id": "feedback-client-version-verified",
+            "reason": "停止候选策略；配置版本差异交由人工沿当前证据继续调查。"
+          }
+        }
+      ]
+    }
+  },
+  "rollback": {
+    "rollout_id": "rollout-coupon-r2",
+    "phase": "rolled_back",
+    "new_ticket_bundle_id": "bundle-r1",
+    "candidate_components_needing_review": [
+      {
+        "kind": "experience",
+        "id": "experience-coupon-missing-campaign-r1"
+      },
+      {
+        "kind": "skill",
+        "id": "skill-coupon-intake-r1"
+      }
+    ]
+  },
+  "after_rollback": {
+    "ticket_id": "topic-after-rollback",
+    "rollout_id": null,
+    "bundle_id": "bundle-r1",
+    "shadow_bundle_id": null,
+    "mode": "stable",
+    "scope": {
+      "brand": "demo-brand",
+      "store": "store-002",
+      "tenant": "demo-tenant"
+    },
+    "assigned_at": "2026-09-19T10:07:00+08:00",
+    "delivered_at": null,
+    "reused_assignment": false
+  },
+  "frozen_canary_assignment": {
+    "ticket_id": "topic-canary-001",
+    "rollout_id": "rollout-coupon-r2",
+    "bundle_id": "bundle-r2",
+    "shadow_bundle_id": null,
+    "mode": "canary",
+    "scope": {
+      "brand": "demo-brand",
+      "store": "store-002",
+      "tenant": "demo-tenant"
+    },
+    "assigned_at": "2026-09-19T10:04:00+08:00",
+    "delivered_at": "2026-09-19T10:04:01+08:00",
+    "reused_assignment": true
+  },
+  "candidate_component_states": [
+    {
+      "kind": "experience",
+      "id": "experience-coupon-missing-campaign-r1",
+      "state": "needs_review"
+    },
+    {
+      "kind": "retrieval",
+      "id": "retrieval-coupon-r1",
+      "state": "active"
+    },
+    {
+      "kind": "skill",
+      "id": "skill-coupon-intake-r1",
+      "state": "needs_review"
+    },
+    {
+      "kind": "swarm",
+      "id": "swarm-single-agent-r1",
+      "state": "active"
+    }
+  ],
+  "limitations": [
+    "全部话题、策略输出和反馈均为合成数据；没有模型、飞书、数据库或活动配置调用。",
+    "shadow、canary 和 rollback 只管理调查策略版本；不修改门店活动，也不表示业务故障已恢复。",
+    "反馈分类由受信任宿主和人工审核提供；本地代码不鉴别真实身份或自动确认回归。"
+  ]
+}

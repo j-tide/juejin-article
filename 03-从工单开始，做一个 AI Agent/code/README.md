@@ -1,6 +1,6 @@
 # 茶饮工单 Agent Demo
 
-当前版本对应第 13 篇：从已知失败提出受限候选策略，并以独立 Gate 比较后决定是否进入影子运行。Python 3.11+；源码实验需要 Git 和 Node.js，前文原生媒体实验另需 macOS、Swift 和 FFmpeg。
+当前版本对应第 14 篇：将策略引用固定成不可变版本，演示影子对照、受限灰度、人工回滚与完整回放。Python 3.11+；源码实验需要 Git 和 Node.js，前文原生媒体实验另需 macOS、Swift 和 FFmpeg。
 
 ## 运行
 
@@ -219,3 +219,15 @@ python3 -m unittest discover -s tests -v
 `policy-update-cases.json` 分成校准集与 Gate 集。两边不得共用工单 ID 或事故 ID；策略调用仅拿到回放时可见的消息，评分标签留在评测端。候选版本只在“优惠券”同时出现“没有提供活动编号”或“活动编号未填写”时改为追问活动编号，其余输入回落到第 12 篇固定路由器。
 
 实际本地比较保存在 `fixtures/policy-update-results.json`：校准集与 Gate 中的必要追问覆盖分别由 1/2 变为 2/2；Gate 其余适用维度和工具调用数未退步。因此结果为 `eligible_for_shadow`，只表示可进入后续影子对照，不是自动发布或真实线上结果。没有调用模型、飞书、订单系统或活动配置。累计 195 项测试通过。
+
+## 第 14 篇：策略包的影子、灰度与回滚
+
+```bash
+python3 -m ticket_agent.policy_rollout_demo \
+  --output fixtures/policy-rollout-results.json
+python3 -m unittest discover -s tests -v
+```
+
+`PolicyBundle` 不可覆盖地绑定经验、技能、检索配置和蜂群计划 ID。`RolloutRegistry` 用本地 SQLite 保存稳定包、影子与灰度范围、首次工单分配、对外发送版本、影子结果、审核、反馈和回滚事件。相同 `ticket_id` 首次路由后始终返回原来的 bundle；影子话题仍对外使用稳定包，候选只保存比较结果。
+
+演示只处理合成数据：一张影子话题由 r1 对外回复并记录 r2；审核人以该记录批准一张灰度话题 r2；确认的配置版本回归停止新 r2 分配，新的话题回到 r1，已分配话题仍保留 r2 历史。候选独有的经验和技能标为 `needs_review`，与稳定包共用的检索和蜂群引用保持 active。没有调用模型、飞书、订单库或活动配置；回滚不代表业务故障已修复。累计 203 项测试通过。

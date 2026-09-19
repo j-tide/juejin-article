@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "候选策略从影子到回滚：工单版本始终冻结",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "database": { "label": "版本与记录" },
+        "backend": { "label": "候选执行" },
+        "frontend": { "label": "人工核验" },
+        "security": { "label": "范围与停止" }
+      }
+    }
+  },
+  "lanes": [
+    { "id": "bundle", "label": "不可变策略包" },
+    { "id": "release", "label": "影子与受限灰度" },
+    { "id": "recovery", "label": "确认回归后的处理" },
+    { "id": "after", "label": "后续新话题" }
+  ],
+  "mainPath": ["candidate", "shadow", "review", "canary", "regression", "rollback", "new-ticket"],
+  "nodes": [
+    { "id": "stable", "lane": "bundle", "col": 0, "type": "database", "label": "稳定包 r1", "sublabel": "对外回复的基线版本", "width": 152 },
+    { "id": "candidate", "lane": "release", "col": 0, "type": "database", "label": "候选包 r2", "sublabel": "经验、技能、检索与蜂群引用", "width": 164 },
+    { "id": "shadow", "lane": "release", "col": 1, "type": "backend", "label": "影子对照", "sublabel": "r1 回复，r2 仅保留记录", "width": 164 },
+    { "id": "review", "lane": "release", "col": 2, "type": "frontend", "label": "人工批准灰度", "sublabel": "影子证据、范围与上限", "width": 164 },
+    { "id": "canary", "lane": "release", "col": 3, "type": "security", "label": "新话题固定 r2", "sublabel": "一店一张，旧工单不换版", "width": 164 },
+    { "id": "regression", "lane": "recovery", "col": 4, "type": "frontend", "label": "核验回归", "sublabel": "报告先记录，人工再确认", "width": 164 },
+    { "id": "rollback", "lane": "recovery", "col": 5, "type": "security", "label": "停止候选分配", "sublabel": "候选独有经验与技能待复核", "width": 164 },
+    { "id": "new-ticket", "lane": "after", "col": 5, "type": "database", "label": "新话题回到 r1", "sublabel": "完整事件链留在回放记录", "width": 164 }
+  ],
+  "edges": [
+    { "id": "stable-shadow", "from": "stable", "to": "shadow" },
+    { "id": "candidate-shadow", "from": "candidate", "to": "shadow" },
+    { "id": "shadow-review", "from": "shadow", "to": "review" },
+    { "id": "review-canary", "from": "review", "to": "canary" },
+    { "id": "canary-regression", "from": "canary", "to": "regression" },
+    { "id": "regression-rollback", "from": "regression", "to": "rollback" },
+    { "id": "rollback-new-ticket", "from": "rollback", "to": "new-ticket" }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "冻结的是策略引用，不是业务处理",
+      "items": ["首次路由后，同一工单保留当时的 bundle ID。", "新消息可继续调查，但历史版本不能被“当前版本”覆盖。"]
+    },
+    {
+      "dot": "rose",
+      "title": "回滚只停新分配",
+      "items": ["一条 reported_issue 不会自动停止灰度。", "确认回归后，新话题回 r1，已分配记录继续可追查。"]
+    }
+  ]
+}

@@ -38,9 +38,9 @@ demo-brand / store-001 / 2026-09-18 14:00 +08:00
 
 ![绑定部署版本后读取前后端路径](assets/source-trace.png)
 
-[交互流程图](diagrams/source-trace.html) · [可编辑规格](diagrams/source-trace.workflow.json)
+[交互流程图](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/06%EF%BD%9C%E7%BB%99%20Agent%20%E9%98%85%E8%AF%BB%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BB%A3%E7%A0%81%E7%9A%84%E8%83%BD%E5%8A%9B%EF%BC%8C%E6%B2%BF%E7%94%A8%E6%88%B7%E6%93%8D%E4%BD%9C%E6%9F%A5%E8%B0%83%E7%94%A8%E9%93%BE/diagrams/source-trace.html) · [可编辑规格](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/06%EF%BD%9C%E7%BB%99%20Agent%20%E9%98%85%E8%AF%BB%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BB%A3%E7%A0%81%E7%9A%84%E8%83%BD%E5%8A%9B%EF%BC%8C%E6%B2%BF%E7%94%A8%E6%88%B7%E6%93%8D%E4%BD%9C%E6%9F%A5%E8%B0%83%E7%94%A8%E9%93%BE/diagrams/source-trace.workflow.json)
 
-前端 [checkout.mjs](../code/fixtures/source/frontend/v1/checkout.mjs) 负责把接口结果转成页面动作：
+前端 [checkout.mjs](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/fixtures/source/frontend/v1/checkout.mjs) 负责把接口结果转成页面动作：
 
 ```javascript
 const result = await requestQuote(cart, send);
@@ -51,7 +51,7 @@ if (result.code === 'PRICE_CHANGED') {
 
 这里暂时能回答：当 `requestQuote` 的返回码是 `PRICE_CHANGED`，这个页面逻辑会给出该提示。它没有告诉我们返回码从哪里来，更不能证明客户的请求确实返回了这个码。
 
-继续读 [api.mjs](../code/fixtures/source/frontend/v1/api.mjs)，能看到请求目标 `/checkout/quote`，以及两个参数：`quote_version` 和 `quoted_total_cents`。后端 [router.mjs](../code/fixtures/source/backend/v1/router.mjs) 将该路径分发给 `quote`。最后再读 [pricing.mjs](../code/fixtures/source/backend/v1/pricing.mjs) 的条件。
+继续读 [api.mjs](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/fixtures/source/frontend/v1/api.mjs)，能看到请求目标 `/checkout/quote`，以及两个参数：`quote_version` 和 `quoted_total_cents`。后端 [router.mjs](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/fixtures/source/backend/v1/router.mjs) 将该路径分发给 `quote`。最后再读 [pricing.mjs](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/fixtures/source/backend/v1/pricing.mjs) 的条件。
 
 这样读的好处是，每一步都提出一个可以在源码里继续验证的问题：提示的条件是什么，返回值来自哪个函数，函数发送了什么请求，接口又调用了什么实现。没有一上来就让模型“总结整个仓库”，也没有仅凭文件名猜某个模块负责什么。
 
@@ -75,14 +75,14 @@ if (body.quoted_total_cents !== activeRule.total_cents) {
 }
 ```
 
-输入保持一致：顾客看到 3200 分，当前计算结果也是 3200 分，但规则版本从 `r1` 变成 `r2`。[source_comparison.mjs](../code/scripts/source_comparison.mjs) 实际调用两组前后端函数，得到：
+输入保持一致：顾客看到 3200 分，当前计算结果也是 3200 分，但规则版本从 `r1` 变成 `r2`。[source_comparison.mjs](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/scripts/source_comparison.mjs) 实际调用两组前后端函数，得到：
 
 | 代码组合 | 返回码 | 页面动作 |
 | --- | --- | --- |
 | 门店部署的 v1 | `PRICE_CHANGED` | 显示价格更新提示 |
 | 当前 main 的 v2 | `OK` | 展示报价确认结果 |
 
-两者返回的金额都为 3200 分。结果保存在 [experiment-results.json](../code/fixtures/source/experiment-results.json)，运行环境为 Node.js 22.22.0。
+两者返回的金额都为 3200 分。结果保存在 [experiment-results.json](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/fixtures/source/experiment-results.json)，运行环境为 Node.js 22.22.0。
 
 因此，按 main 的代码回答“金额没变就不会出现这个提示”，在这个旧版部署场景里不成立。不是检索不到源码，而是检索范围错了。
 
@@ -92,7 +92,7 @@ if (body.quoted_total_cents !== activeRule.total_cents) {
 
 ## 读取 Git 对象，不依赖当前工作区
 
-代码工具在 [source.py](../code/ticket_agent/source.py)。版本固定以后，它从 Git 对象库读取文件，不去打开当前 checkout 里的同名文件。
+代码工具在 [source.py](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/ticket_agent/source.py)。版本固定以后，它从 Git 对象库读取文件，不去打开当前 checkout 里的同名文件。
 
 处理顺序是：核对完整提交 ID，确认对象确实是 commit，查询指定路径的 tree 条目，检查类型和大小，最后读取 blob。Git 的 [ls-tree](https://git-scm.com/docs/git-ls-tree) 提供树条目，后续根据对象 ID 读取内容。
 
@@ -147,7 +147,7 @@ backend@<完整提交>:pricing.mjs:L1-L7
 
 ## 重跑这次对照
 
-下载[本篇代码快照](code.zip)，解压进入 `code/`。源码工具需要 Python 3.11+ 和 Git；运行前后端对照另需 Node.js，本次验证版本为 Git 2.55.0、Node.js 22.22.0。
+下载[本篇代码快照](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/06%EF%BD%9C%E7%BB%99%20Agent%20%E9%98%85%E8%AF%BB%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BB%A3%E7%A0%81%E7%9A%84%E8%83%BD%E5%8A%9B%EF%BC%8C%E6%B2%BF%E7%94%A8%E6%88%B7%E6%93%8D%E4%BD%9C%E6%9F%A5%E8%B0%83%E7%94%A8%E9%93%BE/code.zip)，解压进入 `code/`。源码工具需要 Python 3.11+ 和 Git；运行前后端对照另需 Node.js，本次验证版本为 Git 2.55.0、Node.js 22.22.0。
 
 ```bash
 python3 -m ticket_agent.source --workspace /tmp/ticket-source-ch06
@@ -165,7 +165,7 @@ python3 -m unittest discover -s tests -v
 python3 -m ticket_agent.source --workspace /tmp/ticket-source-ch06 --live
 ```
 
-本次累计 86 项测试全部通过：包括部署时间缺失与重叠、符号版本拒绝、跨门店范围、路径及参数注入、行数预算、符号链接、大文件、工作区改动隔离，以及真正执行示例前后端函数。包含前文原生 OCR 和飞书 SDK 契约测试；若未设置 OCR 路径或未安装 SDK，相应两项会跳过。准备方法见[共享运行说明](../code/README.md)。
+本次累计 86 项测试全部通过：包括部署时间缺失与重叠、符号版本拒绝、跨门店范围、路径及参数注入、行数预算、符号链接、大文件、工作区改动隔离，以及真正执行示例前后端函数。包含前文原生 OCR 和飞书 SDK 契约测试；若未设置 OCR 路径或未安装 SDK，相应两项会跳过。准备方法见[共享运行说明](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/README.md)。
 
 ## 回到话题里
 

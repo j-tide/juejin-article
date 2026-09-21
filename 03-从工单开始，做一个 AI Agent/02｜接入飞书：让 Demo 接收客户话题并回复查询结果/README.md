@@ -55,7 +55,7 @@
 
 ![飞书接单、调查和回复流程](assets/feishu-intake.png)
 
-[交互流程图](diagrams/feishu-intake.html) · [图源](diagrams/feishu-intake.workflow.json) · [SVG](assets/feishu-intake.svg)
+[交互流程图](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/02%EF%BD%9C%E6%8E%A5%E5%85%A5%E9%A3%9E%E4%B9%A6%EF%BC%9A%E8%AE%A9%20Demo%20%E6%8E%A5%E6%94%B6%E5%AE%A2%E6%88%B7%E8%AF%9D%E9%A2%98%E5%B9%B6%E5%9B%9E%E5%A4%8D%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C/diagrams/feishu-intake.html) · [图源](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/02%EF%BD%9C%E6%8E%A5%E5%85%A5%E9%A3%9E%E4%B9%A6%EF%BC%9A%E8%AE%A9%20Demo%20%E6%8E%A5%E6%94%B6%E5%AE%A2%E6%88%B7%E8%AF%9D%E9%A2%98%E5%B9%B6%E5%9B%9E%E5%A4%8D%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C/diagrams/feishu-intake.workflow.json) · [SVG](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/02%EF%BD%9C%E6%8E%A5%E5%85%A5%E9%A3%9E%E4%B9%A6%EF%BC%9A%E8%AE%A9%20Demo%20%E6%8E%A5%E6%94%B6%E5%AE%A2%E6%88%B7%E8%AF%9D%E9%A2%98%E5%B9%B6%E5%9B%9E%E5%A4%8D%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C/assets/feishu-intake.svg)
 
 流程分成三个阶段：接收回调、后台调查、消息交付。图中的 Inbox 和 Outbox 都在同一个 SQLite 文件里，并不是额外部署的两套服务。
 
@@ -151,7 +151,7 @@ body = (ReplyMessageRequestBody.builder()
 
 ## 先用本地事件检查，再接真实应用
 
-[本篇完整代码快照](code.zip)包括第 01 篇实现、新增的 `inbox.py`、`feishu.py`、四个合成事件和测试。[共享代码运行说明](../code/README.md)随专栏继续更新。
+[本篇完整代码快照](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/02%EF%BD%9C%E6%8E%A5%E5%85%A5%E9%A3%9E%E4%B9%A6%EF%BC%9A%E8%AE%A9%20Demo%20%E6%8E%A5%E6%94%B6%E5%AE%A2%E6%88%B7%E8%AF%9D%E9%A2%98%E5%B9%B6%E5%9B%9E%E5%A4%8D%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C/code.zip)包括第 01 篇实现、新增的 `inbox.py`、`feishu.py`、四个合成事件和测试。[共享代码运行说明](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/README.md)随专栏继续更新。
 
 解压后，在 `code/` 运行：
 

@@ -98,7 +98,7 @@ Agent 问需要核对的订单信息。小林随后贴了一张订单详情截�
 
 ![输入版本、调查结果和发送前核验流程](assets/conversation-version.png)
 
-[交互流程图](diagrams/conversation-version.html) · [图源](diagrams/conversation-version.workflow.json) · [SVG](assets/conversation-version.svg)
+[交互流程图](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/03%EF%BD%9C%E6%96%B0%E6%B6%88%E6%81%AF%E6%9D%A5%E4%BA%86%EF%BC%9A%E8%AE%A9%20Demo%20%E4%BC%9A%E8%BF%BD%E9%97%AE%E3%80%81%E7%AD%89%E5%BE%85%E5%92%8C%E7%BB%A7%E7%BB%AD%E8%B0%83%E6%9F%A5/diagrams/conversation-version.html) · [图源](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/03%EF%BD%9C%E6%96%B0%E6%B6%88%E6%81%AF%E6%9D%A5%E4%BA%86%EF%BC%9A%E8%AE%A9%20Demo%20%E4%BC%9A%E8%BF%BD%E9%97%AE%E3%80%81%E7%AD%89%E5%BE%85%E5%92%8C%E7%BB%A7%E7%BB%AD%E8%B0%83%E6%9F%A5/diagrams/conversation-version.workflow.json) · [SVG](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/03%EF%BD%9C%E6%96%B0%E6%B6%88%E6%81%AF%E6%9D%A5%E4%BA%86%EF%BC%9A%E8%AE%A9%20Demo%20%E4%BC%9A%E8%BF%BD%E9%97%AE%E3%80%81%E7%AD%89%E5%BE%85%E5%92%8C%E7%BB%A7%E7%BB%AD%E8%B0%83%E6%9F%A5/assets/conversation-version.svg)
 
 每应用一条新的有效消息，话题版本增加。比如：
 
@@ -155,7 +155,7 @@ valid = (
 
 ## 用可控交错复现，不靠碰运气等网络变慢
 
-[本篇代码快照](code.zip)包含前两章和新增话题状态；共享目录的[运行说明](../code/README.md)提供入口。默认第 02 篇模式仍可运行，本章通过 `--conversation` 开启，实验使用一个独立数据库。
+[本篇代码快照](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/03%EF%BD%9C%E6%96%B0%E6%B6%88%E6%81%AF%E6%9D%A5%E4%BA%86%EF%BC%9A%E8%AE%A9%20Demo%20%E4%BC%9A%E8%BF%BD%E9%97%AE%E3%80%81%E7%AD%89%E5%BE%85%E5%92%8C%E7%BB%A7%E7%BB%AD%E8%B0%83%E6%9F%A5/code.zip)包含前两章和新增话题状态；共享目录的[运行说明](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/README.md)提供入口。默认第 02 篇模式仍可运行，本章通过 `--conversation` 开启，实验使用一个独立数据库。
 
 ```bash
 python3 -m ticket_agent.feishu \

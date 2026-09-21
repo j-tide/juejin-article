@@ -22,7 +22,7 @@
 
 ![附件到可回查证据的处理流程](assets/media-evidence.png)
 
-[打开交互流程图](diagrams/media-evidence.html) · [查看可编辑规格](diagrams/media-evidence.workflow.json)
+[打开交互流程图](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/05%EF%BD%9C%E7%9C%8B%E6%87%82%E5%9B%BE%E7%89%87%E5%92%8C%E6%BC%94%E7%A4%BA%E8%A7%86%E9%A2%91%EF%BC%9A%E6%8A%8A%E5%AE%A2%E6%88%B7%E6%93%8D%E4%BD%9C%E5%8F%98%E6%88%90%E5%8F%AF%E5%9B%9E%E6%9F%A5%E7%9A%84%E8%AF%81%E6%8D%AE/diagrams/media-evidence.html) · [查看可编辑规格](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/05%EF%BD%9C%E7%9C%8B%E6%87%82%E5%9B%BE%E7%89%87%E5%92%8C%E6%BC%94%E7%A4%BA%E8%A7%86%E9%A2%91%EF%BC%9A%E6%8A%8A%E5%AE%A2%E6%88%B7%E6%93%8D%E4%BD%9C%E5%8F%98%E6%88%90%E5%8F%AF%E5%9B%9E%E6%9F%A5%E7%9A%84%E8%AF%81%E6%8D%AE/diagrams/media-evidence.workflow.json)
 
 流程分成两层。`MediaReader` 负责处理已授权的本地附件；`media_handler` 把它包装成 Agent 工具，限制模型能查的附件和返回量。第 02 篇保存的飞书附件引用还没有自动下载到这一层，这次使用本地授权目录演示。接真实飞书资源接口时，还需要把租户鉴权、资源获取和失效处理补到入口。
 
@@ -42,7 +42,7 @@
 }
 ```
 
-实际记录还带附件 SHA-256、原消息 ID、接收时间和文字框位置。完整结构见 [media.py](../code/ticket_agent/media.py)。
+实际记录还带附件 SHA-256、原消息 ID、接收时间和文字框位置。完整结构见 [media.py](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/ticket_agent/media.py)。
 
 这里有三个容易混淆的时间：消息接收时间、视频播放时间、业务事件发生时间。视频第 1.2 秒只是相对位置；客户可能晚了十分钟才上传，也可能发的是上午的录屏。因此 `observed_at` 保存接收记录的时间，`media_time_s` 保存帧时间，`event_at` 保持空值，不能把上传时间自动当成下单时间。
 
@@ -52,9 +52,9 @@ SHA-256 则用于确认复核时拿到的是同一份附件。它不证明附件
 
 ## 做一个会漏掉提示的实验
 
-样本是一段 720×960、10 fps、3 秒、无音轨的视频。两杯饮品合计 32 元，提示仅出现在第 11、12、13 帧，对应区间 `[1.1, 1.4)` 秒。输入生成器和真值文件放在 [fixtures/media](../code/fixtures/media/)，内容明确标注为合成演示。
+样本是一段 720×960、10 fps、3 秒、无音轨的视频。两杯饮品合计 32 元，提示仅出现在第 11、12、13 帧，对应区间 `[1.1, 1.4)` 秒。输入生成器和真值文件放在 [fixtures/media](https://github.com/j-tide/juejin-article/tree/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/fixtures/media)，内容明确标注为合成演示。
 
-[下载实验视频](../code/fixtures/media/checkout.mp4)。下面这张图是从视频第 12 帧实际解码得到的，不是另画的一张示意图。
+[下载实验视频](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/fixtures/media/checkout.mp4)。下面这张图是从视频第 12 帧实际解码得到的，不是另画的一张示意图。
 
 ![视频 1.2 秒处实际抽取的画面](assets/frame-1.2.png)
 
@@ -65,7 +65,7 @@ SHA-256 则用于确认复核时拿到的是同一份附件。它不证明附件
 | 全段 1 fps | 3 | 没有匹配到 |
 | 局部 5 fps，0.8—1.6 秒 | 4 | 1.2 秒帧出现候选，置信分数 0.5 |
 
-这次使用 macOS Vision 的文字识别，FFmpeg 负责解码，FFprobe 提供帧时间。本地环境是 macOS 27.0、FFmpeg 8.1.2，结果保存在 [experiment-results.json](../code/fixtures/media/experiment-results.json)。没有调用云模型 API。
+这次使用 macOS Vision 的文字识别，FFmpeg 负责解码，FFprobe 提供帧时间。本地环境是 macOS 27.0、FFmpeg 8.1.2，结果保存在 [experiment-results.json](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/fixtures/media/experiment-results.json)。没有调用云模型 API。
 
 它不是准确率测试。只有一个人为安排提示时机的样本，能说明这种稀疏采样会漏掉短提示，以及局部加密在这个样本上找到了候选。换一台设备、一个字体或一种编码，OCR 输出和分数可能变化，不能从这张表推导线上识别成功率。
 
@@ -96,7 +96,7 @@ selected = sample_frames(times, fps=5, start=0.8, end=1.6)
 
 ## 把解析能力注册成一个受限工具
 
-[MEDIA_TOOL](../code/ticket_agent/media.py) 只让模型传 `query`。附件 ID、采样频率和时间窗口由应用层绑定，模型不能把一个路径或 URL 塞进参数，让工具去下载别人的文件。
+[MEDIA_TOOL](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/ticket_agent/media.py) 只让模型传 `query`。附件 ID、采样频率和时间窗口由应用层绑定，模型不能把一个路径或 URL 塞进参数，让工具去下载别人的文件。
 
 ```python
 from ticket_agent.media import MEDIA_TOOL, MediaReader, media_handler
@@ -123,7 +123,7 @@ handler = media_handler(reader, 'checkout', fps=5, start=0.8, end=1.6)
 
 ## 在本机重跑
 
-[本篇代码快照](code.zip) 包含累计源码、测试、已生成视频和实验记录。解压后进入 `code/`。Python 使用 3.11+；原生 OCR 路径需要 macOS、Swift 编译器和 FFmpeg。其他平台仍可运行纯 Python 的逻辑测试，但没有实现替代 OCR 后端。
+[本篇代码快照](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/05%EF%BD%9C%E7%9C%8B%E6%87%82%E5%9B%BE%E7%89%87%E5%92%8C%E6%BC%94%E7%A4%BA%E8%A7%86%E9%A2%91%EF%BC%9A%E6%8A%8A%E5%AE%A2%E6%88%B7%E6%93%8D%E4%BD%9C%E5%8F%98%E6%88%90%E5%8F%AF%E5%9B%9E%E6%9F%A5%E7%9A%84%E8%AF%81%E6%8D%AE/code.zip) 包含累计源码、测试、已生成视频和实验记录。解压后进入 `code/`。Python 使用 3.11+；原生 OCR 路径需要 macOS、Swift 编译器和 FFmpeg。其他平台仍可运行纯 Python 的逻辑测试，但没有实现替代 OCR 后端。
 
 ```bash
 swiftc scripts/vision_ocr.swift -o /tmp/vision-ocr
@@ -135,7 +135,7 @@ TICKET_OCR_BINARY=/tmp/vision-ocr python3 -m unittest discover -s tests -v
 
 本次装有前文固定的飞书 SDK，并设置了 OCR 路径，累计 70 项测试全部通过，包含真正解码和识别该视频的集成测试。不设 OCR 环境变量会跳过原生集成测试；没有飞书 SDK 时还会跳过对应 SDK 契约测试。
 
-需要重新生成视频时，再安装 Pillow；本次生成使用 Pillow 12.3.0。生成器用 `--font` 接收本机可用中文字体，仓库没有分发系统字体。直接重跑识别不需要 Pillow。具体说明见[共享代码运行文档](../code/README.md)。
+需要重新生成视频时，再安装 Pillow；本次生成使用 Pillow 12.3.0。生成器用 `--font` 接收本机可用中文字体，仓库没有分发系统字体。直接重跑识别不需要 Pillow。具体说明见[共享代码运行文档](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/README.md)。
 
 ## 回到话题里
 

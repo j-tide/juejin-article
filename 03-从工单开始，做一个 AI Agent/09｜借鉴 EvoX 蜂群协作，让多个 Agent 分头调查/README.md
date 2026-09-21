@@ -46,13 +46,13 @@
 
 ![独立检查并行与依赖检查等待](assets/swarm-structure.png)
 
-[打开协作结构图](diagrams/swarm-structure.html) · [可编辑规格](diagrams/swarm-structure.architecture.json)
+[打开协作结构图](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/09%EF%BD%9C%E5%80%9F%E9%89%B4%20EvoX%20%E8%9C%82%E7%BE%A4%E5%8D%8F%E4%BD%9C%EF%BC%8C%E8%AE%A9%E5%A4%9A%E4%B8%AA%20Agent%20%E5%88%86%E5%A4%B4%E8%B0%83%E6%9F%A5/diagrams/swarm-structure.html) · [可编辑规格](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/09%EF%BD%9C%E5%80%9F%E9%89%B4%20EvoX%20%E8%9C%82%E7%BE%A4%E5%8D%8F%E4%BD%9C%EF%BC%8C%E8%AE%A9%E5%A4%9A%E4%B8%AA%20Agent%20%E5%88%86%E5%A4%B4%E8%B0%83%E6%9F%A5/diagrams/swarm-structure.architecture.json)
 
 图展示任务依赖与主要结果流。每项任务的状态和证据都会进入本轮结果表，包括前端的中间结果；后端失败时，前端已取得的证据不会一起丢失。
 
 ## 调度前先检查计划
 
-[validate_plan](../code/ticket_agent/swarm.py) 检查任务 ID 唯一、角色已登记、依赖存在、没有自依赖或环，以及总工具预算是否超过限制。
+[validate_plan](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/ticket_agent/swarm.py) 检查任务 ID 唯一、角色已登记、依赖存在、没有自依赖或环，以及总工具预算是否超过限制。
 
 为什么要在执行前检查总预算？假设三个分支都觉得自己最多查三次不算多，加起来就是九次。每个局部都满足限制，不代表整张工单满足限制。本例先预留 5 次调用额度，任何任务计划超过总额，尚未执行工具就拒绝。
 
@@ -103,7 +103,7 @@
 | 一个本地工作者，串行 | 3 | 5 | 6 | 157 ms |
 | 两个本地工作者，受依赖约束并行 | 3 | 5 | 6 | 154 ms |
 
-证据 ID 与原文一致，结果见 [swarm-results.json](../code/fixtures/swarm-results.json)。这是一轮真实本地执行记录，没有用固定延时伪装工具耗时。
+证据 ID 与原文一致，结果见 [swarm-results.json](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/fixtures/swarm-results.json)。这是一轮真实本地执行记录，没有用固定延时伪装工具耗时。
 
 3 ms 的差异不能作为加速结论。数据很小，Git 子进程和本地计算占了主要开销；要看稳定收益，需要多次运行、记录分布，并考虑机器负载。我们本轮验证的是并行不会漏结果、依赖不会被跳过，不是证明“蜂群一定更快”。
 
@@ -123,7 +123,7 @@
 
 ## 运行与验证
 
-[本篇代码快照](code.zip) 解压后进入 `code/`：
+[本篇代码快照](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/09%EF%BD%9C%E5%80%9F%E9%89%B4%20EvoX%20%E8%9C%82%E7%BE%A4%E5%8D%8F%E4%BD%9C%EF%BC%8C%E8%AE%A9%E5%A4%9A%E4%B8%AA%20Agent%20%E5%88%86%E5%A4%B4%E8%B0%83%E6%9F%A5/code.zip) 解压后进入 `code/`：
 
 ```bash
 python3 -m ticket_agent.swarm --workspace /tmp/ticket-swarm-ch09 --workers 1
@@ -141,7 +141,7 @@ python3 -m ticket_agent.swarm --workspace /tmp/ticket-swarm-ch09 --workers 2 --l
 
 真实模式每个分支使用独立的供应商适配器，最多 4 轮，工具次数仍分别为 2、1、2。缺 Key 会退出，不降级成回放。我们只用脚本化 Provider 验证了这条接线，没有实际请求模型，也没有评估其任务拆解或推理表现。
 
-累计 134 项测试通过，覆盖真实并发重叠、依赖等待、父任务失败、重复 ID、依赖环、总预算、角色权限、分支预算、伪造来源、遗漏证据、缺少必需文件、输入修订和结构冲突。完整依赖见[共享运行说明](../code/README.md)。
+累计 134 项测试通过，覆盖真实并发重叠、依赖等待、父任务失败、重复 ID、依赖环、总预算、角色权限、分支预算、伪造来源、遗漏证据、缺少必需文件、输入修订和结构冲突。完整依赖见[共享运行说明](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/README.md)。
 
 ## 回到小林的问题
 

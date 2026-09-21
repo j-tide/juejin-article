@@ -46,7 +46,7 @@ AND event.visible_at <= case.as_of
 
 ![工单回放评测流程](assets/evaluation-flow.png)
 
-[打开完整流程图](diagrams/evaluation-flow.html) · [可编辑规格](diagrams/evaluation-flow.workflow.json)
+[打开完整流程图](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/12%EF%BD%9C%E6%80%8E%E6%A0%B7%E7%9F%A5%E9%81%93%20Agent%20%E8%BF%9B%E6%AD%A5%E4%BA%86%EF%BC%9A%E5%BB%BA%E7%AB%8B%E5%B7%A5%E5%8D%95%E5%9B%9E%E6%94%BE%E8%AF%84%E6%B5%8B/diagrams/evaluation-flow.html) · [可编辑规格](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/12%EF%BD%9C%E6%80%8E%E6%A0%B7%E7%9F%A5%E9%81%93%20Agent%20%E8%BF%9B%E6%AD%A5%E4%BA%86%EF%BC%9A%E5%BB%BA%E7%AB%8B%E5%B7%A5%E5%8D%95%E5%9B%9E%E6%94%BE%E8%AF%84%E6%B5%8B/diagrams/evaluation-flow.workflow.json)
 
 这里的隔离发生在评测输入 API 边界：`ReplayInput` 只有工单范围、截止时间和可见消息，没有标签、标准引用或根因字段。它不是安全沙箱。被测策略仍然是同一 Python 进程中的可信代码；如果它主动读取评测文件，API 设计无法阻止它。真正要隔离不可信插件或远程 Agent，还需要进程、文件和网络权限边界。
 
@@ -139,7 +139,7 @@ questions = ["channel", "product"] if "活动编号" in text else ["campaign"]
 
 ## 怎么运行
 
-[本篇代码快照](code.zip)解压后进入 `code/`：
+[本篇代码快照](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/12%EF%BD%9C%E6%80%8E%E6%A0%B7%E7%9F%A5%E9%81%93%20Agent%20%E8%BF%9B%E6%AD%A5%E4%BA%86%EF%BC%9A%E5%BB%BA%E7%AB%8B%E5%B7%A5%E5%8D%95%E5%9B%9E%E6%94%BE%E8%AF%84%E6%B5%8B/code.zip)解压后进入 `code/`：
 
 ```bash
 # 写出可检查的本次回放结果。
@@ -149,7 +149,7 @@ python3 -m ticket_agent.evaluation_demo --output fixtures/evaluation-results.jso
 python3 -m unittest discover -s tests -v
 ```
 
-[样本定义](../code/fixtures/evaluation-cases.json)和[实际结果](../code/fixtures/evaluation-results.json)都在仓库中。样本、配置和结果分别保存哈希，便于判断后续差异来自策略、评测集还是运行条件。
+[样本定义](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/fixtures/evaluation-cases.json)和[实际结果](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/fixtures/evaluation-results.json)都在仓库中。样本、配置和结果分别保存哈希，便于判断后续差异来自策略、评测集还是运行条件。
 
 本机累计 189 项测试通过。本篇新增用例覆盖：同事故不跨集合、未来确认信息不进入输入、晚可见事件排除、标签结构校验、错误引用、无依据根因、超预算、未知原因、失败不丢分母、配置与样本哈希变化，以及固定路由器漏问活动编号。
 

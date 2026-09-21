@@ -89,7 +89,7 @@ ticket_id / incident_id / as_of / tenant / brand / store / visible messages
 
 ![候选策略的提出与准入流程](assets/policy-update-flow.png)
 
-[打开完整流程图](diagrams/policy-update-flow.html) · [可编辑规格](diagrams/policy-update-flow.workflow.json)
+[打开完整流程图](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/13%EF%BD%9C%E6%A0%B9%E6%8D%AE%E5%8F%8D%E9%A6%88%E6%94%B9%E8%BF%9B%E7%AD%96%E7%95%A5%EF%BC%9A%E6%A3%80%E7%B4%A2%E3%80%81%E6%8E%92%E6%9F%A5%E6%AD%A5%E9%AA%A4%E5%92%8C%E8%9C%82%E7%BE%A4%E5%88%86%E5%B7%A5%E6%80%8E%E6%A0%B7%E6%9B%B4%E6%96%B0/diagrams/policy-update-flow.html) · [可编辑规格](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/13%EF%BD%9C%E6%A0%B9%E6%8D%AE%E5%8F%8D%E9%A6%88%E6%94%B9%E8%BF%9B%E7%AD%96%E7%95%A5%EF%BC%9A%E6%A3%80%E7%B4%A2%E3%80%81%E6%8E%92%E6%9F%A5%E6%AD%A5%E9%AA%A4%E5%92%8C%E8%9C%82%E7%BE%A4%E5%88%86%E5%B7%A5%E6%80%8E%E6%A0%B7%E6%9B%B4%E6%96%B0/diagrams/policy-update-flow.workflow.json)
 
 这套 API 隔离仍不是不可信代码的安全沙箱。被测策略和评分器在同一 Python 进程内；恶意插件若能自行读取 fixture 文件，仍可能绕过这个边界。真正运行第三方策略时，需要进程、文件和网络权限隔离。
 
@@ -154,7 +154,7 @@ Gate 里有三张未复用的合成工单：
 
 ## 怎么运行
 
-[本篇代码快照](code.zip)解压后进入 `code/`：
+[本篇代码快照](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/13%EF%BD%9C%E6%A0%B9%E6%8D%AE%E5%8F%8D%E9%A6%88%E6%94%B9%E8%BF%9B%E7%AD%96%E7%95%A5%EF%BC%9A%E6%A3%80%E7%B4%A2%E3%80%81%E6%8E%92%E6%9F%A5%E6%AD%A5%E9%AA%A4%E5%92%8C%E8%9C%82%E7%BE%A4%E5%88%86%E5%B7%A5%E6%80%8E%E6%A0%B7%E6%9B%B4%E6%96%B0/code.zip)解压后进入 `code/`：
 
 ```bash
 # 运行已知失败、正常对照和独立 Gate 的比较。
@@ -165,7 +165,7 @@ python3 -m ticket_agent.policy_update_demo \
 python3 -m unittest discover -s tests -v
 ```
 
-[候选与样本定义](../code/fixtures/policy-update-cases.json)和[实际比较结果](../code/fixtures/policy-update-results.json)都保存在仓库。新增测试覆盖：校准和 Gate 不共享工单或事故、候选只改变指定否定表述、已知失败被修复、Gate 未降低适用维度、fixture 泄漏被拒绝，以及策略输入不含标签。
+[候选与样本定义](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/fixtures/policy-update-cases.json)和[实际比较结果](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/fixtures/policy-update-results.json)都保存在仓库。新增测试覆盖：校准和 Gate 不共享工单或事故、候选只改变指定否定表述、已知失败被修复、Gate 未降低适用维度、fixture 泄漏被拒绝，以及策略输入不含标签。
 
 本机累计 195 项测试通过。这个数字是脚本化回归覆盖数；本篇的 2 张校准样本和 3 张 Gate 样本也是教学数据，不能外推成线上准确率。真实模型的采样波动、真实活动范围、图片视频、数据库读取和多 Agent 协作均未进入这一次比较。
 

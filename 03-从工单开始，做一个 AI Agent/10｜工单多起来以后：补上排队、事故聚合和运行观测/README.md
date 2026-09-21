@@ -22,7 +22,7 @@
 
 ![工单排队与执行流程](assets/queue-flow.png)
 
-[打开完整流程图](diagrams/queue-flow.html) · [可编辑规格](diagrams/queue-flow.workflow.json)
+[打开完整流程图](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/10%EF%BD%9C%E5%B7%A5%E5%8D%95%E5%A4%9A%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%9A%E8%A1%A5%E4%B8%8A%E6%8E%92%E9%98%9F%E3%80%81%E4%BA%8B%E6%95%85%E8%81%9A%E5%90%88%E5%92%8C%E8%BF%90%E8%A1%8C%E8%A7%82%E6%B5%8B/diagrams/queue-flow.html) · [可编辑规格](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/10%EF%BD%9C%E5%B7%A5%E5%8D%95%E5%A4%9A%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%9A%E8%A1%A5%E4%B8%8A%E6%8E%92%E9%98%9F%E3%80%81%E4%BA%8B%E6%95%85%E8%81%9A%E5%90%88%E5%92%8C%E8%BF%90%E8%A1%8C%E8%A7%82%E6%B5%8B/diagrams/queue-flow.workflow.json)
 
 图中从领取到核对结果是一轮执行。图下的说明另外标出两个例外：租约到期要等待确认，事故候选仍需调查。它们不是正常成功路径上的自动跳转。
 
@@ -58,7 +58,7 @@
 
 最容易写错的流程是：先查一个等待任务，释放数据库连接，再把它改成运行中。两个工作者可能在中间同时看到同一条记录，然后各执行一次。
 
-[claim](../code/ticket_agent/work_queue.py) 使用 SQLite 的 `BEGIN IMMEDIATE`，在一个事务中完成过期检查、名额统计、任务选择和状态更新。别的工作者要等事务结束后，才能基于新状态领取。
+[claim](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/ticket_agent/work_queue.py) 使用 SQLite 的 `BEGIN IMMEDIATE`，在一个事务中完成过期检查、名额统计、任务选择和状态更新。别的工作者要等事务结束后，才能基于新状态领取。
 
 这依赖 SQLite 的写事务协调机制，适合这里的单机 Demo。写锁等待仍可能失败，应用需要处理数据库忙的情况；不能据此推断它已适合多地域高吞吐调度。[SQLite 事务文档](https://www.sqlite.org/lang_transaction.html)说明了 `IMMEDIATE` 事务的行为和竞争时可能返回的错误。
 
@@ -130,11 +130,11 @@ Token 用量无法取得时保留 `null`。本文实际工具接线使用 Replay
 
 第二个实验实际调用 `execute_one`，在工作者里运行前文的 `run_ticket`、固定 Replay 和本地订单工具。结果取得四条阶段证据，队列状态为 `done`，业务输出仍为 `needs_human`。本次函数耗时约 1 ms，多条内部耗时四舍五入为 0 ms，只说明本地样例很小，不代表网络查询没有成本。
 
-[实验结果](../code/fixtures/queue-results.json)保留这两种模式；[实验代码](../code/ticket_agent/queue_experiment.py)可以重新生成结果。没有调用真实模型或飞书，也没有测并发压测下的 P95、超时率或单工单成本。
+[实验结果](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/fixtures/queue-results.json)保留这两种模式；[实验代码](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/ticket_agent/queue_experiment.py)可以重新生成结果。没有调用真实模型或飞书，也没有测并发压测下的 P95、超时率或单工单成本。
 
 ## 运行与复核
 
-[下载本篇代码快照](code.zip)，解压后进入 `code/`：
+[下载本篇代码快照](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/10%EF%BD%9C%E5%B7%A5%E5%8D%95%E5%A4%9A%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%9A%E8%A1%A5%E4%B8%8A%E6%8E%92%E9%98%9F%E3%80%81%E4%BA%8B%E6%95%85%E8%81%9A%E5%90%88%E5%92%8C%E8%BF%90%E8%A1%8C%E8%A7%82%E6%B5%8B/code.zip)，解压后进入 `code/`：
 
 ```bash
 # 每次想重新演示调度时，使用一个新的临时目录。
@@ -146,7 +146,7 @@ python3 -m ticket_agent.queue_experiment
 python3 -m unittest discover -s tests -v
 ```
 
-重复使用第一个命令的数据库不会重新执行已经完成的任务，这是幂等行为。运行所有章节测试的依赖和 OCR 设置见[共享运行说明](../code/README.md)。
+重复使用第一个命令的数据库不会重新执行已经完成的任务，这是幂等行为。运行所有章节测试的依赖和 OCR 设置见[共享运行说明](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/README.md)。
 
 累计 155 项测试覆盖了优先级与等待加分、容量、重复输入、实际并发领取、租户限制、重启保留、旧结果拒绝、租约过期占位、确认停止后的重试、三次尝试上限、候选范围以及异常工作者收尾。测试数量表示回归覆盖，不表示模型工单成功率。
 

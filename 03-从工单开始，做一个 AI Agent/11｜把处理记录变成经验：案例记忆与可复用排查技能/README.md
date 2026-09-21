@@ -48,13 +48,13 @@
 
 ![从处理记录到可复用经验](assets/experience-flow.png)
 
-[打开完整流程图](diagrams/experience-flow.html) · [可编辑规格](diagrams/experience-flow.workflow.json)
+[打开完整流程图](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/11%EF%BD%9C%E6%8A%8A%E5%A4%84%E7%90%86%E8%AE%B0%E5%BD%95%E5%8F%98%E6%88%90%E7%BB%8F%E9%AA%8C%EF%BC%9A%E6%A1%88%E4%BE%8B%E8%AE%B0%E5%BF%86%E4%B8%8E%E5%8F%AF%E5%A4%8D%E7%94%A8%E6%8E%92%E6%9F%A5%E6%8A%80%E8%83%BD/diagrams/experience-flow.html) · [可编辑规格](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/11%EF%BD%9C%E6%8A%8A%E5%A4%84%E7%90%86%E8%AE%B0%E5%BD%95%E5%8F%98%E6%88%90%E7%BB%8F%E9%AA%8C%EF%BC%9A%E6%A1%88%E4%BE%8B%E8%AE%B0%E5%BF%86%E4%B8%8E%E5%8F%AF%E5%A4%8D%E7%94%A8%E6%8E%92%E6%9F%A5%E6%8A%80%E8%83%BD/diagrams/experience-flow.workflow.json)
 
 图中的审查和条件检查都是程序中的独立步骤。末尾的引用记录用于撤销追查，不代表执行结束后就可以确认根因。
 
 ## 候选记录先有身份，再谈检索
 
-[ExperienceStore](../code/ticket_agent/experience.py) 将案例和技能保存在 SQLite 中，另建引用记录与操作事件表。内容用规范化 JSON 序列化后计算哈希，哈希就是该版本的 ID。
+[ExperienceStore](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/ticket_agent/experience.py) 将案例和技能保存在 SQLite 中，另建引用记录与操作事件表。内容用规范化 JSON 序列化后计算哈希，哈希就是该版本的 ID。
 
 相同内容重复提交会得到相同 ID；更正诊断或改变适用条件，会产生新 ID。旧记录不原地覆盖，这样历史运行引用的到底是哪一版经验仍然可以查清。
 
@@ -70,7 +70,7 @@
 
 但 `verified=True` 只是受信任审查结果的结构化表示，并不具备自动鉴伪能力。程序不会因为这个字段，就知道配置截图是否取错日期，或人工是否漏看了另一个变量。
 
-本章的来源保存在[合成经验材料](../code/fixtures/experience.json)中，`fixture://` ID 用于定位教学摘录，不是可公开访问的线上工单地址。两条案例也是手工构造的独立事故标识，不是声称我们在线上重复验证过两次。
+本章的来源保存在[合成经验材料](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/fixtures/experience.json)中，`fixture://` ID 用于定位教学摘录，不是可公开访问的线上工单地址。两条案例也是手工构造的独立事故标识，不是声称我们在线上重复验证过两次。
 
 实际导入可以从第 08 篇的调查记录中选取原始消息引用、修订和反证，但当前没有自动转换器，也没有模型提炼过程。人工挑选什么内容进入候选，是本版明确保留的操作步骤。
 
@@ -137,7 +137,7 @@
 
 ## 用四种情况检查复用路径
 
-[experience_demo](../code/ticket_agent/experience_demo.py) 用临时数据库建立两条案例和一个技能，再调用第 04 篇真实的本地 `KnowledgeReader`。这里“真实”指程序实际执行查询，数据依然是合成材料。
+[experience_demo](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/ticket_agent/experience_demo.py) 用临时数据库建立两条案例和一个技能，再调用第 04 篇真实的本地 `KnowledgeReader`。这里“真实”指程序实际执行查询，数据依然是合成材料。
 
 | 回放条件 | 结果 | 是否执行当前资料查询 |
 | --- | --- | --- |
@@ -146,20 +146,20 @@
 | 范围一致，但渠道和商品信息缺失 | `fallback` | 是，发现条件未知后退出 |
 | 撤销一个被引用的案例 | `fallback` | 后续复用不再启动查询 |
 
-[实验结果](../code/fixtures/experience-results.json)保留当前证据和撤销影响清单。相同范围的例子仍然没有自动确认门店范围就是根因；它只是按已审查步骤完成一次资料核对。
+[实验结果](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/fixtures/experience-results.json)保留当前证据和撤销影响清单。相同范围的例子仍然没有自动确认门店范围就是根因；它只是按已审查步骤完成一次资料核对。
 
 这不是有记忆与无记忆的准确率对照，也没有用少调用一次工具证明系统变聪明。我们还没有跑真实模型、自动生成摘要或验证线上故障恢复。下一篇再建立独立工单回放，比较漏查、错误定因与必要追问。
 
 ## 运行方式与验证范围
 
-[本篇代码快照](code.zip)解压后进入 `code/`：
+[本篇代码快照](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/11%EF%BD%9C%E6%8A%8A%E5%A4%84%E7%90%86%E8%AE%B0%E5%BD%95%E5%8F%98%E6%88%90%E7%BB%8F%E9%AA%8C%EF%BC%9A%E6%A1%88%E4%BE%8B%E8%AE%B0%E5%BF%86%E4%B8%8E%E5%8F%AF%E5%A4%8D%E7%94%A8%E6%8E%92%E6%9F%A5%E6%8A%80%E8%83%BD/code.zip)解压后进入 `code/`：
 
 ```bash
 python3 -m ticket_agent.experience_demo
 python3 -m unittest discover -s tests -v
 ```
 
-默认只用标准库和已有本地检索模块，临时记忆库结束后清理；之前章节的完整测试依赖见[共享运行说明](../code/README.md)。需要持久保存时，给 `ExperienceStore` 一个应用管理的数据库路径。
+默认只用标准库和已有本地检索模块，临时记忆库结束后清理；之前章节的完整测试依赖见[共享运行说明](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/README.md)。需要持久保存时，给 `ExperienceStore` 一个应用管理的数据库路径。
 
 累计 174 项测试通过。本章新增检查包含候选不可复用、恢复反馈无法单独批准、身份限制、条件隔离、过期、内容去重、同事故重复摘要、只读配方、撤销依赖、引用追查、重启保留，以及执行中撤销。数量表示回归用例，不表示模型成功处理了 174 张工单。
 

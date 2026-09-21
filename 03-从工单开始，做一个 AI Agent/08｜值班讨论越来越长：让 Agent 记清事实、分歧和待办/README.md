@@ -30,11 +30,11 @@
 
 ![调查记录的版本、依赖和交接流程](assets/investigation-board.png)
 
-[交互流程图](diagrams/investigation-board.html) · [可编辑规格](diagrams/investigation-board.workflow.json)
+[交互流程图](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/08%EF%BD%9C%E5%80%BC%E7%8F%AD%E8%AE%A8%E8%AE%BA%E8%B6%8A%E6%9D%A5%E8%B6%8A%E9%95%BF%EF%BC%9A%E8%AE%A9%20Agent%20%E8%AE%B0%E6%B8%85%E4%BA%8B%E5%AE%9E%E3%80%81%E5%88%86%E6%AD%A7%E5%92%8C%E5%BE%85%E5%8A%9E/diagrams/investigation-board.html) · [可编辑规格](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/08%EF%BD%9C%E5%80%BC%E7%8F%AD%E8%AE%A8%E8%AE%BA%E8%B6%8A%E6%9D%A5%E8%B6%8A%E9%95%BF%EF%BC%9A%E8%AE%A9%20Agent%20%E8%AE%B0%E6%B8%85%E4%BA%8B%E5%AE%9E%E3%80%81%E5%88%86%E6%AD%A7%E5%92%8C%E5%BE%85%E5%8A%9E/diagrams/investigation-board.workflow.json)
 
 ## 原消息继续保留，只新增调查视图
 
-第 03 篇已经把消息保存到 `ConversationInbox`，并维护话题输入版本。本章的 [InvestigationBoard](../code/ticket_agent/investigation.py) 直接复用这个数据库，不另建一套消息来源。
+第 03 篇已经把消息保存到 `ConversationInbox`，并维护话题输入版本。本章的 [InvestigationBoard](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/ticket_agent/investigation.py) 直接复用这个数据库，不另建一套消息来源。
 
 新增两张表：`investigation_board` 保存当前调查视图，`investigation_operations` 保存每次确认过的操作。操作带操作者、操作 ID、期望版本、输入话题版本和正文，不覆盖旧操作。
 
@@ -123,7 +123,7 @@
 
 ## 看实际回放结果
 
-执行器收到四条合成话题消息，依次确认六次视图操作，结果保存在 [investigation-results.json](../code/fixtures/investigation-results.json)：
+执行器收到四条合成话题消息，依次确认六次视图操作，结果保存在 [investigation-results.json](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/fixtures/investigation-results.json)：
 
 | 项目 | 当前结果 |
 | --- | --- |
@@ -135,7 +135,7 @@
 
 六次操作的输入是显式编写的操作结构，不是模型从自然语言里自动抽取的结果。这个回放验证状态与来源机制，不能换个名字就当成摘要质量评测。
 
-运行[本篇代码快照](code.zip)：
+运行[本篇代码快照](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/08%EF%BD%9C%E5%80%BC%E7%8F%AD%E8%AE%A8%E8%AE%BA%E8%B6%8A%E6%9D%A5%E8%B6%8A%E9%95%BF%EF%BC%9A%E8%AE%A9%20Agent%20%E8%AE%B0%E6%B8%85%E4%BA%8B%E5%AE%9E%E3%80%81%E5%88%86%E6%AD%A7%E5%92%8C%E5%BE%85%E5%8A%9E/code.zip)：
 
 ```bash
 # 解压后进入 code/
@@ -146,7 +146,7 @@ python3 -m unittest discover -s tests -v
 
 第二次运行返回相同视图，不重复追加六次操作。数据库保留在仓库外。已有话题模式新增两张独立表，没有改变前三篇表结构；没有实现其他版本数据的通用迁移框架。
 
-累计 117 项测试通过，包括来源与原文校验、原子更正、两级依赖失效、竞争修订、话题更新、重复操作、认领权限、重启恢复和预算失败。完整套件依赖及可选测试见[共享运行说明](../code/README.md)。没有接真实飞书群，也没有测模型分类或摘要质量。
+累计 117 项测试通过，包括来源与原文校验、原子更正、两级依赖失效、竞争修订、话题更新、重复操作、认领权限、重启恢复和预算失败。完整套件依赖及可选测试见[共享运行说明](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/README.md)。没有接真实飞书群，也没有测模型分类或摘要质量。
 
 ## 交接时，大家知道接着查哪一项
 

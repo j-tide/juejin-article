@@ -45,7 +45,7 @@
 
 ![文字工单查询和证据回复流程](assets/text-ticket.png)
 
-[打开可交互流程图](diagrams/text-ticket.html) · [可编辑图源](diagrams/text-ticket.workflow.json) · [SVG](assets/text-ticket.svg)
+[打开可交互流程图](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/01%EF%BD%9C%E5%85%88%E8%B7%91%E8%B5%B7%E6%9D%A5%EF%BC%9A%E7%94%A8%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%B8%80%E4%B8%AA%E6%9F%A5%E8%AF%A2%E5%B7%A5%E5%85%B7%E5%A4%84%E7%90%86%E6%96%87%E5%AD%97%E5%B7%A5%E5%8D%95/diagrams/text-ticket.html) · [可编辑图源](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/01%EF%BD%9C%E5%85%88%E8%B7%91%E8%B5%B7%E6%9D%A5%EF%BC%9A%E7%94%A8%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%B8%80%E4%B8%AA%E6%9F%A5%E8%AF%A2%E5%B7%A5%E5%85%B7%E5%A4%84%E7%90%86%E6%96%87%E5%AD%97%E5%B7%A5%E5%8D%95/diagrams/text-ticket.workflow.json) · [SVG](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/01%EF%BD%9C%E5%85%88%E8%B7%91%E8%B5%B7%E6%9D%A5%EF%BC%9A%E7%94%A8%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%B8%80%E4%B8%AA%E6%9F%A5%E8%AF%A2%E5%B7%A5%E5%85%B7%E5%A4%84%E7%90%86%E6%96%87%E5%AD%97%E5%B7%A5%E5%8D%95/assets/text-ticket.svg)
 
 图里的模型出现两次：第一次从客户文字提出工具调用，第二次读完工具结果，提交带引用的回复对象。Python 程序负责真正执行工具，并检查回复是否使用了本轮证据。
 
@@ -182,7 +182,7 @@ messages.append({
 
 ## 在本地运行，然后故意让它出错
 
-[本篇代码快照](code.zip)包含截至第 01 篇的完整代码、数据和测试。共享代码后续还会演进，想复现这一篇，解压这个版本就可以。下载仓库后也可以进入[共享代码目录](../code/README.md)。
+[本篇代码快照](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/01%EF%BD%9C%E5%85%88%E8%B7%91%E8%B5%B7%E6%9D%A5%EF%BC%9A%E7%94%A8%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%B8%80%E4%B8%AA%E6%9F%A5%E8%AF%A2%E5%B7%A5%E5%85%B7%E5%A4%84%E7%90%86%E6%96%87%E5%AD%97%E5%B7%A5%E5%8D%95/code.zip)包含截至第 01 篇的完整代码、数据和测试。共享代码后续还会演进，想复现这一篇，解压这个版本就可以。下载仓库后也可以进入[共享代码目录](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/README.md)。
 
 ```bash
 # 解压 code.zip 后，进入其中的 code 目录

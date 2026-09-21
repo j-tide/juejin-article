@@ -84,7 +84,7 @@ run_ticket(
 
 ![资料筛选、检索、条件对比和证据回复](assets/knowledge-retrieval.png)
 
-[交互流程图](diagrams/knowledge-retrieval.html) · [可编辑图源](diagrams/knowledge-retrieval.workflow.json) · [SVG](assets/knowledge-retrieval.svg)
+[交互流程图](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/04%EF%BD%9C%E6%8E%A5%E4%B8%8A%E5%8E%86%E5%8F%B2%E5%B7%A5%E5%8D%95%E5%92%8C%E7%9F%A5%E8%AF%86%E5%BA%93%EF%BC%9A%E8%AE%A9%20Agent%20%E6%9C%89%E4%BE%9D%E6%8D%AE%E5%9C%B0%E6%9F%A5%E7%9B%B8%E4%BC%BC%E9%97%AE%E9%A2%98/diagrams/knowledge-retrieval.html) · [可编辑图源](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/04%EF%BD%9C%E6%8E%A5%E4%B8%8A%E5%8E%86%E5%8F%B2%E5%B7%A5%E5%8D%95%E5%92%8C%E7%9F%A5%E8%AF%86%E5%BA%93%EF%BC%9A%E8%AE%A9%20Agent%20%E6%9C%89%E4%BE%9D%E6%8D%AE%E5%9C%B0%E6%9F%A5%E7%9B%B8%E4%BC%BC%E9%97%AE%E9%A2%98/diagrams/knowledge-retrieval.workflow.json) · [SVG](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/04%EF%BD%9C%E6%8E%A5%E4%B8%8A%E5%8E%86%E5%8F%B2%E5%B7%A5%E5%8D%95%E5%92%8C%E7%9F%A5%E8%AF%86%E5%BA%93%EF%BC%9A%E8%AE%A9%20Agent%20%E6%9C%89%E4%BE%9D%E6%8D%AE%E5%9C%B0%E6%9F%A5%E7%9B%B8%E4%BC%BC%E9%97%AE%E9%A2%98/assets/knowledge-retrieval.svg)
 
 本篇使用两个词法检索分支，不调用 Embedding，也没有把规则映射伪装成语义向量搜索：
 
@@ -155,7 +155,7 @@ if field in requirements:
 
 ## 跑两条看起来一样的工单
 
-下载[第 04 篇代码快照](code.zip)，解压进入 `code/`；也可以进入仓库的[共享代码目录](../code/README.md)。不需要安装向量数据库。
+下载[第 04 篇代码快照](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/04%EF%BD%9C%E6%8E%A5%E4%B8%8A%E5%8E%86%E5%8F%B2%E5%B7%A5%E5%8D%95%E5%92%8C%E7%9F%A5%E8%AF%86%E5%BA%93%EF%BC%9A%E8%AE%A9%20Agent%20%E6%9C%89%E4%BE%9D%E6%8D%AE%E5%9C%B0%E6%9F%A5%E7%9B%B8%E4%BC%BC%E9%97%AE%E9%A2%98/code.zip)，解压进入 `code/`；也可以进入仓库的[共享代码目录](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/README.md)。不需要安装向量数据库。
 
 ```bash
 python3 -m ticket_agent.research '两杯水果茶，优惠券用不了' \

@@ -64,7 +64,7 @@ else:
 
 ![候选策略从影子到回滚的流程](assets/policy-rollout-flow.png)
 
-[打开完整流程图](diagrams/policy-rollout-flow.html) · [可编辑规格](diagrams/policy-rollout-flow.workflow.json)
+[打开完整流程图](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/14%EF%BD%9C%E6%8A%8A%E6%94%B9%E8%BF%9B%E7%94%A8%E8%B5%B7%E6%9D%A5%EF%BC%9A%E5%B0%8F%E8%8C%83%E5%9B%B4%E5%90%AF%E7%94%A8%E3%80%81%E9%94%99%E8%AF%AF%E7%BB%8F%E9%AA%8C%E6%92%A4%E9%94%80%E4%B8%8E%E5%AE%8C%E6%95%B4%E5%9B%9E%E6%94%BE/diagrams/policy-rollout-flow.html) · [可编辑规格](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/14%EF%BD%9C%E6%8A%8A%E6%94%B9%E8%BF%9B%E7%94%A8%E8%B5%B7%E6%9D%A5%EF%BC%9A%E5%B0%8F%E8%8C%83%E5%9B%B4%E5%90%AF%E7%94%A8%E3%80%81%E9%94%99%E8%AF%AF%E7%BB%8F%E9%AA%8C%E6%92%A4%E9%94%80%E4%B8%8E%E5%AE%8C%E6%95%B4%E5%9B%9E%E6%94%BE/diagrams/policy-rollout-flow.workflow.json)
 
 ## 影子运行：候选可以回答，客户看不到它的回复
 
@@ -135,7 +135,7 @@ python3 -m ticket_agent.policy_rollout_demo \
 python3 -m unittest discover -s tests -v
 ```
 
-[本篇代码快照](code.zip)可以独立解压运行。共享代码目录里的[实际演示结果](../code/fixtures/policy-rollout-results.json)记录了这一条固定流程：
+[本篇代码快照](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/14%EF%BD%9C%E6%8A%8A%E6%94%B9%E8%BF%9B%E7%94%A8%E8%B5%B7%E6%9D%A5%EF%BC%9A%E5%B0%8F%E8%8C%83%E5%9B%B4%E5%90%AF%E7%94%A8%E3%80%81%E9%94%99%E8%AF%AF%E7%BB%8F%E9%AA%8C%E6%92%A4%E9%94%80%E4%B8%8E%E5%AE%8C%E6%95%B4%E5%9B%9E%E6%94%BE/code.zip)可以独立解压运行。共享代码目录里的[实际演示结果](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/fixtures/policy-rollout-results.json)记录了这一条固定流程：
 
 1. `topic-shadow-001` 对外用 r1，r2 只留下“应追问活动编号”的对照；
 2. `ops-zhou` 以一条 shadow 记录批准 r2 在一个门店的一张新话题中灰度；

@@ -27,13 +27,13 @@
 
 ![只读查询与证据范围检查](assets/database-evidence.png)
 
-[交互流程图](diagrams/database-evidence.html) · [可编辑规格](diagrams/database-evidence.workflow.json)
+[交互流程图](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/07%EF%BD%9C%E6%8E%A5%E4%B8%8A%E5%8F%AA%E8%AF%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E6%97%A5%E5%BF%97%EF%BC%8C%E8%AE%A9%E4%BB%A3%E7%A0%81%E6%8E%A8%E6%96%AD%E5%BE%97%E5%88%B0%E9%AA%8C%E8%AF%81/diagrams/database-evidence.html) · [可编辑规格](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/07%EF%BD%9C%E6%8E%A5%E4%B8%8A%E5%8F%AA%E8%AF%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E6%97%A5%E5%BF%97%EF%BC%8C%E8%AE%A9%E4%BB%A3%E7%A0%81%E6%8E%A8%E6%96%AD%E5%BE%97%E5%88%B0%E9%AA%8C%E8%AF%81/diagrams/database-evidence.workflow.json)
 
 图中的订单表、事件表和同步进度放在同一个本地 SQLite 文件里，查询使用同一读事务。线上往往跨数据库、日志平台和设备服务，本章没有把一次本地快照冒充跨系统一致性快照。
 
 ## 工具接收对象，不接收 SQL
 
-第一篇的执行器调用 `reader.lookup(arguments, scope)`。这次换成 [SqlOrderReader](../code/ticket_agent/evidence_db.py)，调用接口保持不变。模型仍然只传订单号或支付流水号，品牌、门店、时间范围由应用绑定。
+第一篇的执行器调用 `reader.lookup(arguments, scope)`。这次换成 [SqlOrderReader](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/ticket_agent/evidence_db.py)，调用接口保持不变。模型仍然只传订单号或支付流水号，品牌、门店、时间范围由应用绑定。
 
 ```python
 reader = SqlOrderReader(
@@ -84,7 +84,7 @@ LIMIT 2
 | O1001 | 支付接受 → 订单创建 → 任务发送 | 没有 |
 | O1002 | 支付接受 → 订单创建 → 设备离线 → 第二次发送 → 打印确认 | 有 |
 
-这个结果由真实 SQLite 查询得到，输入在 [database.json](../code/fixtures/database.json)，实际对照摘要在 [database-results.json](../code/fixtures/database-results.json)。事件里保留订单、事件 ID、尝试次数和追踪标识；没有记录手机号或完整请求正文。
+这个结果由真实 SQLite 查询得到，输入在 [database.json](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/fixtures/database.json)，实际对照摘要在 [database-results.json](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/fixtures/database-results.json)。事件里保留订单、事件 ID、尝试次数和追踪标识；没有记录手机号或完整请求正文。
 
 O1002 的 `dispatch=sent` 并不否定此前设备离线。它只是当前保存的值。值班同事要解释“为什么顾客刚才等了很久”，需要事件顺序；要知道“现在有没有回执”，又需要当前已取得的记录。两种问题不能只用一个状态字段回答。
 
@@ -137,7 +137,7 @@ O1002 的打印回执在业务时间 14:00:06 发生，但到 14:00:20 才进入
 
 ## 自己跑一次
 
-[本篇代码快照](code.zip) 包含全部累计代码。解压后进入 `code/`，Python 3.11+ 自带的 SQLite 接口即可运行本篇核心实验：
+[本篇代码快照](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/07%EF%BD%9C%E6%8E%A5%E4%B8%8A%E5%8F%AA%E8%AF%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E6%97%A5%E5%BF%97%EF%BC%8C%E8%AE%A9%E4%BB%A3%E7%A0%81%E6%8E%A8%E6%96%AD%E5%BE%97%E5%88%B0%E9%AA%8C%E8%AF%81/code.zip) 包含全部累计代码。解压后进入 `code/`，Python 3.11+ 自带的 SQLite 接口即可运行本篇核心实验：
 
 ```bash
 python3 -m ticket_agent.evidence_db --db /tmp/ticket-evidence-ch07.sqlite3 --init-demo
@@ -148,7 +148,7 @@ python3 -m unittest discover -s tests -v
 
 初始化不会覆盖已存在的文件；后续命令去掉 `--init-demo`。运行库放在仓库外，不把临时数据库当作文章素材提交。
 
-累计 100 项测试通过，包含写操作拒绝、私有字段拒绝、参数注入、跨门店查询、读取前后数据库字节不变、缺失文件不创建、事件迟到、截断和实际查询中断。完整套件依赖前几篇的 Git、Node.js；原生 OCR 和飞书 SDK 的启用方式见[共享运行说明](../code/README.md)。这些测试验证程序行为，没有测真实模型，也没有生产数据规模。
+累计 100 项测试通过，包含写操作拒绝、私有字段拒绝、参数注入、跨门店查询、读取前后数据库字节不变、缺失文件不创建、事件迟到、截断和实际查询中断。完整套件依赖前几篇的 Git、Node.js；原生 OCR 和飞书 SDK 的启用方式见[共享运行说明](https://github.com/j-tide/juejin-article/blob/main/03-%E4%BB%8E%E5%B7%A5%E5%8D%95%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%81%9A%E4%B8%80%E4%B8%AA%20AI%20Agent/code/README.md)。这些测试验证程序行为，没有测真实模型，也没有生产数据规模。
 
 ## 回到柜台那张照片
 
